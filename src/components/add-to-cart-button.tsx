@@ -32,9 +32,9 @@ export function AddToCartButton({ product }: AddToCartButtonType) {
     >
       {loading ? 'Adding...' : 'Add to Cart'}
       {loading ? (
-        <Loader className="h-4 w-4 animate-spin" strokeWidth="2.5" />
+        <Loader className="h-4 w-4 animate-spin" />
       ) : (
-        <ShoppingCart className="h-4 w-4" strokeWidth="2.25" />
+        <ShoppingCart className="h-4 w-4" />
       )}
     </Button>
   )

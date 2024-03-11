@@ -77,7 +77,7 @@ export default async function Home() {
       </div>
 
       <div>
-        <div className="mb-4 flex items-center justify-between">
+        <div className="mb-4 flex items-end justify-between">
           <SectionTitle>Mices</SectionTitle>
           <LinkSeeAll href="/search/mices" />
         </div>
@@ -85,14 +85,14 @@ export default async function Home() {
       </div>
 
       <div>
-        <div className="mb-4 flex items-center justify-between">
+        <div className="mb-4 flex items-end justify-between">
           <SectionTitle>Keyboards</SectionTitle>
           <LinkSeeAll href="/search/keyboards" />
         </div>
         <CarouselProducts products={keyboards} />
       </div>
       <div>
-        <div className="mb-4 flex items-center justify-between">
+        <div className="mb-4 flex items-end justify-between">
           <SectionTitle>Headset</SectionTitle>
           <LinkSeeAll href="/search/headsets" />
         </div>

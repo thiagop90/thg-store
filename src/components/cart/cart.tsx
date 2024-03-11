@@ -35,7 +35,7 @@ export function Cart() {
       </SheetTrigger>
       <SheetContent className="flex w-full flex-col gap-0 p-0">
         <SheetHeader className="p-6">
-          <SheetTitle className="text-lg">My Cart</SheetTitle>
+          <SheetTitle className="text-xl">My Cart</SheetTitle>
         </SheetHeader>
         {cart.length === 0 ? (
           <div className="mt-20 flex w-full flex-col items-center justify-center">

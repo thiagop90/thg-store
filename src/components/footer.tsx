@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="relative border-t py-6 text-sm text-muted-foreground ">
       <div className="mx-auto flex w-full flex-col items-center gap-2 px-4">
-        <p>© 2023 FSW Store, Inc. All rights reserved.</p>
+        <p>© 2023 THG Store, Inc. All rights reserved.</p>
         <div className="flex gap-3">
           <Link target="_blank" href="https://github.com/thiagop90">
             <Button

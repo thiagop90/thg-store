@@ -50,7 +50,7 @@ export function CarouselImages({ imageUrls }: ProductImagesProps) {
 
   return (
     <div
-      className="relative h-full w-full basis-full overflow-hidden lg:basis-4/6"
+      className=" h-full w-full basis-full overflow-hidden lg:basis-4/6"
       ref={emblaMainRef}
     >
       <div className="flex aspect-square h-full max-h-[400px] w-full touch-pan-y backface-hidden sm:max-h-[500px]">
@@ -68,10 +68,10 @@ export function CarouselImages({ imageUrls }: ProductImagesProps) {
               width={0}
               height={0}
               sizes="100vw"
-              className="h-full w-full flex-none object-contain p-12"
+              className="h-full w-full shrink-0 object-contain p-12"
               onLoad={handleImageLoad}
-              priority
               quality={100}
+              priority
             />
           </>
         ))}

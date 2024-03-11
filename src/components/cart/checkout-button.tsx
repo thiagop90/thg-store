@@ -25,7 +25,7 @@ export function CheckoutButton() {
   }
 
   return (
-    <div className="space-y-3.5 px-6 pb-6">
+    <div className="space-y-4 px-6 pb-6">
       <Button
         className="w-full"
         onClick={handleFinishPurchaseClick}
@@ -42,13 +42,14 @@ export function CheckoutButton() {
       </Button>
       {!data?.user && (
         <p className="text-center leading-relaxed">
+          You must{' '}
           <span
             onClick={() => signIn('google')}
-            className="cursor-pointer font-semibold text-primary underline"
+            className="cursor-pointer font-semibold text-primary underline underline-offset-4"
           >
-            Sign in
+            log in
           </span>{' '}
-          to the platform to proceed with checkout.
+          to proceed with checkout.
         </p>
       )}
     </div>

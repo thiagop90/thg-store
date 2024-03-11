@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowLeft, Search } from 'lucide-react'
+import { Search, X } from 'lucide-react'
 import { Button } from './ui/button'
 import { SearchBar } from './search-bar'
 import { useSearchBar } from '@/store/search-bar'
@@ -21,7 +21,7 @@ export function MobileSearchBar() {
             size="icon"
             variant="outline"
           >
-            <ArrowLeft className="h-5 w-5" />
+            <X className="h-5 w-5" />
           </Button>
           <SearchBar />
         </div>
