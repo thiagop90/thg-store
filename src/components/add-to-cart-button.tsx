@@ -34,7 +34,7 @@ export function AddToCartButton({ product }: AddToCartButtonType) {
       {loading ? (
         <Loader className="h-4 w-4 animate-spin" />
       ) : (
-        <ShoppingCart className="h-4 w-4" />
+        <ShoppingCart className="h-4 w-4" strokeWidth="2.25" />
       )}
     </Button>
   )

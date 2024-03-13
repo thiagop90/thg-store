@@ -22,7 +22,7 @@ export function ThumbsButton(props: PropType) {
       <button
         onClick={onClick}
         className={cn(
-          'group h-full w-full rounded-lg border bg-card p-1 hover:border-primary',
+          'h-full w-full rounded-lg border bg-card p-1 hover:border-primary',
           {
             'border-2 border-primary': selected && imageLoaded,
           },
@@ -35,7 +35,10 @@ export function ThumbsButton(props: PropType) {
           alt={imgSrc}
           width={80}
           height={80}
-          className="h-full w-full object-contain transition duration-300 group-hover:scale-105"
+          className={cn(
+            'h-full w-full object-contain opacity-0 transition-opacity duration-300',
+            imageLoaded && 'opacity-100',
+          )}
           onLoad={handleImageLoad}
         />
       </button>

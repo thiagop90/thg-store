@@ -5,6 +5,7 @@ import { Search, X } from 'lucide-react'
 import { FormEvent, useEffect, useRef, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useSearchBar } from '@/store/search-bar'
+import { Button } from './ui/button'
 
 export function SearchBar() {
   const { isOpen, toggleSearchBar } = useSearchBar()
@@ -21,7 +22,7 @@ export function SearchBar() {
     }
   }, [isOpen])
 
-  const onSearch = (event: FormEvent) => {
+  function onSearch(event: FormEvent) {
     event.preventDefault()
 
     const encodedSearchQuery = encodeURI(searchQuery || '')
@@ -32,6 +33,11 @@ export function SearchBar() {
     }
     inputRef.current?.blur()
     toggleSearchBar()
+  }
+
+  function clearSearchQuery() {
+    setSearchQuery('')
+    inputRef.current?.focus()
   }
 
   return (
@@ -57,13 +63,14 @@ export function SearchBar() {
           ref={inputRef}
         />
         {searchQuery && (
-          <button
-            type="button"
-            className="flex h-10 w-10 shrink-0 items-center justify-center"
-            onClick={() => setSearchQuery('')}
+          <Button
+            size="icon"
+            variant="outline"
+            className="mr-2 h-6 w-6  p-1"
+            onClick={clearSearchQuery}
           >
-            <X className="h-5 w-5 text-primary" strokeWidth="2.25" />
-          </button>
+            <X className="h-4 w-4 flex-none text-primary" strokeWidth="2.25" />
+          </Button>
         )}
       </div>
     </form>

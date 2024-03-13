@@ -9,7 +9,7 @@ export function LinkSeeAll(props: LinkProps) {
     <Button
       asChild
       variant="outline"
-      className="h-9 text-primary hover:text-primary"
+      className="h-8 text-primary hover:text-primary"
     >
       <Link href={href} {...restProps}>
         See all <ArrowRight className="ml-1 h-4 w-4" />

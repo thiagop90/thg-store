@@ -18,7 +18,7 @@ export function ContainerImage({ imageUrl }: ContainerImageProps) {
   return (
     <>
       {!imageLoaded && (
-        <div className="absolute">
+        <div className="absolute flex h-full w-full items-center justify-center bg-card">
           <Loader className="animate-spin text-primary" />
         </div>
       )}
@@ -27,7 +27,7 @@ export function ContainerImage({ imageUrl }: ContainerImageProps) {
         width={0}
         height={0}
         sizes="100vw"
-        className="z-10 h-full w-full object-contain transition duration-300 group-hover:scale-105"
+        className="h-full w-full object-contain transition duration-300 group-hover:scale-105"
         alt=""
         onLoad={handleImageLoad}
       />

@@ -5,6 +5,7 @@ import Image from 'next/image'
 import useEmblaCarousel from 'embla-carousel-react'
 import { ThumbsButton } from './thumbs-button'
 import { Loader } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 type ProductImagesProps = {
   imageUrls: string[]
@@ -53,11 +54,11 @@ export function CarouselImages({ imageUrls }: ProductImagesProps) {
       className=" h-full w-full basis-full overflow-hidden lg:basis-4/6"
       ref={emblaMainRef}
     >
-      <div className="flex aspect-square h-full max-h-[400px] w-full touch-pan-y backface-hidden sm:max-h-[500px]">
+      <div className="relative flex aspect-square h-full max-h-[400px] w-full touch-pan-y backface-hidden sm:max-h-[500px]">
         {imageUrls.map((imageUrl) => (
           <>
             {!imageLoaded && (
-              <div className="flex h-full w-full items-center justify-center">
+              <div className="absolute flex h-full w-full items-center justify-center bg-card">
                 <Loader className="animate-spin text-primary" />
               </div>
             )}
@@ -68,7 +69,10 @@ export function CarouselImages({ imageUrls }: ProductImagesProps) {
               width={0}
               height={0}
               sizes="100vw"
-              className="h-full w-full shrink-0 object-contain p-12"
+              className={cn(
+                'h-full w-full shrink-0 object-contain p-12 opacity-0 transition-opacity duration-300',
+                imageLoaded && 'opacity-100',
+              )}
               onLoad={handleImageLoad}
               quality={100}
               priority
