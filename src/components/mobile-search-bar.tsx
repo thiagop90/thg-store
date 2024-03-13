@@ -20,7 +20,7 @@ export function MobileSearchBar() {
             initial={{ y: '-100%' }}
             animate={{ y: 0, transition: { duration: 0.2 } }}
             exit={{ y: '-100%' }}
-            className="fixed inset-0 z-50 flex items-center gap-3 bg-background px-4"
+            className="absolute inset-0 z-50 flex h-16 items-center gap-3 bg-background px-4"
           >
             <Button
               onClick={toggleSearchBar}
