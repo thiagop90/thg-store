@@ -42,4 +42,12 @@
   input[type="search"]::-webkit-search-results-decoration {  
     @apply hidden
   }
+
+  .command-list::-webkit-scrollbar {
+    @apply w-1;
+  }
+
+  .command-list::-webkit-scrollbar-thumb {
+    @apply rounded-2xl bg-neutral-800;
+  }
 }

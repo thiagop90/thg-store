@@ -1,9 +1,8 @@
 import { Cart } from './cart/cart'
 import { PopoverMenu } from './menu/popover-menu'
 import { Hydrate } from './hydrate'
-import { SearchBar } from './search-bar'
 import { NavHeader } from './nav-header'
-import { MobileSearchBar } from './mobile-search-bar'
+import { CommandMenuDialog } from './command-menu/command-menu'
 
 export function Header() {
   return (
@@ -13,11 +12,8 @@ export function Header() {
           <PopoverMenu />
         </div>
         <NavHeader />
-        <div className="hidden w-full md:flex md:justify-center lg:w-1/3">
-          <SearchBar />
-        </div>
-        <div className="flex flex-1 justify-end gap-3 lg:w-1/3">
-          <MobileSearchBar />
+        <CommandMenuDialog />
+        <div className="flex justify-end gap-3 xl:w-1/3">
           <div className="hidden flex-none md:block">
             <PopoverMenu />
           </div>
