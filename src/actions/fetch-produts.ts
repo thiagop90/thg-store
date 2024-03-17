@@ -13,6 +13,7 @@ export async function fetchProducts(searchQuery: string) {
     select: {
       id: true,
       name: true,
+      slug: true,
       category: {
         select: {
           slug: true,
