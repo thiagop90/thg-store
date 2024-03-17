@@ -10,8 +10,13 @@ export async function fetchProducts(searchQuery: string) {
         mode: 'insensitive',
       },
     },
-    include: {
-      category: true,
+    select: {
+      name: true,
+      category: {
+        select: {
+          slug: true,
+        },
+      },
     },
     take: 5,
   })

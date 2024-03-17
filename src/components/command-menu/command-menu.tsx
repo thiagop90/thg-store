@@ -31,6 +31,13 @@ export function CommandMenuDialog() {
   const [searchQuery, setSearchQuery] = useState('')
   const router = useRouter()
 
+  const { data: filteredProducts = [], isLoading } = useQuery(
+    ['products', searchQuery],
+    () => fetchProducts(searchQuery),
+
+    { enabled: !!searchQuery },
+  )
+
   useEffect(() => {
     function down(e: KeyboardEvent) {
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
@@ -42,13 +49,6 @@ export function CommandMenuDialog() {
     document.addEventListener('keydown', down)
     return () => document.removeEventListener('keydown', down)
   }, [setShowCommandMenu])
-
-  const { data: filteredProducts = [], isLoading } = useQuery(
-    ['products', searchQuery],
-    () => fetchProducts(searchQuery),
-
-    { enabled: !!searchQuery },
-  )
 
   const forwardToRoute = useCallback(
     (slug: string) => {
