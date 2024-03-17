@@ -36,7 +36,7 @@ export function ThumbsButton(props: PropType) {
           width={80}
           height={80}
           className={cn(
-            'h-full w-full object-contain opacity-0 transition-opacity duration-300',
+            'h-full w-full object-contain opacity-0 transition-opacity duration-500',
             imageLoaded && 'opacity-100',
           )}
           onLoad={handleImageLoad}

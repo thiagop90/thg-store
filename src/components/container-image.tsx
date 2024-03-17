@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import { Loader } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -18,7 +19,7 @@ export function ContainerImage({ imageUrl }: ContainerImageProps) {
   return (
     <>
       {!imageLoaded && (
-        <div className="absolute flex h-full w-full items-center justify-center bg-card">
+        <div className="absolute flex h-full w-full items-center justify-center">
           <Loader className="animate-spin text-primary" />
         </div>
       )}
@@ -27,7 +28,10 @@ export function ContainerImage({ imageUrl }: ContainerImageProps) {
         width={0}
         height={0}
         sizes="100vw"
-        className="h-full w-full object-contain transition duration-300 group-hover:scale-105"
+        className={cn(
+          'h-full w-full shrink-0 object-contain opacity-0 transition-opacity duration-500',
+          imageLoaded && 'opacity-100',
+        )}
         alt=""
         onLoad={handleImageLoad}
       />

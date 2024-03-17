@@ -58,7 +58,7 @@ export function CarouselImages({ imageUrls }: ProductImagesProps) {
         {imageUrls.map((imageUrl) => (
           <>
             {!imageLoaded && (
-              <div className="absolute flex h-full w-full items-center justify-center bg-card">
+              <div className="absolute flex h-full w-full items-center justify-center">
                 <Loader className="animate-spin text-primary" />
               </div>
             )}
@@ -70,7 +70,7 @@ export function CarouselImages({ imageUrls }: ProductImagesProps) {
               height={0}
               sizes="100vw"
               className={cn(
-                'h-full w-full shrink-0 object-contain p-12 opacity-0 transition-opacity duration-300',
+                'h-full w-full shrink-0 object-contain p-12 opacity-0 transition-opacity duration-500',
                 imageLoaded && 'opacity-100',
               )}
               onLoad={handleImageLoad}
