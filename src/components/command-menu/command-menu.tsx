@@ -127,11 +127,6 @@ export function CommandMenuDialog() {
                     key={product.id}
                     onSelect={() => forwardToRoute(`/product/${product.slug}`)}
                   >
-                    {
-                      categoryIcon[
-                        product.category.slug as keyof typeof categoryIcon
-                      ]
-                    }
                     {product.name}
                   </CommandItem>
                 ))}
