@@ -11,6 +11,7 @@ export async function fetchProducts(searchQuery: string) {
       },
     },
     select: {
+      id: true,
       name: true,
       category: {
         select: {
