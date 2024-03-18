@@ -61,6 +61,8 @@ export function CommandMenuDialog() {
   const { filteredCategories, isLoadingCategories } =
     useGetCategories(searchQuery)
   const isLoading = isLoadingProducts || isLoadingCategories
+  const noResults =
+    filteredProducts.length === 0 && filteredCategories.length === 0
 
   useEffect(() => {
     function down(e: KeyboardEvent) {
@@ -117,60 +119,63 @@ export function CommandMenuDialog() {
       <CommandDialog open={showCommandMenu} onOpenChange={setShowCommandMenu}>
         <CommandInput
           placeholder="Search for products..."
-          value={searchQuery || ''}
+          value={searchQuery}
           onValueChange={(value) => setSearchQuery(value)}
         />
 
         <CommandList className="command-list">
-          {!searchQuery &&
-            groups.map((group) => (
-              <CommandGroup key={group.heading} heading={group.heading}>
-                {group.actions.map((action) => (
-                  <CommandItem key={action.name} onSelect={action.onSelect}>
-                    <Search className="h-4 w-4" />
-                    {action.name}
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            ))}
+          {!searchQuery && (
+            <>
+              {groups.map((group) => (
+                <CommandGroup key={group.heading} heading={group.heading}>
+                  {group.actions.map((action) => (
+                    <CommandItem key={action.name} onSelect={action.onSelect}>
+                      <Search className="h-4 w-4" />
+                      {action.name}
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              ))}
+            </>
+          )}
 
           {searchQuery && (
-            <>
-              <CommandGroup heading="Search">
+            <CommandGroup heading="Search">
+              <CommandItem
+                onSelect={() => forwardToRoute(`/search?query=${searchQuery}`)}
+              >
+                <Search className="h-4 w-4" />
+                {searchQuery}
+              </CommandItem>
+            </CommandGroup>
+          )}
+
+          {filteredCategories.length !== 0 && (
+            <CommandGroup heading="Categories" className="border-t">
+              {filteredCategories.map((category) => (
                 <CommandItem
-                  onSelect={() =>
-                    forwardToRoute(`/search?query=${searchQuery}`)
-                  }
+                  key={category.id}
+                  onSelect={() => forwardToRoute(`/search/${category.slug}`)}
                 >
-                  <Search className="h-4 w-4" />
-                  {searchQuery}
+                  {/* {getCategoryIcon(category.slug)} */}
+                  {category.name}
                 </CommandItem>
-              </CommandGroup>
+              ))}
+            </CommandGroup>
+          )}
 
-              <CommandGroup heading="Categories" className="border-t">
-                {filteredCategories.map((category) => (
-                  <CommandItem
-                    key={category.id}
-                    onSelect={() => forwardToRoute(`/search/${category.slug}`)}
-                  >
-                    {/* {getCategoryIcon(category.slug)} */}
-                    {category.name}
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-
-              <CommandGroup heading="Products" className="border-t">
-                {filteredProducts.map((product) => (
-                  <CommandItem
-                    key={product.id}
-                    onSelect={() => forwardToRoute(`/product/${product.slug}`)}
-                  >
-                    {/* {getCategoryIcon(product.category.slug)} */}
-                    {product.name}
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            </>
+          {filteredProducts.length !== 0 && (
+            <CommandGroup heading="Products" className="border-t">
+              {filteredProducts.map((product) => (
+                <CommandItem
+                  key={product.id}
+                  onSelect={() => forwardToRoute(`/product/${product.slug}`)}
+                >
+                  {/* {getCategoryIcon(product.category.slug)} */}
+                  {product.name}
+                </CommandItem>
+              ))}
+            </CommandGroup>
           )}
 
           {isLoading && (
@@ -192,8 +197,10 @@ export function CommandMenuDialog() {
             </div>
           )}
 
-          {!isLoading && filteredProducts.length === 0 && (
-            <CommandEmpty>No products found.</CommandEmpty>
+          {!isLoading && noResults && searchQuery && (
+            <p className="py-6 text-center text-sm text-foreground">
+              No results found.
+            </p>
           )}
         </CommandList>
       </CommandDialog>

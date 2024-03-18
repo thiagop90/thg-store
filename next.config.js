@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ['lucide-react'],
   images: {
     domains: [
       'fsw-store.s3.sa-east-1.amazonaws.com',
