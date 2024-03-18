@@ -2,7 +2,7 @@
 
 import { prismaClient } from '@/lib/prisma'
 
-export async function fetchProducts(searchQuery: string) {
+export async function getProducts(searchQuery: string) {
   const products = await prismaClient.product.findMany({
     where: {
       name: {
@@ -16,6 +16,7 @@ export async function fetchProducts(searchQuery: string) {
       slug: true,
       category: {
         select: {
+          id: true,
           slug: true,
         },
       },

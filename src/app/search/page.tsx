@@ -3,7 +3,7 @@
 import { WrapperProduct } from './components/wrapper-product'
 import { Fragment, useEffect } from 'react'
 import axios from 'axios'
-import { useInfiniteQuery } from 'react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { useInView } from 'react-intersection-observer'
 import { Product } from '@prisma/client'
 import { ProductCard } from '@/components/product-card'
@@ -11,17 +11,6 @@ import { computeProductTotalPrice } from '@/helpers/compute-price'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Loader } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
-
-const searchAllProducts = async (
-  pageParam: string,
-  encodedSearchQuery: string,
-  encodedSortQuery: string,
-) => {
-  const response = await axios.get(
-    `/api/search?cursor=${pageParam}&query=${encodedSearchQuery}&sort=${encodedSortQuery}`,
-  )
-  return response.data
-}
 
 export default function SearchPage() {
   const { ref, inView } = useInView()
@@ -31,6 +20,13 @@ export default function SearchPage() {
   const encodedSearchQuery = encodeURI(searchQuery || '')
   const encodedSortQuery = encodeURI(sortQuery || '')
 
+  const searchAllProducts = async ({ pageParam }: { pageParam: string }) => {
+    const response = await axios.get(
+      `/api/search?cursor=${pageParam}&query=${encodedSearchQuery}&sort=${encodedSortQuery}`,
+    )
+    return response.data
+  }
+
   const {
     isLoading,
     data,
@@ -38,14 +34,12 @@ export default function SearchPage() {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useInfiniteQuery(
-    ['products', { encodedSearchQuery, encodedSortQuery }],
-    ({ pageParam = '' }) =>
-      searchAllProducts(pageParam, encodedSearchQuery, encodedSortQuery),
-    {
-      getNextPageParam: (lastPage) => lastPage.nextId,
-    },
-  )
+  } = useInfiniteQuery({
+    queryKey: ['products', { encodedSearchQuery, encodedSortQuery }],
+    queryFn: searchAllProducts,
+    initialPageParam: '',
+    getNextPageParam: (lastPage) => lastPage.nextId,
+  })
 
   useEffect(() => {
     if (inView && hasNextPage) {

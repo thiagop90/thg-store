@@ -29,10 +29,10 @@ export default async function Home() {
     },
   })
 
-  const mices = await prismaClient.product.findMany({
+  const mouses = await prismaClient.product.findMany({
     where: {
       category: {
-        slug: 'mices',
+        slug: 'mouses',
       },
     },
     take: 10,
@@ -78,10 +78,10 @@ export default async function Home() {
 
       <div>
         <div className="mb-4 flex items-end justify-between">
-          <SectionTitle>Mices</SectionTitle>
+          <SectionTitle>Mouses</SectionTitle>
           <LinkSeeAll href="/search/mices" />
         </div>
-        <CarouselProducts products={mices} />
+        <CarouselProducts products={mouses} />
       </div>
 
       <div>

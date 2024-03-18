@@ -11,12 +11,38 @@ import {
   CommandList,
 } from './command-menu-components'
 import { CommandTrigger } from './command-trigger'
-import { fetchProducts } from '@/actions/fetch-produts'
-import { useQuery } from 'react-query'
 import { Skeleton } from '../ui/skeleton'
-import { Search } from 'lucide-react'
+import {
+  HeadphonesIcon,
+  KeyboardIcon,
+  MonitorIcon,
+  MouseIcon,
+  Search,
+  SpeakerIcon,
+  SquareIcon,
+} from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { categoryIcon } from '@/constants/category-icon'
+import { useGetProducts } from '@/hooks/use-get-products'
+import { useGetCategories } from '@/hooks/use-get-categories'
+
+function getCategoryIcon(slug: string) {
+  switch (slug) {
+    case 'keyboards':
+      return <KeyboardIcon />
+    case 'monitors':
+      return <MonitorIcon />
+    case 'mouses':
+      return <MouseIcon />
+    case 'headsets':
+      return <HeadphonesIcon />
+    case 'speakers':
+      return <SpeakerIcon />
+    case 'mousepads':
+      return <SquareIcon />
+    default:
+      return null
+  }
+}
 
 type Groups = Array<{
   heading: string
@@ -27,16 +53,14 @@ type Groups = Array<{
 }>
 
 export function CommandMenuDialog() {
-  const { showCommandMenu, setShowCommandMenu } = useCommandMenu()
-  const [searchQuery, setSearchQuery] = useState('')
   const router = useRouter()
+  const { showCommandMenu, setShowCommandMenu } = useCommandMenu()
 
-  const { data: filteredProducts = [], isLoading } = useQuery(
-    ['products', searchQuery],
-    () => fetchProducts(searchQuery),
-
-    { enabled: !!searchQuery },
-  )
+  const [searchQuery, setSearchQuery] = useState('')
+  const { filteredProducts, isLoadingProducts } = useGetProducts(searchQuery)
+  const { filteredCategories, isLoadingCategories } =
+    useGetCategories(searchQuery)
+  const isLoading = isLoadingProducts || isLoadingCategories
 
   useEffect(() => {
     function down(e: KeyboardEvent) {
@@ -98,7 +122,7 @@ export function CommandMenuDialog() {
         />
 
         <CommandList className="command-list">
-          {!searchQuery ? (
+          {!searchQuery &&
             groups.map((group) => (
               <CommandGroup key={group.heading} heading={group.heading}>
                 {group.actions.map((action) => (
@@ -108,8 +132,9 @@ export function CommandMenuDialog() {
                   </CommandItem>
                 ))}
               </CommandGroup>
-            ))
-          ) : (
+            ))}
+
+          {searchQuery && (
             <>
               <CommandGroup heading="Search">
                 <CommandItem
@@ -121,12 +146,26 @@ export function CommandMenuDialog() {
                   {searchQuery}
                 </CommandItem>
               </CommandGroup>
-              <CommandGroup heading="Products">
+
+              <CommandGroup heading="Categories" className="border-t">
+                {filteredCategories.map((category) => (
+                  <CommandItem
+                    key={category.id}
+                    onSelect={() => forwardToRoute(`/search/${category.slug}`)}
+                  >
+                    {/* {getCategoryIcon(category.slug)} */}
+                    {category.name}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+
+              <CommandGroup heading="Products" className="border-t">
                 {filteredProducts.map((product) => (
                   <CommandItem
                     key={product.id}
                     onSelect={() => forwardToRoute(`/product/${product.slug}`)}
                   >
+                    {/* {getCategoryIcon(product.category.slug)} */}
                     {product.name}
                   </CommandItem>
                 ))}
