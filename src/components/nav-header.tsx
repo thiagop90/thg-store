@@ -3,7 +3,7 @@ import { Computer } from 'lucide-react'
 
 const links = [
   { href: '/search', label: 'All' },
-  { href: '/search/mices', label: 'Mices' },
+  { href: '/search/mouses', label: 'Mouses' },
   { href: '/search/keyboards', label: 'Keyboards' },
 ]
 

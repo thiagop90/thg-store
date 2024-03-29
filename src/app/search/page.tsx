@@ -2,7 +2,6 @@
 
 import { WrapperProduct } from './components/wrapper-product'
 import { Fragment, useEffect } from 'react'
-import axios from 'axios'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { useInView } from 'react-intersection-observer'
 import { Product } from '@prisma/client'
@@ -11,6 +10,7 @@ import { computeProductTotalPrice } from '@/helpers/compute-price'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Loader } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
+import { searchAllProducts } from '@/actions/search-all-products'
 
 export default function SearchPage() {
   const { ref, inView } = useInView()
@@ -19,13 +19,6 @@ export default function SearchPage() {
   const sortQuery = search ? search.get('sort') : null
   const encodedSearchQuery = encodeURI(searchQuery || '')
   const encodedSortQuery = encodeURI(sortQuery || '')
-
-  const searchAllProducts = async ({ pageParam }: { pageParam: string }) => {
-    const response = await axios.get(
-      `/api/search?cursor=${pageParam}&query=${encodedSearchQuery}&sort=${encodedSortQuery}`,
-    )
-    return response.data
-  }
 
   const {
     isLoading,
@@ -36,7 +29,8 @@ export default function SearchPage() {
     hasNextPage,
   } = useInfiniteQuery({
     queryKey: ['products', { encodedSearchQuery, encodedSortQuery }],
-    queryFn: searchAllProducts,
+    queryFn: ({ pageParam }: { pageParam: string }) =>
+      searchAllProducts({ pageParam, encodedSearchQuery, encodedSortQuery }),
     initialPageParam: '',
     getNextPageParam: (lastPage) => lastPage.nextId,
   })
