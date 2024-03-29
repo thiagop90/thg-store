@@ -1,28 +1,17 @@
-'use server'
+import axios from 'axios'
 
-import { prismaClient } from '@/lib/prisma'
+type GetProductsResponse = {
+  name: string
+  id: string
+  slug: string
+  category: {
+    id: string
+    slug: string
+  }
+}[]
 
-export async function getProducts(searchQuery: string) {
-  const products = await prismaClient.product.findMany({
-    where: {
-      name: {
-        contains: searchQuery,
-        mode: 'insensitive',
-      },
-    },
-    select: {
-      id: true,
-      name: true,
-      slug: true,
-      category: {
-        select: {
-          id: true,
-          slug: true,
-        },
-      },
-    },
-    take: 5,
-  })
+export async function getProducts() {
+  const response = await axios.get<GetProductsResponse>('/api/products')
 
-  return products
+  return response.data
 }
