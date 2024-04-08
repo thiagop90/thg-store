@@ -1,23 +1,38 @@
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-import { LogOut, PackageSearch, User } from 'lucide-react'
+import { Loader, LogOut, PackageSearch, User } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { PopoverClose } from '@radix-ui/react-popover'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Skeleton } from '../ui/skeleton'
+import { useState } from 'react'
+import { BuiltInProviderType } from 'next-auth/providers/index'
+import { Button } from '../ui/button'
 
 export function StatusAuthenticated() {
+  const [isLoading, setIsLoading] = useState(false)
   const pathname = usePathname()
+
   const { status, data } = useSession()
 
-  const handleLoginClick = async () => {
-    await signIn('google')
+  async function handleLoginClick(provider: BuiltInProviderType) {
+    try {
+      setIsLoading(true)
+      await signIn(provider)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleLogoutClick = async () => {
-    await signOut()
+    try {
+      setIsLoading(true)
+      await signOut()
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -38,18 +53,47 @@ export function StatusAuthenticated() {
             </div>
           </div>
 
-          <button
-            onClick={handleLoginClick}
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-background p-4 transition hover:bg-accent"
-          >
-            <Image
-              src="/google-logo.svg"
-              alt="Google Logo"
-              width={20}
-              height={20}
-            />
-            Continue with Google
-          </button>
+          <div className="space-y-2">
+            <Button
+              variant="outline"
+              className="h-14 w-full gap-2 p-4"
+              onClick={() => handleLoginClick('google')}
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <Loader className="h-4 w-4 animate-spin" />
+              ) : (
+                <Image
+                  src="/google-logo.svg"
+                  alt="Google Logo"
+                  width={16}
+                  height={16}
+                  priority
+                />
+              )}
+              Continue with Google
+            </Button>
+
+            <Button
+              variant="outline"
+              className="h-14 w-full gap-2 p-4"
+              onClick={() => handleLoginClick('github')}
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <Loader className="h-4 w-4 animate-spin" />
+              ) : (
+                <Image
+                  src="/github-logo.svg"
+                  alt="GitHub Logo"
+                  width={16}
+                  height={16}
+                  priority
+                />
+              )}
+              Continue with GitHub
+            </Button>
+          </div>
         </div>
       )}
 
@@ -57,8 +101,8 @@ export function StatusAuthenticated() {
         <div className="flex items-center gap-3 p-4">
           <Skeleton className="h-10 w-10 rounded-full" />
           <div className="space-y-1">
-            <Skeleton className="h-4 w-20" />
-            <Skeleton className="h-4 w-20" />
+            <Skeleton className="h-3.5 w-40" />
+            <Skeleton className="h-3.5 w-20" />
           </div>
         </div>
       )}
@@ -79,27 +123,36 @@ export function StatusAuthenticated() {
           </div>
 
           <PopoverClose asChild>
-            <Link
-              href="/orders"
+            <Button
               className={cn(
-                'flex w-full items-center gap-4 rounded-lg p-4 text-muted-foreground hover:bg-background',
+                'h-14 w-full justify-start gap-4 p-4 text-muted-foreground hover:bg-background',
                 {
                   'pointer-events-none bg-background text-foreground':
                     pathname === '/orders',
                 },
               )}
+              variant="ghost"
+              asChild
             >
-              <PackageSearch className="h-5 w-5" strokeWidth={1.75} />
-              Order history
-            </Link>
+              <Link href="/orders">
+                <PackageSearch className="h-5 w-5" strokeWidth={1.75} />
+                Order history
+              </Link>
+            </Button>
           </PopoverClose>
-          <button
+          <Button
+            variant="ghost"
+            className="h-14 w-full justify-start gap-4 p-4 text-red-400 hover:bg-background hover:text-red-400"
             onClick={handleLogoutClick}
-            className="flex w-full items-center gap-4 rounded-lg p-4 text-red-400 hover:bg-background"
+            disabled={isLoading}
           >
-            <LogOut className="h-5 w-5" strokeWidth={1.75} />
+            {isLoading ? (
+              <Loader className="h-5 w-5 animate-spin" />
+            ) : (
+              <LogOut className="h-5 w-5" strokeWidth={1.75} />
+            )}
             Log out of account
-          </button>
+          </Button>
         </div>
       )}
     </>
