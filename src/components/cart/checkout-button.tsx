@@ -6,6 +6,7 @@ import { useCartStore } from '@/store/cart'
 import { loadStripe } from '@stripe/stripe-js'
 import { Button } from '../ui/button'
 import { Loader } from 'lucide-react'
+import { env } from '@/@types/env'
 
 export function CheckoutButton() {
   const { cart } = useCartStore()
@@ -17,7 +18,7 @@ export function CheckoutButton() {
 
     const order = await createOrder(cart, data?.user.id ?? '')
     const checkout = await createCheckout(cart, order.id)
-    const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
+    const stripe = await loadStripe(env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
 
     stripe?.redirectToCheckout({
       sessionId: checkout.id,
