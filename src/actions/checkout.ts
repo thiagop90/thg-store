@@ -1,19 +1,18 @@
 'use server'
 
-import { env } from '@/@types/env'
 import { CartProduct } from '@/store/cart'
 import Stripe from 'stripe'
 
 export async function createCheckout(products: CartProduct[], orderId: string) {
-  const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
     apiVersion: '2023-10-16',
   })
 
   const checkout = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     mode: 'payment',
-    success_url: `${env.HOST_URL}/orders`,
-    cancel_url: env.HOST_URL,
+    success_url: `${process.env.HOST_URL}/orders`,
+    cancel_url: process.env.HOST_URL,
     metadata: {
       orderId,
     },
