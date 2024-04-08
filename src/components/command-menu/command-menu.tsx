@@ -87,8 +87,8 @@ export function CommandMenuDialog() {
           )}
 
           {isLoadingProducts && (
-            <div className="px-2 py-1.5">
-              <div className="px-2 py-1.5">
+            <div className="px-3 py-2">
+              <div className="p-2">
                 <Skeleton className="h-1.5 w-[80px]" />
               </div>
               {Array.from({ length: 5 }).map((_, i) => {

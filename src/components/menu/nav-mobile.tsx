@@ -3,31 +3,36 @@ import { usePathname } from 'next/navigation'
 import { PopoverClose } from '@radix-ui/react-popover'
 import { Home, Keyboard, LayoutGrid, Mouse } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { Button } from '../ui/button'
 
-const links = [
-  {
-    href: '/',
-    label: 'Home',
-    icon: <Home className="h-5 w-5" strokeWidth={1.75} />,
-  },
-  {
-    href: '/search',
-    label: 'All',
-    icon: <LayoutGrid className="h-5 w-5" strokeWidth={1.75} />,
-  },
-  {
-    href: '/search/mices',
-    label: 'Mices',
-    icon: <Mouse className="h-5 w-5" strokeWidth={1.75} />,
-  },
-  {
-    href: '/search/keyboards',
-    label: 'Keyboards',
-    icon: <Keyboard className="h-5 w-5" strokeWidth={1.75} />,
-  },
-]
 export function NavMobile() {
   const pathname = usePathname()
+
+  const className = 'h-5 w-5'
+  const strokeWidth = '1.75'
+
+  const links = [
+    {
+      href: '/',
+      label: 'Home',
+      icon: <Home className={className} strokeWidth={strokeWidth} />,
+    },
+    {
+      href: '/search',
+      label: 'All',
+      icon: <LayoutGrid className={className} strokeWidth={strokeWidth} />,
+    },
+    {
+      href: '/search/mouses',
+      label: 'Mouses',
+      icon: <Mouse className={className} strokeWidth={strokeWidth} />,
+    },
+    {
+      href: '/search/keyboards',
+      label: 'Keyboards',
+      icon: <Keyboard className={className} strokeWidth={strokeWidth} />,
+    },
+  ]
 
   return (
     <nav className="md:hidden">
@@ -35,19 +40,22 @@ export function NavMobile() {
 
       {links.map((link, index) => (
         <PopoverClose asChild key={index}>
-          <Link
+          <Button
             className={cn(
-              'flex w-full items-center gap-4 rounded-lg p-4 text-muted-foreground hover:bg-background',
+              'h-14 w-full justify-start gap-4 p-4 text-muted-foreground hover:bg-background',
               {
                 'pointer-events-none bg-background text-foreground':
                   pathname === link.href,
               },
             )}
-            href={link.href}
+            variant="ghost"
+            asChild
           >
-            <span>{link.icon}</span>
-            <span>{link.label}</span>
-          </Link>
+            <Link href={link.href}>
+              <span>{link.icon}</span>
+              <span>{link.label}</span>
+            </Link>
+          </Button>
         </PopoverClose>
       ))}
     </nav>
