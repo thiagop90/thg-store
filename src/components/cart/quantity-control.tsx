@@ -1,8 +1,8 @@
-import { CartProduct, useCartStore } from '@/store/cart'
+import { CartProductProps, useCartStore } from '@/store/cart'
 import { Minus, Plus } from 'lucide-react'
 
 type QuantityControlType = {
-  product: CartProduct
+  product: CartProductProps
 }
 
 export function QuantityControl({ product }: QuantityControlType) {

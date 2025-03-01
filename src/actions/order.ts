@@ -1,9 +1,12 @@
 'use server'
 
 import { prismaClient } from '@/lib/prisma'
-import { CartProduct } from '@/store/cart'
+import { CartProductProps } from '@/store/cart'
 
-export async function createOrder(cartProducts: CartProduct[], userId: string) {
+export async function createOrder(
+  cartProducts: CartProductProps[],
+  userId: string,
+) {
   const order = await prismaClient.order.create({
     data: {
       userId,

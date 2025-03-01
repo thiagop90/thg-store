@@ -1,9 +1,12 @@
 'use server'
 
-import { CartProduct } from '@/store/cart'
+import { CartProductProps } from '@/store/cart'
 import Stripe from 'stripe'
 
-export async function createCheckout(products: CartProduct[], orderId: string) {
+export async function createCheckout(
+  products: CartProductProps[],
+  orderId: string,
+) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
     apiVersion: '2023-10-16',
   })
