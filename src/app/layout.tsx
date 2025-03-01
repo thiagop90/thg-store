@@ -1,23 +1,31 @@
 import { Barlow } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/header'
-import { AuthProvider } from '@/app/provider-auth'
 import { Footer } from '@/components/footer'
 import { QueryWrapper } from './query-wrapper'
 import { getLocale, getMessages } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
+import type { Metadata, Viewport } from 'next'
+import { auth } from '@/auth'
+import { SessionProvider } from 'next-auth/react'
 
 const barlowFont = Barlow({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
 })
 
-export const metadata = {
+export const metadata: Metadata = {
   title: {
     default: 'THG Store',
     template: '%s |  THG Store',
   },
-  viewport: { width: 'device-width', initialScale: 1, maximumScale: 1 },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 }
 
 export default async function RootLayout({
@@ -25,20 +33,23 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const locale = await getLocale()
-  const messages = await getMessages()
+  const [locale, messages, session] = await Promise.all([
+    await getLocale(),
+    await getMessages(),
+    await auth(),
+  ])
 
   return (
     <html lang={locale}>
       <body className={barlowFont.className}>
         <NextIntlClientProvider messages={messages}>
-          <QueryWrapper>
-            <AuthProvider>
+          <SessionProvider session={session}>
+            <QueryWrapper>
               <Header />
               <main className="h-full min-h-[100dvh] px-4">{children}</main>
               <Footer />
-            </AuthProvider>
-          </QueryWrapper>
+            </QueryWrapper>
+          </SessionProvider>
         </NextIntlClientProvider>
       </body>
     </html>

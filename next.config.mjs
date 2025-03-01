@@ -7,13 +7,13 @@ const withNextIntl = createNextIntlPlugin()
  */
 const nextConfig = {
   images: {
-    domains: [
-      'fsw-store.s3.sa-east-1.amazonaws.com',
-      'thg-store.s3.us-east-2.amazonaws.com',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'thg-store.s3.us-east-2.amazonaws.com',
+        pathname: '**',
+      },
     ],
-  },
-  experimental: {
-    serverActions: true,
   },
   trailingSlash: true,
 }

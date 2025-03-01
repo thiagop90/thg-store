@@ -1,12 +1,11 @@
-import { authOptions } from '@/lib/auth'
 import { prismaClient } from '@/lib/prisma'
-import { getServerSession } from 'next-auth'
 import { OrderItem } from './components/order-item'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { PackageSearch } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
+import { auth } from '@/auth'
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('OrderPage')
@@ -17,10 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function OrderPage() {
-  const [t, session] = await Promise.all([
-    getTranslations('OrderPage'),
-    getServerSession(authOptions),
-  ])
+  const [t, session] = await Promise.all([getTranslations('OrderPage'), auth()])
 
   if (!session || !session.user) {
     redirect('/')
