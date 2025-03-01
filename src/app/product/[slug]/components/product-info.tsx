@@ -2,12 +2,15 @@ import { AddToCartButton } from '@/components/add-to-cart-button'
 import { DiscountBadge } from '@/components/discount-badge'
 import { ProductWithTotalPrice } from '@/helpers/compute-price'
 import { useProductPricesFormatted } from '@/helpers/product-prices-formatted'
+import { useTranslations } from 'next-intl'
 
 type ProductInfoType = {
   product: ProductWithTotalPrice
 }
 
 export function ProductInfo({ product }: ProductInfoType) {
+  const t = useTranslations('ProductPage')
+
   const { formattedBasePrice, formattedTotalPrice } =
     useProductPricesFormatted(product)
 
@@ -18,11 +21,11 @@ export function ProductInfo({ product }: ProductInfoType) {
       <div className="mb-6 flex flex-col border-b pb-6">
         <div className="mb-2 text-muted-foreground">
           <span className="">
-            Sold and delivered by:{' '}
+            {t('soldAndDeliveredBy')}{' '}
             <span className="font-bold text-primary">THG Store</span>{' '}
           </span>
           <span className="mx-1">|</span>
-          <span className="font-bold text-green-500">In stock</span>
+          <span className="font-bold text-green-500">{t('inStock')}</span>
         </div>
         <h1 className="text-2xl font-medium">{product.name}</h1>
         <div className="mt-2 flex items-center gap-2">

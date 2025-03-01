@@ -17,8 +17,10 @@ import { Search } from 'lucide-react'
 import { getCategoryIcon } from './get-category-icon'
 import { useQuery } from '@tanstack/react-query'
 import { getProducts } from '@/actions/get-products'
+import { useTranslations } from 'next-intl'
 
 export function CommandMenuDialog() {
+  const t = useTranslations('Products')
   const router = useRouter()
   const { showCommandMenu, setShowCommandMenu } = useCommandMenu()
 
@@ -55,14 +57,14 @@ export function CommandMenuDialog() {
       <CommandDialog open={showCommandMenu} onOpenChange={setShowCommandMenu}>
         <CommandInput
           id="searchQuery"
-          placeholder="Search for products..."
+          placeholder={t('searchProducts')}
           value={searchQuery}
           onValueChange={(value) => setSearchQuery(value)}
         />
 
         <CommandList className="command-list">
           {searchQuery && (
-            <CommandGroup heading="Search" className="border-b">
+            <CommandGroup heading={t('search')} className="border-b">
               <CommandItem
                 onSelect={() => forwardToRoute(`/search?query=${searchQuery}`)}
               >
@@ -73,7 +75,7 @@ export function CommandMenuDialog() {
           )}
 
           {filteredProducts && (
-            <CommandGroup heading="Products">
+            <CommandGroup heading={t('products')}>
               {filteredProducts?.map((product) => (
                 <CommandItem
                   key={product.id}
@@ -105,7 +107,7 @@ export function CommandMenuDialog() {
             </div>
           )}
 
-          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandEmpty>{t('noProductsFound')}</CommandEmpty>
         </CommandList>
       </CommandDialog>
     </>

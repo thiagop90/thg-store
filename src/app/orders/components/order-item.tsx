@@ -1,10 +1,12 @@
 import { Prisma } from '@prisma/client'
 import { OrderProductItem } from './order-product-item'
 import { getOrderStatus } from '../helpers/status'
-import { DateTime } from 'luxon'
 import { useMemo } from 'react'
 import { computeProductTotalPrice } from '@/helpers/compute-price'
 import { formatCurrency } from '@/helpers/format-currency'
+import { useTranslations } from 'next-intl'
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
 type OrderItemType = {
   order: Prisma.OrderGetPayload<{
@@ -17,11 +19,15 @@ type OrderItemType = {
 }
 
 export function OrderItem({ order }: OrderItemType) {
-  const timeZone = 'America/Sao_Paulo'
+  const t = useTranslations('OrderPage')
 
-  const formattedCreatedAtWithTime = DateTime.fromJSDate(order.createdAt, {
-    zone: timeZone,
-  }).toFormat("dd/MM/y 'at' HH:mm")
+  const formattedCreatedAtWithTime = format(
+    order.createdAt,
+    `P '${t('at')}' kk':'mm`,
+    {
+      locale: ptBR,
+    },
+  )
 
   const totalAmount = useMemo(() => {
     return order.orderProducts.reduce((acc, { product, quantity }) => {
@@ -43,13 +49,13 @@ export function OrderItem({ order }: OrderItemType) {
           </span>
         </div>
         <div className="flex justify-between pt-4 sm:block sm:pt-0">
-          <p className="font-medium">Date placed</p>
+          <p className="font-medium">{t('purchaseData')}</p>
           <span className="text-muted-foreground sm:mt-1">
             {formattedCreatedAtWithTime}
           </span>
         </div>
         <div className="flex justify-between pt-4 sm:block sm:pt-0">
-          <p className="font-medium">Total amount</p>
+          <p className="font-medium">{t('totalAmount')}</p>
           <span className="text-muted-foreground sm:mt-1">
             {formattedTotalAmount}
           </span>

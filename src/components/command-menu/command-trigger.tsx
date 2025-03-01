@@ -2,8 +2,10 @@
 
 import { useCommandMenu } from '@/store/command-menu'
 import { SearchIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 export function CommandTrigger() {
+  const t = useTranslations('Products')
   const { setShowCommandMenu } = useCommandMenu()
 
   return (
@@ -13,7 +15,7 @@ export function CommandTrigger() {
         onClick={() => setShowCommandMenu(true)}
       >
         <SearchIcon className="h-5 w-5" />
-        <span className="hidden sm:block">Search for products</span>
+        <span className="hidden sm:block">{t('searchProducts')}</span>
         <span className="hidden rounded-md border bg-background px-1.5 text-[10px] sm:flex lg:ml-auto">
           CTRL + K
         </span>

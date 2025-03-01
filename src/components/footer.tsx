@@ -1,12 +1,16 @@
 import Link from 'next/link'
 import { Button } from './ui/button'
 import { Github, Linkedin } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
 
-export function Footer() {
+export async function Footer() {
+  const t = await getTranslations('Footer')
   return (
     <footer className="relative border-t py-6 text-sm text-muted-foreground ">
       <div className="mx-auto flex w-full flex-col items-center gap-2 px-4">
-        <p>© 2023 THG Store, Inc. All rights reserved.</p>
+        <p translate="no">
+          © {new Date().getFullYear()} THG Store, Inc. {t('allRightsReserved')}
+        </p>
         <div className="flex gap-3">
           <Link target="_blank" href="https://github.com/thiagop90">
             <Button

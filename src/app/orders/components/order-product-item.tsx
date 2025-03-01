@@ -4,6 +4,7 @@ import { Prisma } from '@prisma/client'
 import Image from 'next/image'
 import Link from 'next/link'
 import { BuyAgainButton } from './buy-again-button'
+import { useTranslations } from 'next-intl'
 
 type OrderProductItemType = {
   orderProduct: Prisma.OrderProductGetPayload<{
@@ -14,6 +15,8 @@ type OrderProductItemType = {
 }
 
 export function OrderProductItem({ orderProduct }: OrderProductItemType) {
+  const t = useTranslations('OrderPage')
+
   const productTotalPrice = computeProductTotalPrice(orderProduct.product)
   const { formattedBasePrice, formattedTotalPrice } =
     useProductPricesFormatted(productTotalPrice)
@@ -47,7 +50,7 @@ export function OrderProductItem({ orderProduct }: OrderProductItemType) {
               )}
             </div>
             <p className="text-muted-foreground">
-              Quantity: <span>{orderProduct.quantity}</span>
+              {t('quantity')}: <span>{orderProduct.quantity}</span>
             </p>
           </div>
         </div>
@@ -58,7 +61,7 @@ export function OrderProductItem({ orderProduct }: OrderProductItemType) {
             href={`/product/${orderProduct.product.slug}`}
             className="font-medium text-primary underline-offset-4 hover:underline"
           >
-            View product
+            {t('viewProduct')}
           </Link>
         </div>
         <div className="flex flex-1 justify-center pl-4 sm:flex-none">

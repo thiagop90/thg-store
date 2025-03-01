@@ -4,8 +4,10 @@ import { PopoverClose } from '@radix-ui/react-popover'
 import { Home, Keyboard, LayoutGrid, Mouse } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '../ui/button'
+import { useTranslations } from 'next-intl'
 
 export function NavMobile() {
+  const t = useTranslations()
   const pathname = usePathname()
 
   const className = 'h-5 w-5'
@@ -14,22 +16,22 @@ export function NavMobile() {
   const links = [
     {
       href: '/',
-      label: 'Home',
+      label: t('HomePage.home'),
       icon: <Home className={className} strokeWidth={strokeWidth} />,
     },
     {
       href: '/search',
-      label: 'All',
+      label: t('Categories.all'),
       icon: <LayoutGrid className={className} strokeWidth={strokeWidth} />,
     },
     {
       href: '/search/mouses',
-      label: 'Mouses',
+      label: t('Categories.mouses'),
       icon: <Mouse className={className} strokeWidth={strokeWidth} />,
     },
     {
       href: '/search/keyboards',
-      label: 'Keyboards',
+      label: t('Categories.keyboards'),
       icon: <Keyboard className={className} strokeWidth={strokeWidth} />,
     },
   ]

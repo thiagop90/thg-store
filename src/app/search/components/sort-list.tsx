@@ -4,8 +4,10 @@ import { usePathname, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { SortDropdown } from './sort-dropdown'
+import { useTranslations } from 'next-intl'
 
 export function SortList() {
+  const t = useTranslations('SortBy')
   const pathname = usePathname()
   const search = useSearchParams()
   const searchQuery = search ? search.get('query') : null
@@ -18,14 +20,16 @@ export function SortList() {
   }
 
   const sortOptions = [
-    { label: 'Relevance', param: '' },
-    { label: 'Price: Low to High', param: 'price-asc' },
-    { label: 'Price: High to Low', param: 'price-desc' },
+    { label: t('relevance'), param: '' },
+    { label: t('lowToHigh'), param: 'price-asc' },
+    { label: t('highToLow'), param: 'price-desc' },
   ]
 
   return (
     <div className="flex flex-col">
-      <h3 className="mb-2 text-sm text-muted-foreground md:mb-0">Sort by</h3>
+      <h3 className="mb-2 text-sm text-muted-foreground md:mb-0">
+        {t('sortBy')}
+      </h3>
       <div className="hidden md:block">
         {sortOptions.map((option) => (
           <li className="mt-2 shrink-0" key={option.param}>

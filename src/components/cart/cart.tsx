@@ -14,18 +14,21 @@ import { ScrollArea } from '../ui/scroll-area'
 import { CartSummary } from './cart-summary'
 import { CheckoutButton } from './checkout-button'
 import { Button } from '../ui/button'
+import { useTranslations } from 'next-intl'
+import { Icons } from '../icons'
 
 export function Cart() {
+  const t = useTranslations('Cart')
   const { isOpenCart, toggleCart } = useOpenCart()
   const { cart, removeAll } = useCartStore()
 
-  const itemText = cart.length > 1 ? 'items' : 'item'
+  const itemText = cart.length > 1 ? t('items') : 'item'
 
   return (
     <Sheet open={isOpenCart} onOpenChange={toggleCart}>
       <SheetTrigger asChild>
         <Button className="relative" size="icon" variant="outline">
-          <ShoppingCart className="h-5 w-5" />
+          <Icons.shoppingCart />
           {cart.length > 0 && (
             <span className="absolute right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded bg-primary text-xs font-semibold">
               {cart.length}
@@ -35,13 +38,13 @@ export function Cart() {
       </SheetTrigger>
       <SheetContent className="flex w-full flex-col gap-0 p-0">
         <SheetHeader className="p-6">
-          <SheetTitle className="text-xl">My Cart</SheetTitle>
+          <SheetTitle className="text-xl">{t('myCart')}</SheetTitle>
         </SheetHeader>
         {cart.length === 0 ? (
           <div className="mt-20 flex w-full flex-col items-center justify-center">
             <ShoppingCart className="h-16 w-16" />
             <p className="mt-6 text-center text-2xl font-bold">
-              Your cart is empty.
+              {t('yourCartIsEmpty')}
             </p>
           </div>
         ) : (
@@ -55,7 +58,7 @@ export function Cart() {
                 className="h-fit p-0 text-base"
                 onClick={removeAll}
               >
-                Empty cart
+                {t('emptyCart')}
               </Button>
             </div>
 

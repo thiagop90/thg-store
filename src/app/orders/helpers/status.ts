@@ -1,8 +1,11 @@
 import { OrderStatus } from '@prisma/client'
+import { getTranslations } from 'next-intl/server'
 
-export function getOrderStatus(orderStatus: OrderStatus) {
+export async function getOrderStatus(orderStatus: OrderStatus) {
+  const t = await getTranslations('OrderPage')
+
   return {
-    [OrderStatus.PAYMENT_CONFIRMED]: 'Payment Confirmed',
-    [OrderStatus.WAITING_FOR_PAYMENT]: 'Waiting for Payment',
+    [OrderStatus.PAYMENT_CONFIRMED]: t('paymentConfirmed'),
+    [OrderStatus.WAITING_FOR_PAYMENT]: t('waitingForPayment'),
   }[orderStatus]
 }

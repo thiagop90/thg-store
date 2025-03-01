@@ -8,11 +8,13 @@ import { Product } from '@prisma/client'
 import { ProductCard } from '@/components/product-card'
 import { computeProductTotalPrice } from '@/helpers/compute-price'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Loader } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
 import { searchAllProducts } from '@/actions/search-all-products'
+import { useTranslations } from 'next-intl'
+import { Icons } from '@/components/icons'
 
 export default function SearchPage() {
+  const t = useTranslations('Products')
   const { ref, inView } = useInView()
   const search = useSearchParams()
   const searchQuery = search ? search.get('query') : null
@@ -72,7 +74,7 @@ export default function SearchPage() {
   if (totalResults === 0) {
     return (
       <p className="mb-4">
-        There are no products that match{' '}
+        {t('thereAreNoProductsThatMatch')}{' '}
         <span className="font-bold">
           {'"'}
           {searchQuery}
@@ -86,7 +88,7 @@ export default function SearchPage() {
     <>
       {searchQuery && totalResults > 0 && (
         <p className="mb-4">
-          Showing {totalResults} result for{' '}
+          {t('showing')} {totalResults} {t('resultsTo')}{' '}
           <span className="font-bold">
             {'"'}
             {searchQuery}
@@ -112,8 +114,8 @@ export default function SearchPage() {
       <div className="flex justify-center" ref={ref}>
         {isFetchingNextPage && (
           <div className="flex items-center gap-2">
-            <Loader className="animate-spin text-primary" />
-            Loading more products...
+            <Icons.spinner className="text-primary" />
+            {t('loadingMoreProducts')}
           </div>
         )}
       </div>

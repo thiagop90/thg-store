@@ -1,4 +1,5 @@
 import { useCartPricesFormatted } from '@/helpers/cart-prices-formatted'
+import { useTranslations } from 'next-intl'
 
 type SummaryItemType = {
   label: string
@@ -15,6 +16,8 @@ function SummaryItem({ label, value }: SummaryItemType) {
 }
 
 export function CartSummary() {
+  const t = useTranslations('Cart')
+
   const {
     formattedDiscount,
     formattedSubtotal,
@@ -24,7 +27,7 @@ export function CartSummary() {
   return (
     <div className="flex flex-col border-t px-6 py-4">
       <SummaryItem label="Subtotal" value={formattedSubtotal} />
-      <SummaryItem label="Discount" value={`- ${formattedDiscount}`} />
+      <SummaryItem label={t('discount')} value={`- ${formattedDiscount}`} />
       <SummaryItem label="Total" value={formattedTotalPriceWithDiscount} />
     </div>
   )

@@ -5,9 +5,11 @@ import { createCheckout } from '@/actions/checkout'
 import { useCartStore } from '@/store/cart'
 import { loadStripe } from '@stripe/stripe-js'
 import { Button } from '../ui/button'
-import { Loader } from 'lucide-react'
+import { Icons } from '../icons'
+import { useTranslations } from 'next-intl'
 
 export function CheckoutButton() {
+  const t = useTranslations('Cart')
   const { cart } = useCartStore()
   const { data } = useSession()
   const [isProcessing, setIsProcessing] = useState(false)
@@ -22,6 +24,8 @@ export function CheckoutButton() {
     stripe?.redirectToCheckout({
       sessionId: checkout.id,
     })
+
+    // setIsProcessing(false)
   }
 
   return (
@@ -33,11 +37,11 @@ export function CheckoutButton() {
       >
         {isProcessing ? (
           <>
-            Processing...
-            <Loader className="ml-1 h-4 w-4 animate-spin" />
+            {t('processing')}
+            <Icons.spinner className="ml-1 h-4 w-4" />
           </>
         ) : (
-          'Checkout'
+          <span translate="no">Checkout</span>
         )}
       </Button>
       {!data?.user && (

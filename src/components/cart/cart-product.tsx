@@ -1,4 +1,4 @@
-import { CartProduct, useCartStore } from '@/store/cart'
+import { CartProductProps, useCartStore } from '@/store/cart'
 import Image from 'next/image'
 import Link from 'next/link'
 import { SheetTrigger } from '../ui/sheet'
@@ -6,12 +6,14 @@ import { QuantityControl } from './quantity-control'
 import { useProductPricesFormatted } from '@/helpers/product-prices-formatted'
 import { formatCurrency } from '@/helpers/format-currency'
 import { Button } from '../ui/button'
+import { useTranslations } from 'next-intl'
 
 type CartProductType = {
-  product: CartProduct
+  product: CartProductProps
 }
 
 export function CartProduct({ product }: CartProductType) {
+  const t = useTranslations('Cart')
   const { removeItemFromCart } = useCartStore()
   const handleRemoveCartProduct = () => removeItemFromCart(product.id)
 
@@ -62,7 +64,7 @@ export function CartProduct({ product }: CartProductType) {
             variant="link"
             className="h-fit p-0 text-base"
           >
-            Remove
+            {t('remove')}
           </Button>
           <QuantityControl product={product} />
         </div>

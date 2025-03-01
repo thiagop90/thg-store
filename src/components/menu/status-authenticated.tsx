@@ -1,6 +1,6 @@
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-import { Loader, LogOut, PackageSearch, User } from 'lucide-react'
+import { LogOut, PackageSearch, User } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { PopoverClose } from '@radix-ui/react-popover'
@@ -10,8 +10,11 @@ import { Skeleton } from '../ui/skeleton'
 import { useState } from 'react'
 import { BuiltInProviderType } from 'next-auth/providers/index'
 import { Button } from '../ui/button'
+import { useTranslations } from 'next-intl'
+import { Icons } from '../icons'
 
 export function StatusAuthenticated() {
+  const t = useTranslations('Profile')
   const [isLoading, setIsLoading] = useState(false)
   const pathname = usePathname()
 
@@ -46,9 +49,9 @@ export function StatusAuthenticated() {
               </AvatarFallback>
             </Avatar>
             <div>
-              <p>Hello!</p>
+              <p>{t('hello')}!</p>
               <p className="text-sm text-muted-foreground">
-                Sign in to continue to platform.
+                {t('signinToContinueToPlatform')}
               </p>
             </div>
           </div>
@@ -61,7 +64,7 @@ export function StatusAuthenticated() {
               disabled={isLoading}
             >
               {isLoading ? (
-                <Loader className="h-4 w-4 animate-spin" />
+                <Icons.spinner />
               ) : (
                 <Image
                   src="/google-logo.svg"
@@ -71,7 +74,7 @@ export function StatusAuthenticated() {
                   priority
                 />
               )}
-              Continue with Google
+              {t('continueWith')} Google
             </Button>
 
             <Button
@@ -81,7 +84,7 @@ export function StatusAuthenticated() {
               disabled={isLoading}
             >
               {isLoading ? (
-                <Loader className="h-4 w-4 animate-spin" />
+                <Icons.spinner />
               ) : (
                 <Image
                   src="/github-logo.svg"
@@ -91,7 +94,7 @@ export function StatusAuthenticated() {
                   priority
                 />
               )}
-              Continue with GitHub
+              {t('continueWith')} GitHub
             </Button>
           </div>
         </div>
@@ -117,8 +120,12 @@ export function StatusAuthenticated() {
               <AvatarImage src={data?.user?.image ?? ''} />
             </Avatar>
             <div>
-              <p>Hello, {data.user?.name}!</p>
-              <p className="text-sm text-muted-foreground">Good shopping.</p>
+              <p>
+                {t('hello')}, {data.user?.name}!
+              </p>
+              <p className="text-sm text-muted-foreground">
+                {t('goodShopping')}
+              </p>
             </div>
           </div>
 
@@ -136,7 +143,7 @@ export function StatusAuthenticated() {
             >
               <Link href="/orders">
                 <PackageSearch className="h-5 w-5" strokeWidth={1.75} />
-                Order history
+                {t('orderHistory')}
               </Link>
             </Button>
           </PopoverClose>
@@ -147,11 +154,11 @@ export function StatusAuthenticated() {
             disabled={isLoading}
           >
             {isLoading ? (
-              <Loader className="h-5 w-5 animate-spin" />
+              <Icons.spinner />
             ) : (
               <LogOut className="h-5 w-5" strokeWidth={1.75} />
             )}
-            Log out of account
+            {t('logoutOfAccount')}
           </Button>
         </div>
       )}

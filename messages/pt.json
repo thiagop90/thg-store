@@ -1,0 +1,75 @@
+{
+  "Products": {
+    "products": "Produtos",
+    "search": "Pesquisar",
+    "searchProducts": "Pesquisar por produtos...",
+    "thereAreNoProductsThatMatch": "Não há produtos que correspondam a",
+    "noProductsFound": "Nenhum produto encontrado.",
+    "showing": "Mostrando",
+    "resultsTo": "resultado(s) para",
+    "loadingMoreProducts": "Carregando mais produtos..."
+  },
+  "Categories": {
+    "categories": "Categorias",
+    "categoryNotFound": "Categoria não encontrada.",
+    "all": "Todos",
+    "mouses": "Mouses",
+    "keyboards": "Teclados",
+    "headsets": "Headsets",
+    "mousepads": "Mousepads",
+    "monitors": "Monitores",
+    "speakers": "Caixas de Som"
+  },
+  "SortBy": {
+    "sortBy": "Ordenar por",
+    "relevance": "Relevância",
+    "lowToHigh": "Preço: Baixo - Alto",
+    "highToLow": "Preço: Alto - Baixo"
+  },
+  "HomePage": {
+    "home": "Página inicial",
+    "discountMessage": "Economize até 30% em acessórios de computador selecionados.",
+    "shopByCategory": "Comprar por categoria",
+    "seeAll": "Ver tudo"
+  },
+  "Footer": {
+    "allRightsReserved": "Todos os direitos reservados."
+  },
+  "Cart": {
+    "cart": "Carrinho",
+    "myCart": "Meu carrinho",
+    "emptyCart": "Esvaziar carrinho",
+    "addToCart": "Adicionar ao carrinho",
+    "yourCartIsEmpty": "Seu carrinho está vazio.",
+    "remove": "Remover",
+    "items": "itens",
+    "discount": "Desconto",
+    "processing": "Processando..."
+  },
+  "Profile": {
+    "hello": "Olá",
+    "goodShopping": "Boas compras.",
+    "signinToContinueToPlatform": "Faça login para continuar na plataforma.",
+    "continueWith": "Continuar com",
+    "orderHistory": "Histórico de pedidos",
+    "logoutOfAccount": "Sair da conta"
+  },
+  "OrderPage": {
+    "orderHistory": "Histórico de pedidos",
+    "checkTheStatusOfRecentOrders": "Verifique o status de pedidos recentes e descubra produtos semelhantes.",
+    "paymentConfirmed": "Pagamento confirmado",
+    "waitingForPayment": "Aguardando pagamento",
+    "purchaseData": "Data da compra",
+    "totalAmount": "Valor total",
+    "quantity": "Quantidade",
+    "viewProduct": "Ver produto",
+    "buyAgain": "Comprar novamente",
+    "at": "às"
+  },
+  "ProductPage": {
+    "back": "Voltar",
+    "soldAndDeliveredBy": "Vendido e entregue por:",
+    "inStock": "Em estoque",
+    "relatedProducts": "Produtos relacionados"
+  }
+}

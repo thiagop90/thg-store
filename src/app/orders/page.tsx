@@ -5,13 +5,22 @@ import { OrderItem } from './components/order-item'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { PackageSearch } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
+import type { Metadata } from 'next'
 
-export const metadata = {
-  title: 'Order History',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('OrderPage')
+
+  return {
+    title: t('orderHistory'),
+  }
 }
 
 export default async function OrderPage() {
-  const session = await getServerSession(authOptions)
+  const [t, session] = await Promise.all([
+    getTranslations('OrderPage'),
+    getServerSession(authOptions),
+  ])
 
   if (!session || !session.user) {
     redirect('/')
@@ -48,10 +57,10 @@ export default async function OrderPage() {
         <>
           <div>
             <h1 className="text-2xl font-semibold sm:text-3xl">
-              Order history
+              {t('orderHistory')}
             </h1>
             <p className="mt-2 text-muted-foreground">
-              Check the status of recent orders and discover similar products.
+              {t('checkTheStatusOfRecentOrders')}
             </p>
           </div>
 

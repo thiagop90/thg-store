@@ -1,13 +1,18 @@
+'use client'
+
 import Link from 'next/link'
 import { Computer } from 'lucide-react'
-
-const links = [
-  { href: '/search', label: 'All' },
-  { href: '/search/mouses', label: 'Mouses' },
-  { href: '/search/keyboards', label: 'Keyboards' },
-]
+import { useTranslations } from 'next-intl'
 
 export function NavHeader() {
+  const t = useTranslations('Categories')
+
+  const links = [
+    { href: '/search', label: t('all') },
+    { href: '/search/mouses', label: t('mouses') },
+    { href: '/search/keyboards', label: t('keyboards') },
+  ]
+
   return (
     <div className="md:flex md:w-1/3">
       <Link
@@ -17,7 +22,10 @@ export function NavHeader() {
         <div className="flex h-10 w-10 items-center justify-center rounded-xl border bg-card px-3">
           <Computer strokeWidth={1.5} className="h-5 w-5 flex-none" />
         </div>
-        <span className="ml-3 flex-none font-semibold uppercase md:hidden lg:block">
+        <span
+          translate="no"
+          className="ml-3 flex-none font-semibold uppercase md:hidden lg:block"
+        >
           THG Store
         </span>
       </Link>
