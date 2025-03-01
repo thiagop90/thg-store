@@ -12,12 +12,12 @@ export const useOpenCart = create<ToggleCart>()((set, get) => ({
   toggleCart: () => set({ isOpenCart: !get().isOpenCart }),
 }))
 
-export type CartProduct = ProductWithTotalPrice & {
+export type CartProductProps = ProductWithTotalPrice & {
   quantity: number
 }
 
 type CartStore = {
-  cart: CartProduct[]
+  cart: CartProductProps[]
   quantity: () => number
   subtotal: () => number
   totalPrice: () => number
@@ -75,8 +75,8 @@ export const useCartStore = create<CartStore>()(
 
 function updateCart(
   product: ProductWithTotalPrice,
-  cart: CartProduct[],
-): CartProduct[] {
+  cart: CartProductProps[],
+): CartProductProps[] {
   const updatedCart = [...cart]
   const existingIndex = updatedCart.findIndex((item) => item.id === product.id)
 
@@ -93,8 +93,8 @@ function updateCart(
 
 function removeCartProduct(
   idProduct: string,
-  cart: CartProduct[],
-): CartProduct[] {
+  cart: CartProductProps[],
+): CartProductProps[] {
   const updatedCart = cart.map((item) =>
     item.id === idProduct ? { ...item, quantity: item.quantity - 1 } : item,
   )
@@ -103,8 +103,8 @@ function removeCartProduct(
 
 function removeItemFromCart(
   idProduct: string,
-  cart: CartProduct[],
-): CartProduct[] {
+  cart: CartProductProps[],
+): CartProductProps[] {
   const updatedCart = cart.filter((item) => item.id !== idProduct)
   return updatedCart
 }
