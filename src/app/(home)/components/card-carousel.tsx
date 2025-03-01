@@ -13,7 +13,7 @@ export function CardCarousel({ product }: ProductItemProps) {
     useProductPricesFormatted(product)
 
   return (
-    <li className="group relative aspect-square h-[30vh] max-h-[275px] min-h-[240px] flex-none overflow-hidden rounded-lg border bg-card hover:border-primary">
+    <li className="group relative aspect-square h-[30vh] max-h-[275px] min-h-[240px] flex-none overflow-hidden rounded-lg border bg-card lg:hover:border-primary">
       <Link href={`/product/${product.slug}`}>
         <div className="flex h-full w-full items-center justify-center p-14">
           <ContainerImage imageUrl={product.imageUrls} />

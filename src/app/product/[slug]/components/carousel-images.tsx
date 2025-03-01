@@ -1,11 +1,11 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { Fragment, useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import useEmblaCarousel from 'embla-carousel-react'
 import { ThumbsButton } from './thumbs-button'
-import { Loader } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { Icons } from '@/components/icons'
 
 type ProductImagesProps = {
   imageUrls: string[]
@@ -51,15 +51,15 @@ export function CarouselImages({ imageUrls }: ProductImagesProps) {
 
   return (
     <div
-      className=" h-full w-full basis-full overflow-hidden lg:basis-4/6"
+      className="h-full w-full basis-full overflow-hidden lg:basis-4/6"
       ref={emblaMainRef}
     >
       <div className="relative flex aspect-square h-full max-h-[400px] w-full touch-pan-y backface-hidden sm:max-h-[500px]">
         {imageUrls.map((imageUrl) => (
-          <>
+          <Fragment key={imageUrl}>
             {!imageLoaded && (
               <div className="absolute flex h-full w-full items-center justify-center">
-                <Loader className="animate-spin text-primary" />
+                <Icons.spinner className="text-primary" />
               </div>
             )}
             <Image
@@ -77,7 +77,7 @@ export function CarouselImages({ imageUrls }: ProductImagesProps) {
               quality={100}
               priority
             />
-          </>
+          </Fragment>
         ))}
       </div>
       <ul

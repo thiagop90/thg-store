@@ -1,9 +1,9 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { Loader } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
+import { Icons } from './icons'
 
 type ContainerImageProps = {
   imageUrl: string[]
@@ -20,7 +20,7 @@ export function ContainerImage({ imageUrl }: ContainerImageProps) {
     <>
       {!imageLoaded && (
         <div className="absolute flex h-full w-full items-center justify-center">
-          <Loader className="animate-spin text-primary" />
+          <Icons.spinner className="animate-spin text-primary" />
         </div>
       )}
       <Image
@@ -34,6 +34,7 @@ export function ContainerImage({ imageUrl }: ContainerImageProps) {
         )}
         alt=""
         onLoad={handleImageLoad}
+        priority
       />
     </>
   )

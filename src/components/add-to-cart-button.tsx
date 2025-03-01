@@ -4,13 +4,16 @@ import { useCartStore, useOpenCart } from '@/store/cart'
 import { Button } from './ui/button'
 import { useState } from 'react'
 import { ProductWithTotalPrice } from '@/helpers/compute-price'
-import { Loader, ShoppingCart } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { Icons } from './icons'
 
 type AddToCartButtonType = {
   product: ProductWithTotalPrice
 }
 
 export function AddToCartButton({ product }: AddToCartButtonType) {
+  const t = useTranslations('Cart')
+
   const { addToCart } = useCartStore()
   const { toggleCart } = useOpenCart()
   const [loading, setLoading] = useState(false)
@@ -28,14 +31,10 @@ export function AddToCartButton({ product }: AddToCartButtonType) {
     <Button
       disabled={loading}
       onClick={handleAddToCart}
-      className="w-full gap-1 transition-all duration-300"
+      className="w-full justify-between transition-all duration-300"
     >
-      {loading ? 'Adding...' : 'Add to Cart'}
-      {loading ? (
-        <Loader className="h-4 w-4 animate-spin" />
-      ) : (
-        <ShoppingCart className="h-4 w-4" strokeWidth="2.25" />
-      )}
+      {t('addToCart')}
+      {loading ? <Icons.spinner /> : <Icons.shoppingCartPlus />}
     </Button>
   )
 }

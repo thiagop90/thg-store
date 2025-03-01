@@ -84,6 +84,14 @@ module.exports = {
           '0%': { transform: 'translateX(0%)' },
           '100%': { transform: 'translateX(-100%)' },
         },
+        spinner: {
+          '0%': {
+            opacity: '1',
+          },
+          '100%': {
+            opacity: '0.15',
+          },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -91,9 +99,7 @@ module.exports = {
         wiggle: 'wiggle 0.5s ease-in-out',
         fadeIn: 'fadeIn 0.3s ease-in-out',
         carousel: 'marquee 30s linear infinite',
-      },
-      fontFamily: {
-        'general-sans': ['var(--font-general-sans)'],
+        spinner: 'spinner 1.2s linear infinite',
       },
     },
   },
