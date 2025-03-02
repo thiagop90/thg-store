@@ -16,23 +16,16 @@ import { CheckoutButton } from './checkout-button'
 import { Button } from '../ui/button'
 import { useTranslations } from 'next-intl'
 import { Icons } from '../icons'
-import { useMediaQuery } from '@/lib/hooks/use-media-query'
 
 export function Cart() {
   const t = useTranslations('Cart')
-
-  const isMobile = useMediaQuery('(max-width: 640px)')
   const { isOpenCart, toggleCart } = useOpenCart()
   const { cart, removeAll } = useCartStore()
 
   const itemText = cart.length > 1 ? t('items') : 'item'
 
   return (
-    <Drawer
-      direction={isMobile ? 'bottom' : 'right'}
-      open={isOpenCart}
-      onOpenChange={toggleCart}
-    >
+    <Drawer direction="right" open={isOpenCart} onOpenChange={toggleCart}>
       <DrawerTrigger asChild>
         <Button className="relative" size="icon" variant="outline">
           <Icons.shoppingCart />
@@ -43,13 +36,13 @@ export function Cart() {
           )}
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="top-24 mx-auto flex max-w-md flex-col sm:top-2 sm:mx-0 sm:w-full">
-        <DrawerHeader className="relative px-6 sm:py-6">
+      <DrawerContent className="flex w-full max-w-[400px] flex-col sm:max-w-md">
+        <DrawerHeader className="relative p-6">
           <DrawerTitle className="text-xl">{t('myCart')}</DrawerTitle>
           <Button
             size="icon"
             variant="outline"
-            className="invisible absolute right-6 top-1/2 h-8 w-8 -translate-y-1/2 sm:visible"
+            className="absolute right-6 top-1/2 h-8 w-8 -translate-y-1/2"
             onClick={toggleCart}
           >
             <X className="h-4 w-4" />
