@@ -1,9 +1,7 @@
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { LogOut, PackageSearch, User } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
-import { PopoverClose } from '@radix-ui/react-popover'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Skeleton } from '../ui/skeleton'
@@ -12,7 +10,7 @@ import { BuiltInProviderType } from 'next-auth/providers/index'
 import { Button } from '../ui/button'
 import { useTranslations } from 'next-intl'
 import { Icons } from '../icons'
-import { DrawerClose } from '../ui/Drawer'
+import { DrawerClose } from '../ui/drawer'
 
 export function StatusAuthenticated() {
   const t = useTranslations('Profile')

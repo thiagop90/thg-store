@@ -1,11 +1,10 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { PopoverClose } from '@radix-ui/react-popover'
 import { Home, Keyboard, LayoutGrid, Mouse } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '../ui/button'
 import { useTranslations } from 'next-intl'
-import { DrawerClose } from '../ui/Drawer'
+import { DrawerClose } from '../ui/drawer'
 
 export function NavMobile() {
   const t = useTranslations()

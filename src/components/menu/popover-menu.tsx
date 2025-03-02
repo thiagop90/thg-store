@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils'
 import { User } from 'lucide-react'
 import { NavMobile } from './nav-mobile'
 import { Button } from '../ui/button'
-import { Drawer, DrawerContent, DrawerTrigger } from '../ui/Drawer'
+import { Drawer, DrawerContent, DrawerTrigger } from '../ui/drawer'
 
 export function PopoverMenu() {
   const [open, setOpen] = useState(false)

@@ -7,7 +7,6 @@ import { NavHeader } from './nav-header'
 import { CommandMenuDialog } from './command-menu/command-menu'
 import { Button } from './ui/button'
 import { useTransition } from 'react'
-import type { Locale } from '@/i18n/config'
 import { setUserLocale } from '@/i18n/locale'
 import { useLocale } from 'next-intl'
 
