@@ -1,14 +1,14 @@
 'use client'
 
 import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet'
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer'
 import { useCartStore, useOpenCart } from '@/store/cart'
-import { ShoppingCart } from 'lucide-react'
+import { X } from 'lucide-react'
 import { CartProduct } from './cart-product'
 import { ScrollArea } from '../ui/scroll-area'
 import { CartSummary } from './cart-summary'
@@ -16,17 +16,24 @@ import { CheckoutButton } from './checkout-button'
 import { Button } from '../ui/button'
 import { useTranslations } from 'next-intl'
 import { Icons } from '../icons'
+import { useMediaQuery } from '@/lib/hooks/use-media-query'
 
 export function Cart() {
   const t = useTranslations('Cart')
+
+  const isMobile = useMediaQuery('(max-width: 640px)')
   const { isOpenCart, toggleCart } = useOpenCart()
   const { cart, removeAll } = useCartStore()
 
   const itemText = cart.length > 1 ? t('items') : 'item'
 
   return (
-    <Sheet open={isOpenCart} onOpenChange={toggleCart}>
-      <SheetTrigger asChild>
+    <Drawer
+      direction={isMobile ? 'bottom' : 'right'}
+      open={isOpenCart}
+      onOpenChange={toggleCart}
+    >
+      <DrawerTrigger asChild>
         <Button className="relative" size="icon" variant="outline">
           <Icons.shoppingCart />
           {cart.length > 0 && (
@@ -35,20 +42,28 @@ export function Cart() {
             </span>
           )}
         </Button>
-      </SheetTrigger>
-      <SheetContent className="flex w-full flex-col gap-0 p-0">
-        <SheetHeader className="p-6">
-          <SheetTitle className="text-xl">{t('myCart')}</SheetTitle>
-        </SheetHeader>
+      </DrawerTrigger>
+      <DrawerContent className="top-24 mx-auto flex max-w-md flex-col sm:top-2 sm:mx-0 sm:w-full">
+        <DrawerHeader className="relative px-6 sm:py-6">
+          <DrawerTitle className="text-xl">{t('myCart')}</DrawerTitle>
+          <Button
+            size="icon"
+            variant="outline"
+            className="invisible absolute right-6 top-1/2 h-8 w-8 -translate-y-1/2 sm:visible"
+            onClick={toggleCart}
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        </DrawerHeader>
         {cart.length === 0 ? (
           <div className="mt-20 flex w-full flex-col items-center justify-center">
-            <ShoppingCart className="h-16 w-16" />
-            <p className="mt-6 text-center text-2xl font-bold">
+            <Icons.shoppingCart className="h-16 w-16" />
+            <p className="mt-6 text-center text-2xl font-semibold">
               {t('yourCartIsEmpty')}
             </p>
           </div>
         ) : (
-          <div className="flex h-full flex-col justify-between overflow-hidden">
+          <div className="flex h-full flex-col overflow-hidden">
             <div className="flex items-center justify-between border-b border-t px-6 py-1.5">
               <p>
                 {cart.length} {itemText}
@@ -72,7 +87,7 @@ export function Cart() {
             <CheckoutButton />
           </div>
         )}
-      </SheetContent>
-    </Sheet>
+      </DrawerContent>
+    </Drawer>
   )
 }

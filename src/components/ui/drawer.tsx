@@ -46,14 +46,14 @@ const DrawerOverlay = React.forwardRef<
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName
 
 const drawerContentVariants = cva(
-  'fixed z-50 flex h-auto flex-col border bg-card overflow-hidden',
+  'fixed z-50 flex h-auto rounded-2xl flex-col border bg-card overflow-hidden',
   {
     variants: {
       direction: {
-        right: 'ml-24 right-0 rounded-l-[10px] inset-y-0',
-        top: 'mb-24 top-0 rounded-b-[10px] inset-x-0',
-        bottom: 'mt-24 rounded-t-[10px] bottom-0 inset-x-0',
-        left: 'left-2 rounded-2xl inset-y-0 w-[310px]',
+        right: 'right-2 inset-y-2',
+        top: 'top-2 inset-x-2',
+        bottom: 'bottom-2 inset-x-2',
+        left: 'left-2 inset-y-0',
       },
     },
     defaultVariants: {
@@ -76,10 +76,18 @@ const DrawerContent = React.forwardRef<
       <DrawerPrimitive.Content
         ref={ref}
         className={cn(drawerContentVariants({ direction, className }))}
+        style={
+          { '--initial-transform': 'calc(100% + 8px)' } as React.CSSProperties
+        }
         {...props}
       >
-        {/* <div className='mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted' /> */}
+        {direction === 'bottom' && (
+          <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-muted" />
+        )}
         {children}
+        {direction === 'top' && (
+          <div className="mx-auto mb-4 mt-2 h-1 w-16 rounded-full bg-muted" />
+        )}
       </DrawerPrimitive.Content>
     </DrawerPortal>
   )

@@ -37,7 +37,7 @@ export function NavMobile() {
   ]
 
   return (
-    <nav className="md:hidden">
+    <nav>
       <div className="my-2 border-t" />
 
       {links.map((link, index) => (
