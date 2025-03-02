@@ -29,8 +29,10 @@
   "HomePage": {
     "home": "Home",
     "discountMessage": "Save up to 30% on select computer accessories.",
-    "shopByCategory": "Shop by",
-    "seeAll": "See all"
+    "shopByCategory": "Shop by category",
+    "seeAll": "See all",
+    "start": "Start",
+    "stop": "Stop"
   },
   "Footer": {
     "allRightsReserved": "All rights reserved."

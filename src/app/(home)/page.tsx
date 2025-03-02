@@ -2,9 +2,9 @@ import { Categories } from './components/categories'
 import { prismaClient } from '@/lib/prisma'
 import { CarouselProducts } from './components/carousel-products'
 import { SectionTitle } from './components/section-title'
-import { EmblaOptionsType } from 'embla-carousel-react'
 import { LinkSeeAll } from './components/link-see-all'
 import { getTranslations } from 'next-intl/server'
+import type { EmblaOptionsType } from 'embla-carousel'
 
 const OPTIONS: EmblaOptionsType = { dragFree: true }
 
@@ -52,7 +52,7 @@ export default async function Home() {
         </div>
         <div className="-mb-px md:w-[55%] lg:w-2/3">
           <CarouselProducts
-            className="rounded-t-md bg-background py-6 md:rounded-b-md md:px-4"
+            className="rounded-t-lg bg-background py-6 md:rounded-b-lg md:px-4"
             products={deals}
             options={OPTIONS}
             progressBar

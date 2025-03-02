@@ -1,19 +1,19 @@
 'use client'
 
 import { StatusAuthenticated } from './status-authenticated'
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { User } from 'lucide-react'
 import { NavMobile } from './nav-mobile'
 import { Button } from '../ui/button'
+import { Drawer, DrawerContent, DrawerTrigger } from '../ui/Drawer'
 
 export function PopoverMenu() {
   const [open, setOpen] = useState(false)
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+    <Drawer direction="left" open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>
         <Button className="relative flex" size="icon" variant="outline">
           <span
             className={cn(
@@ -36,12 +36,20 @@ export function PopoverMenu() {
 
           <User className="hidden h-5 w-5 md:block" />
         </Button>
-      </PopoverTrigger>
+      </DrawerTrigger>
 
-      <PopoverContent className="ml-4 mt-2 overflow-hidden p-2 md:ml-0 md:mr-4">
-        <StatusAuthenticated />
-        <NavMobile />
-      </PopoverContent>
-    </Popover>
+      <DrawerContent
+        className="top-16 mt-0.5 h-fit bg-card"
+        // classNameOverlay="bg-transparent"
+        style={
+          { '--initial-transform': 'calc(100% + 8px)' } as React.CSSProperties
+        }
+      >
+        <div className="p-2">
+          <StatusAuthenticated />
+          <NavMobile />
+        </div>
+      </DrawerContent>
+    </Drawer>
   )
 }

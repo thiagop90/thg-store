@@ -12,6 +12,7 @@ import { BuiltInProviderType } from 'next-auth/providers/index'
 import { Button } from '../ui/button'
 import { useTranslations } from 'next-intl'
 import { Icons } from '../icons'
+import { DrawerClose } from '../ui/Drawer'
 
 export function StatusAuthenticated() {
   const t = useTranslations('Profile')
@@ -21,21 +22,13 @@ export function StatusAuthenticated() {
   const { status, data } = useSession()
 
   async function handleLoginClick(provider: BuiltInProviderType) {
-    try {
-      setIsLoading(true)
-      await signIn(provider)
-    } finally {
-      setIsLoading(false)
-    }
+    setIsLoading(true)
+    await signIn(provider)
   }
 
-  const handleLogoutClick = async () => {
-    try {
-      setIsLoading(true)
-      await signOut()
-    } finally {
-      setIsLoading(false)
-    }
+  async function handleLogoutClick() {
+    setIsLoading(true)
+    await signOut()
   }
 
   return (
@@ -63,17 +56,7 @@ export function StatusAuthenticated() {
               onClick={() => handleLoginClick('google')}
               disabled={isLoading}
             >
-              {isLoading ? (
-                <Icons.spinner />
-              ) : (
-                <Image
-                  src="/google-logo.svg"
-                  alt="Google Logo"
-                  width={16}
-                  height={16}
-                  priority
-                />
-              )}
+              {isLoading ? <Icons.spinner /> : <Icons.google />}
               {t('continueWith')} Google
             </Button>
 
@@ -83,17 +66,7 @@ export function StatusAuthenticated() {
               onClick={() => handleLoginClick('github')}
               disabled={isLoading}
             >
-              {isLoading ? (
-                <Icons.spinner />
-              ) : (
-                <Image
-                  src="/github-logo.svg"
-                  alt="GitHub Logo"
-                  width={16}
-                  height={16}
-                  priority
-                />
-              )}
+              {isLoading ? <Icons.spinner /> : <Icons.gitHub />}
               {t('continueWith')} GitHub
             </Button>
           </div>
@@ -129,7 +102,7 @@ export function StatusAuthenticated() {
             </div>
           </div>
 
-          <PopoverClose asChild>
+          <DrawerClose asChild>
             <Button
               className={cn(
                 'h-14 w-full justify-start gap-4 p-4 text-muted-foreground hover:bg-background',
@@ -146,7 +119,7 @@ export function StatusAuthenticated() {
                 {t('orderHistory')}
               </Link>
             </Button>
-          </PopoverClose>
+          </DrawerClose>
           <Button
             variant="ghost"
             className="h-14 w-full justify-start gap-4 p-4 text-red-400 hover:bg-background hover:text-red-400"

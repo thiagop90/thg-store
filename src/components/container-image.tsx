@@ -20,7 +20,7 @@ export function ContainerImage({ imageUrl }: ContainerImageProps) {
     <>
       {!imageLoaded && (
         <div className="absolute flex h-full w-full items-center justify-center">
-          <Icons.spinner className="animate-spin text-primary" />
+          <Icons.spinner className="text-primary" />
         </div>
       )}
       <Image

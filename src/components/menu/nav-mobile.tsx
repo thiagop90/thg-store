@@ -5,6 +5,7 @@ import { Home, Keyboard, LayoutGrid, Mouse } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '../ui/button'
 import { useTranslations } from 'next-intl'
+import { DrawerClose } from '../ui/Drawer'
 
 export function NavMobile() {
   const t = useTranslations()
@@ -41,7 +42,7 @@ export function NavMobile() {
       <div className="my-2 border-t" />
 
       {links.map((link, index) => (
-        <PopoverClose asChild key={index}>
+        <DrawerClose asChild key={index}>
           <Button
             className={cn(
               'h-14 w-full justify-start gap-4 p-4 text-muted-foreground hover:bg-background',
@@ -58,7 +59,7 @@ export function NavMobile() {
               <span>{link.label}</span>
             </Link>
           </Button>
-        </PopoverClose>
+        </DrawerClose>
       ))}
     </nav>
   )

@@ -30,7 +30,9 @@
     "home": "Página inicial",
     "discountMessage": "Economize até 30% em acessórios de computador selecionados.",
     "shopByCategory": "Comprar por categoria",
-    "seeAll": "Ver tudo"
+    "seeAll": "Ver tudo",
+    "start": "Iniciar",
+    "stop": "Pausar"
   },
   "Footer": {
     "allRightsReserved": "Todos os direitos reservados."
