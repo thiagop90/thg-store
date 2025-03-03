@@ -36,7 +36,10 @@ export function Cart() {
           )}
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="flex w-full max-w-[400px] flex-col sm:max-w-md">
+      <DrawerContent
+        classNameOverlay="backdrop-blur"
+        className="flex w-[calc(100%-1rem)] max-w-md flex-col"
+      >
         <DrawerHeader className="relative p-6">
           <DrawerTitle className="text-xl">{t('myCart')}</DrawerTitle>
           <Button

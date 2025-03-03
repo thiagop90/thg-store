@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/button'
 import type { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import { useTranslations } from 'next-intl'
+import { Icons } from '@/components/icons'
 
 type ProductListProps = HTMLAttributes<HTMLDivElement> & {
   autoplay?: boolean
@@ -94,14 +95,14 @@ export const CarouselProducts = forwardRef<HTMLDivElement, ProductListProps>(
           <NextButton onClick={scrollNext} />
         </div>
         {progressBar && (
-          <div className="mx-auto mt-4 flex w-fit items-center gap-3 rounded-xl border bg-card p-1 pr-3">
+          <div className="mx-auto mt-4 flex w-fit items-center gap-3 rounded-full border bg-card p-1 pr-3">
             <Button
-              className="h-7"
-              size="sm"
+              className="h-8 w-8 rounded-full hover:bg-current sm:hover:bg-accent"
+              size="icon"
               variant="outline"
               onClick={toggleAutoplay}
             >
-              {autoplayIsPlaying ? t('stop') : t('start')}
+              {autoplayIsPlaying ? <Icons.stop /> : <Icons.play />}
             </Button>
 
             <div className="pointer-events-none relative inset-x-0 flex h-1.5 w-52 max-w-[90%] overflow-hidden rounded-full border bg-card">

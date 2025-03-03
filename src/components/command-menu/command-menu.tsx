@@ -16,16 +16,14 @@ import { getCategoryIcon } from './get-category-icon'
 import { useQuery } from '@tanstack/react-query'
 import { getProducts } from '@/actions/get-products'
 import { useTranslations } from 'next-intl'
-import { useMediaQuery } from '@/lib/hooks/use-media-query'
 import { Button } from '../ui/button'
 
 export function CommandMenuDialog() {
   const t = useTranslations('Products')
-  const isMobile = useMediaQuery('(max-width: 768px)')
   const router = useRouter()
   const [open, setOpen] = useState(false)
 
-  const [searchQuery, setSearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState<string>('')
   const { data: filteredProducts, isLoading: isLoadingProducts } = useQuery({
     queryKey: ['products'],
     queryFn: getProducts,
@@ -52,12 +50,13 @@ export function CommandMenuDialog() {
     [router, setOpen],
   )
 
+  const formattedQuery = searchQuery.replace(/\s+/g, '+')
+
   return (
     <>
       <Button
-        size={isMobile ? 'icon' : 'default'}
         variant="outline"
-        className="gap-2 sm:w-full sm:max-w-fit sm:justify-start sm:px-3 sm:py-2 sm:text-muted-foreground lg:max-w-md"
+        className="h-10 w-10 p-0 sm:w-full sm:max-w-fit sm:justify-start sm:gap-2 sm:px-3 sm:py-2 sm:text-muted-foreground lg:max-w-md"
         onClick={() => setOpen(true)}
       >
         <SearchIcon className="h-5 w-5" />
@@ -71,14 +70,16 @@ export function CommandMenuDialog() {
           id="searchQuery"
           placeholder={t('searchProducts')}
           value={searchQuery}
-          onValueChange={(value) => setSearchQuery(value)}
+          onValueChange={setSearchQuery}
         />
 
         <CommandList className="command-list">
-          {searchQuery && (
+          {searchQuery.length > 0 && (
             <CommandGroup heading={t('search')} className="border-b">
               <CommandItem
-                onSelect={() => forwardToRoute(`/search?query=${searchQuery}`)}
+                onSelect={() =>
+                  forwardToRoute(`/search?query=${formattedQuery}`)
+                }
               >
                 <Search className="h-4 w-4" />
                 {searchQuery}
