@@ -1,12 +1,13 @@
-import { prismaClient } from '@/lib/prisma'
 import { DynamicTag } from './dynamic-tag'
-import { CategoriesDropdown } from './categories-dropdown'
 import { getTranslations } from 'next-intl/server'
 import type { CategorySlug } from '@/@types/category'
+import type { Category } from '@prisma/client'
 
-export async function CategoriesList() {
-  const categories = await prismaClient.category.findMany({})
+type CategoriesListProps = {
+  categories: Category[]
+}
 
+export async function CategoriesList({ categories }: CategoriesListProps) {
   const t = await getTranslations('Categories')
 
   return (
@@ -24,9 +25,6 @@ export async function CategoriesList() {
             </DynamicTag>
           )
         })}
-      </div>
-      <div className="md:hidden">
-        <CategoriesDropdown categories={categories} />
       </div>
     </div>
   )

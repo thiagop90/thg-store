@@ -24,6 +24,8 @@ export function CommandMenuDialog() {
   const [open, setOpen] = useState(false)
 
   const [searchQuery, setSearchQuery] = useState<string>('')
+  const formattedQuery = searchQuery.replace(/\s+/g, '+')
+
   const { data: filteredProducts, isLoading: isLoadingProducts } = useQuery({
     queryKey: ['products'],
     queryFn: getProducts,
@@ -49,8 +51,6 @@ export function CommandMenuDialog() {
     },
     [router, setOpen],
   )
-
-  const formattedQuery = searchQuery.replace(/\s+/g, '+')
 
   return (
     <>

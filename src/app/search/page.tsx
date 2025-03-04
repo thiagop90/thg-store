@@ -9,7 +9,7 @@ import { ProductCard } from '@/components/product-card'
 import { computeProductTotalPrice } from '@/helpers/compute-price'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useSearchParams } from 'next/navigation'
-import { searchAllProducts } from '@/actions/search-all-products'
+import { getAllProducts } from '@/actions/get-all-products'
 import { useTranslations } from 'next-intl'
 import { Icons } from '@/components/icons'
 
@@ -31,10 +31,16 @@ export default function SearchPage() {
     hasNextPage,
   } = useInfiniteQuery({
     queryKey: ['products', { encodedSearchQuery, encodedSortQuery }],
-    queryFn: ({ pageParam }: { pageParam: string }) =>
-      searchAllProducts({ pageParam, encodedSearchQuery, encodedSortQuery }),
+    queryFn: ({ pageParam }) =>
+      getAllProducts({
+        lastCursor: pageParam,
+        encodedSearchQuery,
+        encodedSortQuery,
+      }),
     initialPageParam: '',
-    getNextPageParam: (lastPage) => lastPage.nextId,
+    getNextPageParam: (lastPage) => {
+      return lastPage?.nextId
+    },
   })
 
   useEffect(() => {
@@ -45,7 +51,7 @@ export default function SearchPage() {
 
   const totalResults =
     isSuccess &&
-    data.pages.reduce((total, page) => total + page.search.length, 0)
+    data.pages.reduce((total, page) => total + page.result.length, 0)
 
   if (isLoading)
     return (
@@ -100,7 +106,7 @@ export default function SearchPage() {
         <WrapperProduct>
           {data.pages.map((page) => (
             <Fragment key={page.nextId ?? 'lastPage'}>
-              {page.search.map((product: Product) => (
+              {page.result.map((product: Product) => (
                 <ProductCard
                   key={product.id}
                   product={computeProductTotalPrice(product)}

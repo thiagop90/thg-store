@@ -3,8 +3,8 @@
 import { usePathname, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { SortDropdown } from './sort-dropdown'
 import { useTranslations } from 'next-intl'
+import { sortOptions } from './sort-options'
 
 export function SortList() {
   const t = useTranslations('SortBy')
@@ -19,19 +19,13 @@ export function SortList() {
     return sortParam ? `${currentUrl}${separator}sort=${sortParam}` : currentUrl
   }
 
-  const sortOptions = [
-    { label: t('relevance'), param: '' },
-    { label: t('lowToHigh'), param: 'price-asc' },
-    { label: t('highToLow'), param: 'price-desc' },
-  ]
-
   return (
     <div className="flex flex-col">
       <h3 className="mb-2 text-sm text-muted-foreground md:mb-0">
         {t('sortBy')}
       </h3>
-      <div className="hidden md:block">
-        {sortOptions.map((option) => (
+      <div>
+        {sortOptions(t).map((option) => (
           <li className="mt-2 shrink-0" key={option.param}>
             <Link
               className={cn('w-full hover:underline hover:underline-offset-4', {
@@ -45,9 +39,6 @@ export function SortList() {
             </Link>
           </li>
         ))}
-      </div>
-      <div className="md:hidden">
-        <SortDropdown sortOptions={sortOptions} />
       </div>
     </div>
   )

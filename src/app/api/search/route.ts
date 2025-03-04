@@ -8,10 +8,9 @@ async function fetchProducts(
 ) {
   const { searchParams } = new URL(req.url)
   const limit = 20
-  const cursor = searchParams.get('cursor')
+  const lastCursor = searchParams.get('lastCursor')
   const query = searchParams.get('query')
   const sortParam = searchParams.get('sort')
-  const cursorObj = cursor ? { id: cursor } : undefined
 
   if (!sortParam) {
     orderByObj = { id: 'desc' }
@@ -21,7 +20,7 @@ async function fetchProducts(
     orderByObj = { basePrice: 'asc' }
   }
 
-  const search = await prismaClient.product.findMany({
+  const result = await prismaClient.product.findMany({
     where: {
       OR: [
         { name: { contains: query || '', mode: 'insensitive' } },
@@ -29,14 +28,16 @@ async function fetchProducts(
       ],
     },
     take: limit,
-    cursor: cursorObj,
-    skip: cursor ? 1 : 0,
+    ...(lastCursor && {
+      skip: 1,
+      cursor: { id: lastCursor },
+    }),
     orderBy: orderByObj,
   })
 
   return {
-    search,
-    nextId: search.length === limit ? search[limit - 1].id : undefined,
+    result,
+    nextId: result.length === limit ? result[limit - 1].id : undefined,
   }
 }
 

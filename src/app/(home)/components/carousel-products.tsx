@@ -97,7 +97,7 @@ export const CarouselProducts = forwardRef<HTMLDivElement, ProductListProps>(
         {progressBar && (
           <div className="mx-auto mt-4 flex w-fit items-center gap-3 rounded-full border bg-card p-1 pr-3">
             <Button
-              className="h-8 w-8 rounded-full hover:bg-current sm:hover:bg-accent"
+              className="h-8 w-8 rounded-full hover:bg-background sm:hover:bg-accent"
               size="icon"
               variant="outline"
               onClick={toggleAutoplay}
