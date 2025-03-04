@@ -26,7 +26,7 @@ export default async function SearchLayout({
 
   return (
     <div className="flex max-w-screen-xl flex-col gap-6 pb-4 sm:mx-auto md:flex-row">
-      <div className="flex gap-3 pt-4 md:hidden">
+      <div className="fixed inset-x-2 bottom-2 z-50 mx-auto flex w-full max-w-[400px] gap-4 rounded-2xl border bg-background/80 p-4 backdrop-blur-lg duration-300 animate-in slide-in-from-bottom [border:1px_solid_rgba(255,255,255,.1)] [box-shadow:0_-20px_80px_-20px_#ffffff1f_inset] md:hidden">
         <SelectCategory categories={categories} />
         <SelectSorting />
       </div>

@@ -38,20 +38,24 @@ export function SelectSorting() {
   }
 
   return (
-    <Select value={selectedValue} onValueChange={handleSelectChange}>
-      <SelectTrigger className="w-full rounded-lg bg-popover">
-        <SelectValue aria-label={selectedValue}>{selectedValue}</SelectValue>
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>{t('sortBy')}</SelectLabel>
-          {sortOptions(t).map((option) => (
-            <SelectItem key={option.param} value={option.label}>
-              {option.label}
-            </SelectItem>
-          ))}
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <div className="flex flex-1 flex-col">
+      <h3 className="mb-2 text-sm text-muted-foreground">{t('sortBy')}</h3>
+
+      <Select value={selectedValue} onValueChange={handleSelectChange}>
+        <SelectTrigger className="w-full rounded-lg bg-popover">
+          <SelectValue aria-label={selectedValue}>{selectedValue}</SelectValue>
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>{t('sortBy')}</SelectLabel>
+            {sortOptions(t).map((option) => (
+              <SelectItem key={option.param} value={option.label}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </div>
   )
 }

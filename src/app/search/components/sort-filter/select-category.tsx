@@ -33,23 +33,26 @@ export function SelectCategory({ categories }: FilterItemDropdownProps) {
   }
 
   return (
-    <Select value={selectedValue} onValueChange={handleChange}>
-      <SelectTrigger className="w-full rounded-lg bg-popover">
-        <SelectValue aria-label={selectedValue}>
-          {t(selectedValue as CategorySlug)}
-        </SelectValue>
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>{t('categories')}</SelectLabel>
-          <SelectItem value="all">{t('all')}</SelectItem>
-          {categories.map((category) => (
-            <SelectItem key={category.id} value={category.slug}>
-              {t(category.slug as CategorySlug)}
-            </SelectItem>
-          ))}
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <div className="flex flex-1 flex-col">
+      <h3 className="mb-2 text-sm text-muted-foreground">{t('categories')}</h3>
+      <Select value={selectedValue} onValueChange={handleChange}>
+        <SelectTrigger className="w-full rounded-lg bg-popover">
+          <SelectValue aria-label={selectedValue}>
+            {t(selectedValue as CategorySlug)}
+          </SelectValue>
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>{t('categories')}</SelectLabel>
+            <SelectItem value="all">{t('all')}</SelectItem>
+            {categories.map((category) => (
+              <SelectItem key={category.id} value={category.slug}>
+                {t(category.slug as CategorySlug)}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </div>
   )
 }
