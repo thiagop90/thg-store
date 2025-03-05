@@ -11,11 +11,9 @@ export async function CategoriesList({ categories }: CategoriesListProps) {
   const t = await getTranslations('Categories')
 
   return (
-    <div className="flex flex-col">
-      <h3 className="mb-2 text-sm text-muted-foreground md:mb-0">
-        {t('categories')}
-      </h3>
-      <div className="hidden md:block">
+    <div className="space-y-2">
+      <h3 className="pl-3 text-sm text-muted-foreground">{t('categories')}</h3>
+      <div className="flex flex-col gap-1.5">
         <DynamicTag href="/search">{t('all')}</DynamicTag>
         {categories.map((category) => {
           const categoryName = category.slug as CategorySlug

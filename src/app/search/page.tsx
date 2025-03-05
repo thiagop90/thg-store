@@ -49,43 +49,17 @@ export default function SearchPage() {
     }
   }, [hasNextPage, inView, fetchNextPage])
 
+  const totalProducts = data?.pages[0]?.totalCount || 0
+
   const totalResults =
     isSuccess &&
     data.pages.reduce((total, page) => total + page.result.length, 0)
-
-  if (isLoading)
-    return (
-      <>
-        {searchQuery && <Skeleton className="mb-4 h-6 w-48" />}
-        <WrapperProduct>
-          {Array(12)
-            .fill(null)
-            .map((item, index) => (
-              <div
-                key={index}
-                className="flex h-full w-full flex-col gap-2 border-b border-r p-2"
-              >
-                <Skeleton className="aspect-square" />
-                <div className=" w-full space-y-1">
-                  <Skeleton className="h-5 w-2/3 " />
-                  <Skeleton className="h-4 w-14" />
-                  <Skeleton className="h-4 w-[68px]" />
-                </div>
-              </div>
-            ))}
-        </WrapperProduct>
-      </>
-    )
 
   if (totalResults === 0) {
     return (
       <p className="mb-4">
         {t('thereAreNoProductsThatMatch')}{' '}
-        <span className="font-bold">
-          {'"'}
-          {searchQuery}
-          {'"'}
-        </span>
+        <span className="font-bold">&quot;{searchQuery}&quot;</span>
       </p>
     )
   }
@@ -102,6 +76,14 @@ export default function SearchPage() {
           </span>
         </p>
       )}
+      {!searchQuery && !isLoading && (
+        <div className="mb-6 flex flex-col font-medium ">
+          <span className="mb-0.5 text-xl">Nossos produtos</span>
+          <span className="text-sm lowercase text-muted-foreground">
+            {totalProducts} itens
+          </span>
+        </div>
+      )}
       {isSuccess && (
         <WrapperProduct>
           {data.pages.map((page) => (
@@ -115,6 +97,37 @@ export default function SearchPage() {
             </Fragment>
           ))}
         </WrapperProduct>
+      )}
+      {isLoading && (
+        <>
+          <div className="mb-4">
+            {searchQuery ? (
+              <Skeleton className="h-6 w-48" />
+            ) : (
+              <>
+                <Skeleton className="mb-1 h-5 w-[88px]" />
+                <Skeleton className="h-4 w-20" />
+              </>
+            )}
+          </div>
+          <WrapperProduct>
+            {Array(12)
+              .fill(null)
+              .map((item, index) => (
+                <div
+                  key={index}
+                  className="flex h-full w-full flex-col gap-2 border-b border-r p-2"
+                >
+                  <Skeleton className="aspect-square" />
+                  <div className=" w-full space-y-1">
+                    <Skeleton className="h-5 w-2/3 " />
+                    <Skeleton className="h-4 w-14" />
+                    <Skeleton className="h-4 w-[68px]" />
+                  </div>
+                </div>
+              ))}
+          </WrapperProduct>
+        </>
       )}
 
       <div className="flex justify-center" ref={ref}>

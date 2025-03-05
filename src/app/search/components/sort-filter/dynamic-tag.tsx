@@ -12,18 +12,16 @@ type FilterItemProps = LinkProps & {
 export function DynamicTag({ href, children }: FilterItemProps) {
   const pathname = usePathname()
   const active = pathname === href
-  const DynamicTag = active ? 'p' : Link
+  const DynamicTag = active ? 'div' : Link
 
   return (
-    <li className="mt-2">
-      <DynamicTag
-        className={cn('w-full hover:underline hover:underline-offset-4', {
-          'underline underline-offset-4': active,
-        })}
-        href={href}
-      >
-        {children}
-      </DynamicTag>
-    </li>
+    <DynamicTag
+      className={cn('w-full rounded-lg px-3 py-2 hover:bg-secondary', {
+        'pointer-events-none bg-neutral-700/50': active,
+      })}
+      href={href}
+    >
+      {children}
+    </DynamicTag>
   )
 }

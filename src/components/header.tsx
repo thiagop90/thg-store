@@ -7,7 +7,7 @@ import { LocaleSwitcher } from './locale-switcher'
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/75 backdrop-blur">
+    <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-lg">
       <div className="flex h-16 items-center gap-3 px-4 lg:px-6">
         <div className="block flex-none md:hidden">
           <MenuMobile />

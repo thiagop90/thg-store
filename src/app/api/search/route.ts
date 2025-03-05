@@ -20,6 +20,8 @@ async function fetchProducts(
     orderByObj = { basePrice: 'asc' }
   }
 
+  const totalCount = await prismaClient.product.count()
+
   const result = await prismaClient.product.findMany({
     where: {
       OR: [
@@ -37,6 +39,7 @@ async function fetchProducts(
 
   return {
     result,
+    totalCount,
     nextId: result.length === limit ? result[limit - 1].id : undefined,
   }
 }

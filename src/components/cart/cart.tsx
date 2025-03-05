@@ -54,7 +54,7 @@ export function Cart() {
         {cart.length === 0 ? (
           <div className="mt-20 flex w-full flex-col items-center justify-center">
             <Icons.shoppingCart className="h-16 w-16" />
-            <p className="mt-6 text-center text-2xl font-semibold">
+            <p className="mt-6 text-center text-2xl font-bold">
               {t('yourCartIsEmpty')}
             </p>
           </div>

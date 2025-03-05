@@ -20,24 +20,21 @@ export function SortList() {
   }
 
   return (
-    <div className="flex flex-col">
-      <h3 className="mb-2 text-sm text-muted-foreground md:mb-0">
-        {t('sortBy')}
-      </h3>
-      <div>
+    <div className="space-y-2">
+      <h3 className="pl-3 text-sm text-muted-foreground">{t('sortBy')}</h3>
+      <div className="flex flex-col gap-2">
         {sortOptions(t).map((option) => (
-          <li className="mt-2 shrink-0" key={option.param}>
-            <Link
-              className={cn('w-full hover:underline hover:underline-offset-4', {
-                'underline underline-offset-4':
-                  sortQuery === option.param ||
-                  (!sortQuery && option.param === ''),
-              })}
-              href={buildSortUrl(option.param)}
-            >
-              {option.label}
-            </Link>
-          </li>
+          <Link
+            key={option.param}
+            className={cn('w-full rounded-lg px-3 py-2 hover:bg-secondary', {
+              'pointer-events-none bg-neutral-700/50':
+                sortQuery === option.param ||
+                (!sortQuery && option.param === ''),
+            })}
+            href={buildSortUrl(option.param)}
+          >
+            {option.label}
+          </Link>
         ))}
       </div>
     </div>
