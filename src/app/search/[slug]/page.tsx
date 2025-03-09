@@ -1,4 +1,4 @@
-import { prismaClient } from '@/lib/prisma'
+import { db } from '@/lib/prisma'
 import { WrapperProduct } from '../components/wrapper-product'
 import { Prisma } from '@prisma/client'
 import { ProductCard } from '@/components/product-card'
@@ -19,7 +19,7 @@ type CategoryItemProps = {
 export async function generateMetadata({
   params,
 }: CategoryItemProps): Promise<Metadata> {
-  const category = await prismaClient.category.findFirst({
+  const category = await db.category.findFirst({
     where: {
       slug: params.slug,
     },
@@ -46,7 +46,7 @@ export default async function CategoryProducts({
     orderByObj = { basePrice: 'asc' }
   }
 
-  const category = await prismaClient.category.findFirst({
+  const category = await db.category.findFirst({
     where: {
       slug: params.slug,
     },

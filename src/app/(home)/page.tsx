@@ -1,5 +1,5 @@
 import { Categories } from './components/categories'
-import { prismaClient } from '@/lib/prisma'
+import { db } from '@/lib/prisma'
 import { CarouselProducts } from './components/carousel-products'
 import { SectionTitle } from './components/section-title'
 import { LinkSeeAll } from './components/link-see-all'
@@ -11,23 +11,23 @@ const OPTIONS: EmblaOptionsType = { dragFree: true }
 export default async function Home() {
   const [t, deals, keyboards, mouses, headsets] = await Promise.all([
     getTranslations(),
-    prismaClient.product.findMany({
+    db.product.findMany({
       where: { discountPercentage: { gt: 0 } },
       take: 18,
     }),
 
-    prismaClient.product.findMany({
+    db.product.findMany({
       where: { category: { slug: 'keyboards' } },
       take: 10,
       orderBy: { basePrice: 'asc' },
     }),
 
-    prismaClient.product.findMany({
+    db.product.findMany({
       where: { category: { slug: 'mouses' } },
       take: 10,
     }),
 
-    prismaClient.product.findMany({
+    db.product.findMany({
       where: { category: { slug: 'headsets' } },
       take: 10,
     }),

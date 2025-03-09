@@ -16,9 +16,12 @@ export function DynamicTag({ href, children }: FilterItemProps) {
 
   return (
     <DynamicTag
-      className={cn('w-full rounded-lg px-3 py-2 hover:bg-secondary', {
-        'pointer-events-none bg-neutral-700/50': active,
-      })}
+      className={cn(
+        'group w-full truncate rounded-lg px-3 py-2 text-sm hover:bg-secondary',
+        {
+          'pointer-events-none bg-neutral-700/50': active,
+        },
+      )}
       href={href}
     >
       {children}

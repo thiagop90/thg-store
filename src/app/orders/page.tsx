@@ -1,4 +1,4 @@
-import { prismaClient } from '@/lib/prisma'
+import { db } from '@/lib/prisma'
 import { OrderItem } from './components/order-item'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
@@ -22,7 +22,7 @@ export default async function OrderPage() {
     redirect('/')
   }
 
-  const orders = await prismaClient.order.findMany({
+  const orders = await db.order.findMany({
     where: {
       userId: session.user.id,
     },

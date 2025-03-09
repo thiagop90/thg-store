@@ -1,4 +1,4 @@
-import { prismaClient } from '@/lib/prisma'
+import { db } from '@/lib/prisma'
 import { Prisma } from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -20,9 +20,9 @@ async function fetchProducts(
     orderByObj = { basePrice: 'asc' }
   }
 
-  const totalCount = await prismaClient.product.count()
+  const totalCount = await db.product.count()
 
-  const result = await prismaClient.product.findMany({
+  const result = await db.product.findMany({
     where: {
       OR: [
         { name: { contains: query || '', mode: 'insensitive' } },

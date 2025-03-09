@@ -1,6 +1,8 @@
+'use server'
+
 import axios from 'axios'
 
-type GetProductsResponse = {
+export type GetProductsResponse = {
   name: string
   id: string
   slug: string

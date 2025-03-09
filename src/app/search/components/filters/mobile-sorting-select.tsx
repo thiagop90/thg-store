@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-export function SelectSorting() {
+export function MobileSortingSelect() {
   const t = useTranslations('SortBy')
   const router = useRouter()
   const pathname = usePathname()

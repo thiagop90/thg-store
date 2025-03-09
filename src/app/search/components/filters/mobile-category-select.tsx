@@ -18,7 +18,7 @@ type FilterItemDropdownProps = {
   categories: Category[]
 }
 
-export function SelectCategory({ categories }: FilterItemDropdownProps) {
+export function MobileCategorySelect({ categories }: FilterItemDropdownProps) {
   const t = useTranslations('Categories')
   const router = useRouter()
   const pathname = usePathname()

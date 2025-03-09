@@ -1,4 +1,4 @@
-import { prismaClient } from '@/lib/prisma'
+import { db } from '@/lib/prisma'
 import { CarouselImages } from './components/carousel-images'
 import { computeProductTotalPrice } from '@/helpers/compute-price'
 import { ProductInfo } from './components/product-info'
@@ -17,7 +17,7 @@ type ProductDetailsPageProps = {
 export async function generateMetadata({
   params,
 }: ProductDetailsPageProps): Promise<Metadata> {
-  const product = await prismaClient.product.findFirst({
+  const product = await db.product.findFirst({
     where: {
       slug: params.slug,
     },
@@ -33,7 +33,7 @@ export default async function ProductDetailsPage({
 }: ProductDetailsPageProps) {
   const [t, product] = await Promise.all([
     getTranslations('ProductPage'),
-    prismaClient.product.findFirst({
+    db.product.findFirst({
       where: {
         slug: params.slug,
       },
