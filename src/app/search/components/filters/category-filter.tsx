@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server'
 import type { CategorySlug } from '@/@types/category'
 import { categoryIcons } from '@/helpers/category-icons'
 import { LayoutGrid } from 'lucide-react'
-import { db } from '@/lib/prisma'
+import db from '@/lib/prisma'
 
 export async function CategoryFilter() {
   const [t, categories] = await Promise.all([

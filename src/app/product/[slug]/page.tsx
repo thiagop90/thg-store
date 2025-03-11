@@ -1,4 +1,4 @@
-import { db } from '@/lib/prisma'
+import db from '@/lib/prisma'
 import { CarouselImages } from './components/carousel-images'
 import { computeProductTotalPrice } from '@/helpers/compute-price'
 import { ProductInfo } from './components/product-info'

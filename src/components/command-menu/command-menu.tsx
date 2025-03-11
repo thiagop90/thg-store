@@ -49,7 +49,7 @@ export function CommandMenuDialog() {
       setSearchQuery('')
       setOpen(false)
     },
-    [router, setOpen],
+    [router],
   )
 
   return (

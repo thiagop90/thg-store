@@ -38,7 +38,7 @@ export const Icons = {
       </g>
     </svg>
   ),
-  gitHub: ({ className, ...props }: IconProps) => (
+  github: ({ className, ...props }: IconProps) => (
     <svg
       className={cn('h-4 w-4', className)}
       viewBox="0 0 438.549 438.549"

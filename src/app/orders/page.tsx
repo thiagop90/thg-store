@@ -1,4 +1,4 @@
-import { db } from '@/lib/prisma'
+import db from '@/lib/prisma'
 import { OrderItem } from './components/order-item'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'

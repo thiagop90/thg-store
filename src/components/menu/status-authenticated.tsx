@@ -6,20 +6,22 @@ import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Skeleton } from '../ui/skeleton'
 import { useState } from 'react'
-import { BuiltInProviderType } from 'next-auth/providers/index'
 import { Button } from '../ui/button'
 import { useTranslations } from 'next-intl'
 import { Icons } from '../icons'
-import { DrawerClose } from '../ui/drawer'
 
-export function StatusAuthenticated() {
+export function StatusAuthenticated({
+  setOpen,
+}: {
+  setOpen: (open: boolean) => void
+}) {
   const t = useTranslations('Profile')
   const [isLoading, setIsLoading] = useState(false)
   const pathname = usePathname()
 
   const { status, data } = useSession()
 
-  async function handleLoginClick(provider: BuiltInProviderType) {
+  async function handleLoginClick(provider: string) {
     setIsLoading(true)
     await signIn(provider)
   }
@@ -27,6 +29,7 @@ export function StatusAuthenticated() {
   async function handleLogoutClick() {
     setIsLoading(true)
     await signOut()
+    setOpen(false)
   }
 
   return (
@@ -48,25 +51,24 @@ export function StatusAuthenticated() {
           </div>
 
           <div className="space-y-2">
-            <Button
-              variant="outline"
-              className="h-14 w-full gap-2 p-4"
-              onClick={() => handleLoginClick('google')}
-              disabled={isLoading}
-            >
-              {isLoading ? <Icons.spinner /> : <Icons.google />}
-              {t('continueWith')} Google
-            </Button>
+            {Object.values(['github', 'google']).map((provider, idx) => {
+              const Icon = isLoading
+                ? Icons.spinner
+                : Icons[provider as keyof typeof Icons]
 
-            <Button
-              variant="outline"
-              className="h-14 w-full gap-2 p-4"
-              onClick={() => handleLoginClick('github')}
-              disabled={isLoading}
-            >
-              {isLoading ? <Icons.spinner /> : <Icons.gitHub />}
-              {t('continueWith')} GitHub
-            </Button>
+              return (
+                <Button
+                  key={idx}
+                  variant="outline"
+                  className="h-14 w-full gap-2 p-4 capitalize"
+                  onClick={() => handleLoginClick(provider)}
+                  disabled={isLoading}
+                >
+                  {Icon && <Icon />}
+                  {t('continueWith')} {provider}
+                </Button>
+              )
+            })}
           </div>
         </div>
       )}
@@ -100,24 +102,23 @@ export function StatusAuthenticated() {
             </div>
           </div>
 
-          <DrawerClose asChild>
-            <Button
-              className={cn(
-                'h-14 w-full justify-start gap-4 p-4 text-muted-foreground hover:bg-background',
-                {
-                  'pointer-events-none bg-background text-foreground':
-                    pathname === '/orders',
-                },
-              )}
-              variant="ghost"
-              asChild
-            >
-              <Link href="/orders">
-                <PackageSearch className="h-5 w-5" strokeWidth={1.75} />
-                {t('orderHistory')}
-              </Link>
-            </Button>
-          </DrawerClose>
+          <Button
+            className={cn(
+              'h-14 w-full justify-start gap-4 p-4 text-muted-foreground hover:bg-background',
+              {
+                'pointer-events-none bg-background text-foreground':
+                  pathname === '/orders',
+              },
+            )}
+            variant="ghost"
+            onClick={() => setOpen(false)}
+            asChild
+          >
+            <Link href="/orders">
+              <PackageSearch className="h-5 w-5" strokeWidth={1.75} />
+              {t('orderHistory')}
+            </Link>
+          </Button>
           <Button
             variant="ghost"
             className="h-14 w-full justify-start gap-4 p-4 text-red-400 hover:bg-background hover:text-red-400"

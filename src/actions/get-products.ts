@@ -1,5 +1,3 @@
-'use server'
-
 import axios from 'axios'
 
 export type GetProductsResponse = {

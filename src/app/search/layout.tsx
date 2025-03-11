@@ -3,7 +3,7 @@ import { SortFilter } from './components/filters/sort-filter'
 import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
 import { MobileCategorySelect } from './components/filters/mobile-category-select'
-import { db } from '@/lib/prisma'
+import db from '@/lib/prisma'
 import { MobileSortingSelect } from './components/filters/mobile-sorting-select'
 import { Separator } from '@/components/ui/separator'
 

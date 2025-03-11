@@ -1,6 +1,6 @@
 'use server'
 
-import { db } from '@/lib/prisma'
+import db from '@/lib/prisma'
 import { CartProductProps } from '@/store/cart'
 
 export async function createOrder(

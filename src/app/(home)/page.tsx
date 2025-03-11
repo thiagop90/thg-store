@@ -1,5 +1,5 @@
 import { Categories } from './components/categories'
-import { db } from '@/lib/prisma'
+import db from '@/lib/prisma'
 import { CarouselProducts } from './components/carousel-products'
 import { SectionTitle } from './components/section-title'
 import { LinkSeeAll } from './components/link-see-all'
