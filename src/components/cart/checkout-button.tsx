@@ -17,9 +17,9 @@ export function CheckoutButton() {
   const handleFinishPurchaseClick = async () => {
     setIsProcessing(true)
 
+    const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
     const order = await createOrder(cart, data?.user?.id ?? '')
     const checkout = await createCheckout(cart, order.id)
-    const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
 
     stripe?.redirectToCheckout({
       sessionId: checkout.id,

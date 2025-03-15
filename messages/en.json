@@ -34,6 +34,9 @@
     "start": "Start",
     "stop": "Stop"
   },
+  "SearchPage": {
+    "scrollToTop": "Scroll to top"
+  },
   "Footer": {
     "allRightsReserved": "All rights reserved."
   },
