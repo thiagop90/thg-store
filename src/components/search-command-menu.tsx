@@ -8,17 +8,18 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '../ui/command'
-import { Skeleton } from '../ui/skeleton'
+} from './ui/command'
+import { Skeleton } from './ui/skeleton'
 import { useRouter } from 'next/navigation'
 import { Search, SearchIcon } from 'lucide-react'
-import { getCategoryIcon } from './get-category-icon'
 import { useQuery } from '@tanstack/react-query'
 import { getProducts } from '@/actions/get-products'
 import { useTranslations } from 'next-intl'
-import { Button } from '../ui/button'
+import { Button } from './ui/button'
+import { categoryIcons } from '@/helpers/category-icons'
+import type { CategorySlug } from '@/@types/category'
 
-export function CommandMenuDialog() {
+export function SearchCommandMenu() {
   const t = useTranslations('Products')
   const router = useRouter()
   const [open, setOpen] = useState(false)
@@ -89,15 +90,20 @@ export function CommandMenuDialog() {
 
           {filteredProducts && (
             <CommandGroup heading={t('products')}>
-              {filteredProducts?.map((product) => (
-                <CommandItem
-                  key={product.id}
-                  onSelect={() => forwardToRoute(`/product/${product.slug}`)}
-                >
-                  {getCategoryIcon(product.category.slug)}
-                  {product.name}
-                </CommandItem>
-              ))}
+              {filteredProducts?.map((product) => {
+                const Icon =
+                  categoryIcons[product.category.slug as CategorySlug]
+
+                return (
+                  <CommandItem
+                    key={product.id}
+                    onSelect={() => forwardToRoute(`/product/${product.slug}`)}
+                  >
+                    <Icon className="h-4 w-4" strokeWidth="1.75" />
+                    {product.name}
+                  </CommandItem>
+                )
+              })}
             </CommandGroup>
           )}
 

@@ -65,8 +65,8 @@ export default async function CategoryProducts({
 
   return (
     <>
-      <div className="mb-4 flex flex-col font-medium ">
-        <span className="mb-0.5 text-xl">
+      <div className="my-8 flex flex-col text-center font-medium lg:text-left">
+        <span className="mb-0.5 text-2xl">
           {t(`Categories.${categoryName}`)}
         </span>
         <span className="text-sm lowercase text-muted-foreground">

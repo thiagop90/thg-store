@@ -1,4 +1,5 @@
 export type CategorySlug =
+  | 'all'
   | 'mouses'
   | 'keyboards'
   | 'headsets'

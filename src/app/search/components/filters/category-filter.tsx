@@ -23,8 +23,7 @@ export async function CategoryFilter() {
           {t('all')}
         </DynamicTag>
         {categories.map((category) => {
-          const Icon =
-            categoryIcons[category.slug as keyof typeof categoryIcons]
+          const Icon = categoryIcons[category.slug as CategorySlug]
           return (
             <DynamicTag href={`/search/${category.slug}`} key={category.id}>
               <Icon className="mr-2 inline-block h-4 w-4" strokeWidth="1.75" />

@@ -4,9 +4,9 @@ import { WrapperProduct } from '../components/wrapper-product'
 export default function Loading() {
   return (
     <>
-      <div className="mb-4">
-        <Skeleton className="mb-1 h-5 w-[88px]" />
-        <Skeleton className="h-4 w-20" />
+      <div className="my-8 flex flex-col items-center justify-center lg:items-start lg:justify-start">
+        <Skeleton className="mb-1.5 h-6 w-28" />
+        <Skeleton className="h-4 w-[70px]" />
       </div>
       <WrapperProduct>
         {Array(12)

@@ -4,8 +4,11 @@ import { Button } from '@/components/ui/button'
 import { ArrowUp } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 
 export function ScrollToTopButton() {
+  const t = useTranslations('SearchPage')
+
   const [isVisible, setIsVisible] = useState(false)
 
   function toggleVisibility() {
@@ -32,9 +35,9 @@ export function ScrollToTopButton() {
   }, [])
 
   return (
-    <>
-      <AnimatePresence>
-        {isVisible && (
+    <AnimatePresence>
+      {isVisible && (
+        <>
           <motion.div
             initial={{ y: -42 }}
             animate={{ y: 0 }}
@@ -43,17 +46,17 @@ export function ScrollToTopButton() {
           >
             <Button
               onClick={scrollToTop}
-              className="mx-auto w-auto"
+              className="mx-auto w-auto hover:bg-background md:hover:bg-accent"
               aria-label="Rolar para o topo"
               size="sm"
               variant="outline"
             >
               <ArrowUp className="mr-2 h-4 w-4" />
-              Rolar para o topo
+              {t('scrollToTop')}
             </Button>
           </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+        </>
+      )}
+    </AnimatePresence>
   )
 }

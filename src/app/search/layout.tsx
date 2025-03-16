@@ -23,7 +23,7 @@ export default function SearchLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="mx-auto flex flex-col gap-6 pb-4 sm:max-w-screen-md md:max-w-screen-lg lg:flex-row xl:max-w-screen-xl">
+    <div className="mx-auto flex max-w-[550px] flex-col gap-6 pb-4 sm:max-w-screen-sm md:max-w-[800px] lg:max-w-screen-lg lg:flex-row xl:max-w-screen-xl">
       <ScrollToTopButton />
 
       <div className="sticky top-16 z-40 hidden h-full w-full max-w-[175px] lg:block">

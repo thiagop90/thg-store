@@ -77,8 +77,8 @@ export default function SearchPage() {
         </p>
       )}
       {!searchQuery && !isLoading && (
-        <div className="mb-6 flex flex-col font-medium ">
-          <span className="mb-0.5 text-xl">Nossos produtos</span>
+        <div className="my-8 flex flex-col text-center font-medium lg:text-left">
+          <span className="mb-0.5 text-2xl">Nossos produtos</span>
           <span className="text-sm lowercase text-muted-foreground">
             {totalProducts} itens
           </span>
@@ -100,13 +100,13 @@ export default function SearchPage() {
       )}
       {isLoading && (
         <>
-          <div className="mb-4">
+          <div className="my-8 flex flex-col items-center justify-center lg:items-start lg:justify-start">
             {searchQuery ? (
               <Skeleton className="h-6 w-48" />
             ) : (
               <>
-                <Skeleton className="mb-1 h-5 w-[88px]" />
-                <Skeleton className="h-4 w-20" />
+                <Skeleton className="mb-1.5 h-6 w-32" />
+                <Skeleton className="h-4 w-[70px]" />
               </>
             )}
           </div>

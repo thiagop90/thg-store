@@ -1,6 +1,7 @@
 import {
   Headphones,
   Keyboard,
+  LayoutGrid,
   Monitor,
   Mouse,
   Speaker,
@@ -10,6 +11,7 @@ import {
 import type { CategorySlug } from '@/@types/category'
 
 export const categoryIcons: Record<CategorySlug, LucideIcon> = {
+  all: LayoutGrid,
   mouses: Mouse,
   keyboards: Keyboard,
   headsets: Headphones,

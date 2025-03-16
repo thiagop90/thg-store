@@ -2,8 +2,8 @@ import { Cart } from './cart/cart'
 import { MenuMobile } from './menu/menu-mobile'
 import { Hydrate } from './hydrate'
 import { NavHeader } from './nav-header'
-import { CommandMenuDialog } from './command-menu/command-menu'
 import { LocaleSwitcher } from './locale-switcher'
+import { SearchCommandMenu } from './search-command-menu'
 
 export function Header() {
   return (
@@ -14,7 +14,7 @@ export function Header() {
         </div>
         <NavHeader />
         <div className="flex flex-1 justify-end lg:w-1/3 lg:justify-center">
-          <CommandMenuDialog />
+          <SearchCommandMenu />
         </div>
         <div className="flex justify-end gap-3 xl:w-1/3">
           <LocaleSwitcher />
