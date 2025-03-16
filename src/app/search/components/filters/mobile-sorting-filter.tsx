@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { sortOptions } from './sort-options'
 import {
   Drawer,
@@ -10,70 +10,110 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-  DrawerClose,
 } from '@/components/ui/drawer'
 import { Button } from '@/components/ui/button'
 import { Check, ChevronUp } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 export function MobileSortingFilter() {
   const t = useTranslations('SortBy')
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const [open, setOpen] = useState(false)
+  const [drawer, setDrawer] = useState({
+    open: false,
+    dismissible: false,
+  })
 
-  const sortQuery = searchParams.get('sort') || 'relevance'
+  const sortQuery = searchParams.get('sort') || ''
 
   const currentOption = sortOptions(t).find(
     (option) => option.param === sortQuery,
   )
-  const selectedValue = currentOption ? currentOption.label : t('relevance')
+  const selectedValue = currentOption ? currentOption.param : ''
+  const selectedLabel = currentOption ? currentOption.label : t('relevance')
+
+  useEffect(() => {
+    if (!drawer.open) return
+
+    const currentSort = searchParams.get('sort') || ''
+
+    if (selectedValue === currentSort) {
+      setDrawer({ open: false, dismissible: false })
+    }
+  }, [searchParams, selectedValue])
 
   function handleSelectChange(selectedParam: string) {
+    setDrawer({ open: true, dismissible: true })
+
     const params = new URLSearchParams(searchParams)
-    params.set('sort', selectedParam)
-    router.push(`${pathname}?${params.toString()}`)
-    setOpen(false)
+
+    if (selectedParam === '') {
+      params.delete('sort')
+    } else {
+      params.set('sort', selectedParam)
+    }
+
+    const queryString = params.toString()
+    const url = queryString ? `${pathname}?${queryString}` : pathname
+
+    router.push(url)
   }
 
   return (
     <div className="flex flex-1 flex-col">
       <h3 className="mb-2 text-sm text-muted-foreground">{t('sortBy')}</h3>
-      <Drawer direction="bottom" open={open} onOpenChange={setOpen}>
+      <Drawer
+        direction="bottom"
+        open={drawer.open}
+        dismissible={!drawer.dismissible}
+        onOpenChange={(open) => {
+          if (drawer.dismissible && !open) return
+
+          setDrawer({ ...drawer, open })
+        }}
+      >
         <DrawerTrigger asChild>
           <Button
             variant="outline"
             className="w-full justify-between rounded-lg bg-popover text-left font-normal hover:bg-popover"
           >
-            <span>{selectedValue}</span>
+            <span>{selectedLabel}</span>
             <ChevronUp className="h-4 w-4 opacity-50" />
           </Button>
         </DrawerTrigger>
-        <DrawerContent
-          classNameOverlay="bg-transparent"
-          className="mx-auto w-auto max-w-[440px]"
-        >
+        <DrawerContent className="mx-auto w-auto max-w-[440px]">
           <DrawerHeader>
-            <DrawerTitle>{t('sortBy')}</DrawerTitle>
+            <DrawerTitle className="text-center">{t('sortBy')}</DrawerTitle>
           </DrawerHeader>
           <div className="px-4 pb-6">
             <div className="space-y-1">
-              {sortOptions(t).map((option) => (
-                <DrawerClose key={option.param} asChild>
+              {sortOptions(t).map((option) => {
+                const isSelected = selectedValue === option.param
+
+                return (
                   <Button
-                    variant={
-                      option.label === selectedValue ? 'secondary' : 'ghost'
-                    }
-                    className="w-full justify-between"
+                    key={option.param}
+                    variant="ghost"
+                    className={cn(
+                      'w-full justify-between',
+                      isSelected
+                        ? 'pointer-events-none bg-background'
+                        : 'hover:bg-background',
+                    )}
                     onClick={() => handleSelectChange(option.param)}
+                    disabled={drawer.dismissible}
                   >
-                    <span>{option.label}</span>
+                    <div className="flex items-center gap-2">
+                      <option.icon className="h-4 w-4" strokeWidth="1.75" />
+                      <span>{option.label}</span>
+                    </div>
                     {option.label === selectedValue && (
                       <Check className="h-4 w-4" />
                     )}
                   </Button>
-                </DrawerClose>
-              ))}
+                )
+              })}
             </div>
           </div>
         </DrawerContent>
