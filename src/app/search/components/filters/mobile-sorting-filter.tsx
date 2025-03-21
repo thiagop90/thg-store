@@ -98,19 +98,17 @@ export function MobileSortingFilter() {
                     className={cn(
                       'w-full justify-between',
                       isSelected
-                        ? 'pointer-events-none bg-background'
-                        : 'hover:bg-background',
+                        ? 'pointer-events-none bg-background text-foreground'
+                        : 'text-muted-foreground hover:bg-background',
                     )}
                     onClick={() => handleSelectChange(option.param)}
                     disabled={drawer.dismissible}
                   >
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-3">
                       <option.icon className="h-4 w-4" strokeWidth="1.75" />
                       <span>{option.label}</span>
                     </div>
-                    {option.label === selectedValue && (
-                      <Check className="h-4 w-4" />
-                    )}
+                    {isSelected && <Check className="h-4 w-4" />}
                   </Button>
                 )
               })}

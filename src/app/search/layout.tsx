@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import { Separator } from '@/components/ui/separator'
 import { NavbarMobile } from './components/navbar-mobile'
 import { ScrollToTopButton } from './components/scroll-to-top-button'
+import db from '@/lib/prisma'
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('Products')
@@ -16,12 +17,13 @@ export async function generateMetadata(): Promise<Metadata> {
     },
   }
 }
-
-export default function SearchLayout({
+export default async function SearchLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const categories = await db.category.findMany({})
+
   return (
     <div className="mx-auto flex max-w-[550px] flex-col gap-6 pb-4 sm:max-w-screen-sm md:max-w-[800px] lg:max-w-screen-lg lg:flex-row xl:max-w-screen-xl">
       <ScrollToTopButton />
@@ -35,7 +37,7 @@ export default function SearchLayout({
       </div>
       <div className="min-h-screen w-full sm:mx-0">{children}</div>
 
-      <NavbarMobile />
+      <NavbarMobile categories={categories} />
     </div>
   )
 }

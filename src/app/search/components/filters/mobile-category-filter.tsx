@@ -101,13 +101,13 @@ export function MobileCategoryFilter({
                   className={cn(
                     'w-full justify-between',
                     isSelected
-                      ? 'pointer-events-none bg-background'
-                      : 'hover:bg-background',
+                      ? 'pointer-events-none bg-background text-foreground'
+                      : 'text-muted-foreground hover:bg-background',
                   )}
                   onClick={() => handleChange(category.slug)}
                   disabled={drawer.dismissible}
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-3">
                     <Icon className="h-4 w-4" strokeWidth="1.75" />
                     {t(category.slug as CategorySlug)}
                   </div>
