@@ -3,7 +3,7 @@
 import { usePathname, useRouter } from 'next/navigation'
 import { Category } from '@prisma/client'
 import { useTranslations } from 'next-intl'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useOptimistic } from 'react'
 import type { CategorySlug } from '@/@types/category'
 import {
   Drawer,
@@ -11,12 +11,12 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-  DrawerClose,
 } from '@/components/ui/drawer'
 import { Button } from '@/components/ui/button'
 import { Check, ChevronUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { categoryIcons } from '@/helpers/category-icons'
+import { Icons } from '@/components/icons'
 
 type MobileCategoryFilterProps = {
   categories: Category[]
@@ -28,24 +28,37 @@ export function MobileCategoryFilter({
   const t = useTranslations('Categories')
   const router = useRouter()
   const pathname = usePathname()
+
   const [drawer, setDrawer] = useState({
     open: false,
     dismissible: false,
   })
 
-  const currentCategory = categories.find((category) =>
-    pathname.includes(category.slug),
+  const getCurrentCategory = () => {
+    if (pathname === '/search') return 'all'
+
+    const lastSegment = pathname.split('/').pop()
+    const matchedCategory = categories.find(
+      (category) => category.slug === lastSegment,
+    )
+
+    return matchedCategory ? matchedCategory.slug : 'all'
+  }
+
+  const [optimisticCategory, setOptimisticCategory] = useOptimistic(
+    { slug: getCurrentCategory() },
+    (_, newCategory: { slug: string }) => newCategory,
   )
-  const selectedValue = currentCategory ? currentCategory.slug : 'all'
+
+  const selectedValue = optimisticCategory.slug
   const selectedLabel = t(selectedValue as CategorySlug)
 
   useEffect(() => {
     if (!drawer.open) return
 
-    const currentPath =
-      pathname === '/search' ? 'all' : pathname.split('/').pop()
+    const currentCategory = getCurrentCategory()
 
-    if (selectedValue === currentPath) {
+    if (selectedValue === currentCategory) {
       setDrawer({ open: false, dismissible: false })
     }
   }, [pathname, selectedValue])
@@ -58,8 +71,9 @@ export function MobileCategoryFilter({
       return
     }
 
-    setDrawer({ open: true, dismissible: true })
+    setOptimisticCategory({ slug: newValue })
 
+    setDrawer({ open: true, dismissible: true })
     router.push(newPath)
   }
 
@@ -72,7 +86,6 @@ export function MobileCategoryFilter({
         open={drawer.open}
         onOpenChange={(open) => {
           if (drawer.dismissible && !open) return
-
           setDrawer({ ...drawer, open })
         }}
       >
@@ -111,7 +124,12 @@ export function MobileCategoryFilter({
                     <Icon className="h-4 w-4" strokeWidth="1.75" />
                     {t(category.slug as CategorySlug)}
                   </div>
-                  {isSelected && <Check className="h-4 w-4" />}
+                  {isSelected &&
+                    (drawer.dismissible ? (
+                      <Icons.spinner />
+                    ) : (
+                      <Check className="h-4 w-4" />
+                    ))}
                 </Button>
               )
             })}

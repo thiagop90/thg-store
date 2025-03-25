@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useOptimistic } from 'react'
 import { sortOptions } from './sort-options'
 import {
   Drawer,
@@ -14,12 +14,14 @@ import {
 import { Button } from '@/components/ui/button'
 import { Check, ChevronUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { Icons } from '@/components/icons'
 
 export function MobileSortingFilter() {
   const t = useTranslations('SortBy')
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
+
   const [drawer, setDrawer] = useState({
     open: false,
     dismissible: false,
@@ -30,8 +32,11 @@ export function MobileSortingFilter() {
   const currentOption = sortOptions(t).find(
     (option) => option.param === sortQuery,
   )
-  const selectedValue = currentOption ? currentOption.param : ''
-  const selectedLabel = currentOption ? currentOption.label : t('relevance')
+
+  const [optimisticSort, setOptimisticSort] = useOptimistic(currentOption)
+
+  const selectedValue = optimisticSort ? optimisticSort.param : ''
+  const selectedLabel = optimisticSort ? optimisticSort.label : t('relevance')
 
   useEffect(() => {
     if (!drawer.open) return
@@ -45,6 +50,12 @@ export function MobileSortingFilter() {
 
   function handleSelectChange(selectedParam: string) {
     setDrawer({ open: true, dismissible: true })
+
+    const newOption = sortOptions(t).find(
+      (option) => option.param === selectedParam,
+    )
+
+    setOptimisticSort(newOption)
 
     const params = new URLSearchParams(searchParams)
 
@@ -69,7 +80,6 @@ export function MobileSortingFilter() {
         dismissible={!drawer.dismissible}
         onOpenChange={(open) => {
           if (drawer.dismissible && !open) return
-
           setDrawer({ ...drawer, open })
         }}
       >
@@ -90,6 +100,7 @@ export function MobileSortingFilter() {
             <div className="space-y-1">
               {sortOptions(t).map((option) => {
                 const isSelected = selectedValue === option.param
+                const Icon = option.icon
 
                 return (
                   <Button
@@ -105,10 +116,15 @@ export function MobileSortingFilter() {
                     disabled={drawer.dismissible}
                   >
                     <div className="flex items-center gap-3">
-                      <option.icon className="h-4 w-4" strokeWidth="1.75" />
+                      <Icon className="h-4 w-4" strokeWidth="1.75" />
                       <span>{option.label}</span>
                     </div>
-                    {isSelected && <Check className="h-4 w-4" />}
+                    {isSelected &&
+                      (drawer.dismissible ? (
+                        <Icons.spinner />
+                      ) : (
+                        <Check className="h-4 w-4" />
+                      ))}
                   </Button>
                 )
               })}
