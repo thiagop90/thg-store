@@ -15,10 +15,13 @@ export function CheckoutButton({ userId }: { userId: string | undefined }) {
 
   const [isProcessing, setIsProcessing] = useState(false)
 
-  async function handleFinishPurchaseClick() {
+  function goToLoginPage() {
+    router.push('/login')
     toggleCart()
+  }
 
-    if (!userId) return router.push('/login')
+  async function handleFinishPurchaseClick() {
+    if (!userId) return
 
     setIsProcessing(true)
 
@@ -30,6 +33,7 @@ export function CheckoutButton({ userId }: { userId: string | undefined }) {
       sessionId: checkout.id,
     })
 
+    toggleCart()
     removeAll()
   }
 
@@ -37,7 +41,7 @@ export function CheckoutButton({ userId }: { userId: string | undefined }) {
     <div className="space-y-4 px-6 pb-6">
       <Button
         className="w-full"
-        onClick={handleFinishPurchaseClick}
+        onClick={userId ? handleFinishPurchaseClick : goToLoginPage}
         disabled={isProcessing}
       >
         {isProcessing ? (
