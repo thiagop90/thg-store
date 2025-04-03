@@ -52,6 +52,7 @@
     "processing": "Processando..."
   },
   "Profile": {
+    "signIn": "Fazer login",
     "hello": "Olá",
     "goodShopping": "Boas compras.",
     "signinToContinueToPlatform": "Faça login para continuar na plataforma.",
@@ -60,6 +61,8 @@
     "logoutOfAccount": "Sair da conta"
   },
   "OrderPage": {
+    "noOrdersWerePlaced": "Nenhum pedido foi feito.",
+    "goShopping": "Ir às compras",
     "orderHistory": "Histórico de pedidos",
     "checkTheStatusOfRecentOrders": "Verifique o status de pedidos recentes e descubra produtos semelhantes.",
     "paymentConfirmed": "Pagamento confirmado",

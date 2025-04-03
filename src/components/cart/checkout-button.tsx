@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { signIn, useSession } from 'next-auth/react'
 import { createOrder } from '@/actions/order'
 import { createCheckout } from '@/actions/checkout'
 import { useCartStore } from '@/store/cart'
@@ -7,25 +6,31 @@ import { loadStripe } from '@stripe/stripe-js'
 import { Button } from '../ui/button'
 import { Icons } from '../icons'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
 
-export function CheckoutButton() {
+export function CheckoutButton({ userId }: { userId: string | undefined }) {
   const t = useTranslations('Cart')
-  const { cart } = useCartStore()
-  const { data } = useSession()
+  const router = useRouter()
+  const { cart, toggleCart, removeAll } = useCartStore()
+
   const [isProcessing, setIsProcessing] = useState(false)
 
-  const handleFinishPurchaseClick = async () => {
+  async function handleFinishPurchaseClick() {
+    toggleCart()
+
+    if (!userId) return router.push('/login')
+
     setIsProcessing(true)
 
     const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
-    const order = await createOrder(cart, data?.user?.id ?? '')
+    const order = await createOrder(cart, userId)
     const checkout = await createCheckout(cart, order.id)
 
     stripe?.redirectToCheckout({
       sessionId: checkout.id,
     })
 
-    // setIsProcessing(false)
+    removeAll()
   }
 
   return (
@@ -33,7 +38,7 @@ export function CheckoutButton() {
       <Button
         className="w-full"
         onClick={handleFinishPurchaseClick}
-        disabled={isProcessing || !data?.user}
+        disabled={isProcessing}
       >
         {isProcessing ? (
           <>
@@ -44,18 +49,6 @@ export function CheckoutButton() {
           <span translate="no">Checkout</span>
         )}
       </Button>
-      {!data?.user && (
-        <p className="text-center leading-relaxed">
-          You must{' '}
-          <span
-            onClick={() => signIn('google')}
-            className="cursor-pointer font-semibold text-primary underline underline-offset-4"
-          >
-            log in
-          </span>{' '}
-          to proceed with checkout.
-        </p>
-      )}
     </div>
   )
 }

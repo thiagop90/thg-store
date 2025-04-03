@@ -1,7 +1,7 @@
 import db from '@/lib/prisma'
 import { WrapperProduct } from '../components/wrapper-product'
 import { Prisma } from '@prisma/client'
-import { ProductCard } from '@/components/product-card'
+import { ProductCard } from '@/app/search/components/product-card'
 import { computeProductTotalPrice } from '@/helpers/compute-price'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'

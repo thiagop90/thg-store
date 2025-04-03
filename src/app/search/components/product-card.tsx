@@ -1,9 +1,9 @@
 import { ProductWithTotalPrice } from '@/helpers/compute-price'
 import { useProductPricesFormatted } from '@/helpers/product-prices-formatted'
 import Link from 'next/link'
+import { DiscountBadge } from '@/components/discount-badge'
+import { AddToCartButton } from '@/components/cart/add-to-cart-button'
 import { ContainerImage } from '@/components/container-image'
-import { DiscountBadge } from './discount-badge'
-import { AddToCartButton } from './add-to-cart-button'
 
 type ProductItemProps = {
   product: ProductWithTotalPrice

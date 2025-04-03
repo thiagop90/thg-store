@@ -2,22 +2,14 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { ProductWithTotalPrice } from '../helpers/compute-price'
 
-type ToggleCart = {
-  isOpenCart: boolean
-  toggleCart: () => void
-}
-
-export const useOpenCart = create<ToggleCart>()((set, get) => ({
-  isOpenCart: false,
-  toggleCart: () => set({ isOpenCart: !get().isOpenCart }),
-}))
-
 export type CartProductProps = ProductWithTotalPrice & {
   quantity: number
 }
 
 type CartStore = {
   cart: CartProductProps[]
+  isOpenCart: boolean
+  toggleCart: () => void
   quantity: () => number
   subtotal: () => number
   totalPrice: () => number
@@ -32,6 +24,8 @@ export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
       cart: [],
+      isOpenCart: false,
+      toggleCart: () => set({ isOpenCart: !get().isOpenCart }),
 
       quantity: () =>
         get().cart.reduce((total, product) => total + product.quantity, 0),

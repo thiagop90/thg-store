@@ -52,6 +52,7 @@
     "processing": "Processing..."
   },
   "Profile": {
+    "signIn": "Sign in",
     "hello": "Hello",
     "goodShopping": "Good shopping.",
     "signinToContinueToPlatform": "Sign in to continue to platform.",
@@ -60,6 +61,8 @@
     "logoutOfAccount": "Log out of account"
   },
   "OrderPage": {
+    "noOrdersWerePlaced": "No orders were placed.",
+    "goShopping": "Go shopping",
     "orderHistory": "Order history",
     "checkTheStatusOfRecentOrders": "Check the status of recent orders and discover similar products.",
     "paymentConfirmed": "Payment confirmed",

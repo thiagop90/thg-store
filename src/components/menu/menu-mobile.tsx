@@ -44,7 +44,7 @@ export function MenuMobile() {
         <DrawerTrigger asChild>{ToggleButton}</DrawerTrigger>
         <DrawerContent className="top-16 h-fit w-[310px]">
           <div className="p-2">
-            <StatusAuthenticated setOpen={setOpen} />
+            <StatusAuthenticated onClose={() => setOpen(false)} />
             <NavMobile />
           </div>
         </DrawerContent>
@@ -59,7 +59,7 @@ export function MenuMobile() {
         sideOffset={12}
         className="mr-2 w-[310px] rounded-2xl p-2"
       >
-        <StatusAuthenticated setOpen={setOpen} />
+        <StatusAuthenticated onClose={() => setOpen(false)} />
       </PopoverContent>
     </Popover>
   )

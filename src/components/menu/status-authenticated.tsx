@@ -1,35 +1,29 @@
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-import { LogOut, PackageSearch, User } from 'lucide-react'
+import { LogInIcon, LogOut, PackageSearch, User } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Skeleton } from '../ui/skeleton'
 import { useState } from 'react'
-import { Button } from '../ui/button'
+import { Button, buttonVariants } from '../ui/button'
 import { useTranslations } from 'next-intl'
 import { Icons } from '../icons'
 
-export function StatusAuthenticated({
-  setOpen,
-}: {
-  setOpen: (open: boolean) => void
-}) {
+interface StatusAuthenticated {
+  onClose: () => void
+}
+
+export function StatusAuthenticated({ onClose }: StatusAuthenticated) {
   const t = useTranslations('Profile')
   const [isLoading, setIsLoading] = useState(false)
   const pathname = usePathname()
 
   const { status, data } = useSession()
 
-  async function handleLoginClick(provider: string) {
-    setIsLoading(true)
-    await signIn(provider)
-  }
-
   async function handleLogoutClick() {
     setIsLoading(true)
     await signOut()
-    setOpen(false)
   }
 
   return (
@@ -50,26 +44,21 @@ export function StatusAuthenticated({
             </div>
           </div>
 
-          <div className="space-y-2">
-            {Object.values(['github', 'google']).map((provider, idx) => {
-              const Icon = isLoading
-                ? Icons.spinner
-                : Icons[provider as keyof typeof Icons]
-
-              return (
-                <Button
-                  key={idx}
-                  variant="outline"
-                  className="h-14 w-full gap-2 p-4 capitalize"
-                  onClick={() => handleLoginClick(provider)}
-                  disabled={isLoading}
-                >
-                  {Icon && <Icon />}
-                  {t('continueWith')} {provider}
-                </Button>
-              )
-            })}
-          </div>
+          <Link
+            className={cn(
+              buttonVariants({ variant: 'ghost' }),
+              'h-14 w-full justify-start gap-4 p-4 text-muted-foreground hover:bg-background',
+              {
+                'pointer-events-none bg-background text-foreground':
+                  pathname === '/login',
+              },
+            )}
+            href="/login"
+            onClick={onClose}
+          >
+            <LogInIcon className="h-5 w-5" strokeWidth={1.75} />
+            {t('signIn')}
+          </Link>
         </div>
       )}
 
@@ -102,23 +91,22 @@ export function StatusAuthenticated({
             </div>
           </div>
 
-          <Button
+          <Link
             className={cn(
+              buttonVariants({ variant: 'ghost' }),
               'h-14 w-full justify-start gap-4 p-4 text-muted-foreground hover:bg-background',
               {
                 'pointer-events-none bg-background text-foreground':
-                  pathname === '/orders',
+                  pathname === '/login',
               },
             )}
-            variant="ghost"
-            onClick={() => setOpen(false)}
-            asChild
+            href="/orders"
+            onClick={onClose}
           >
-            <Link href="/orders">
-              <PackageSearch className="h-5 w-5" strokeWidth={1.75} />
-              {t('orderHistory')}
-            </Link>
-          </Button>
+            <PackageSearch className="h-5 w-5" strokeWidth={1.75} />
+            {t('orderHistory')}
+          </Link>
+
           <Button
             variant="ghost"
             className="h-14 w-full justify-start gap-4 p-4 text-red-400 hover:bg-background hover:text-red-400"

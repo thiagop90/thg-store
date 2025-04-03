@@ -2,10 +2,12 @@ import db from '@/lib/prisma'
 import { OrderItem } from './components/order-item'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import { PackageSearch } from 'lucide-react'
+import { MoveRight, PackageSearch } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
 import { auth } from '@/auth'
+import { cn } from '@/lib/utils'
+import { buttonVariants } from '@/components/ui/button'
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('OrderPage')
@@ -38,15 +40,16 @@ export default async function OrderPage() {
     <div className="mx-auto max-w-2xl py-16 lg:max-w-4xl">
       {orders.length === 0 ? (
         <div className="mt-20 flex w-full flex-col items-center justify-center">
-          <PackageSearch className="h-16 w-16" strokeWidth={1.5} />
+          <PackageSearch className="h-16 w-16" strokeWidth={1.25} />
           <p className="mt-6 text-center text-2xl font-semibold">
-            No orders were placed.
+            {t('noOrdersWerePlaced')}
           </p>
           <Link
             href="/search"
-            className="mt-2 text-lg font-medium leading-relaxed text-primary underline-offset-4 hover:underline"
+            className={cn(buttonVariants({ size: 'sm' }), 'mt-6')}
           >
-            Go shopping &#8594;
+            {t('goShopping')}
+            <MoveRight size={16} className="ml-2" />
           </Link>
         </div>
       ) : (

@@ -7,7 +7,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer'
-import { useCartStore, useOpenCart } from '@/store/cart'
+import { useCartStore } from '@/store/cart'
 import { X } from 'lucide-react'
 import { CartProduct } from './cart-product'
 import { ScrollArea } from '../ui/scroll-area'
@@ -16,11 +16,11 @@ import { CheckoutButton } from './checkout-button'
 import { Button } from '../ui/button'
 import { useTranslations } from 'next-intl'
 import { Icons } from '../icons'
+import type { User } from 'next-auth'
 
-export function Cart() {
+export function Cart({ user }: { user: User | undefined }) {
   const t = useTranslations('Cart')
-  const { isOpenCart, toggleCart } = useOpenCart()
-  const { cart, removeAll } = useCartStore()
+  const { cart, removeAll, isOpenCart, toggleCart } = useCartStore()
 
   const itemText = cart.length > 1 ? t('items') : 'item'
 
@@ -80,7 +80,7 @@ export function Cart() {
             </ScrollArea>
 
             <CartSummary />
-            <CheckoutButton />
+            <CheckoutButton userId={user?.id} />
           </div>
         )}
       </DrawerContent>

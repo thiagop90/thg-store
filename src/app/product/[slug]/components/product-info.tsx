@@ -1,4 +1,4 @@
-import { AddToCartButton } from '@/components/add-to-cart-button'
+import { AddToCartButton } from '@/components/cart/add-to-cart-button'
 import { DiscountBadge } from '@/components/discount-badge'
 import { ProductWithTotalPrice } from '@/helpers/compute-price'
 import { useProductPricesFormatted } from '@/helpers/product-prices-formatted'

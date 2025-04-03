@@ -46,7 +46,9 @@ export default async function RootLayout({
           <SessionProvider session={session}>
             <QueryWrapper>
               <Header />
-              <main className="h-full min-h-[100dvh] px-4">{children}</main>
+              <main className="-mb-px h-full min-h-[calc(100dvh-11.25rem)] px-4">
+                {children}
+              </main>
               <Footer />
             </QueryWrapper>
           </SessionProvider>

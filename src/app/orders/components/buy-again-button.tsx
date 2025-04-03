@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { ProductWithTotalPrice } from '@/helpers/compute-price'
-import { useCartStore, useOpenCart } from '@/store/cart'
+import { useCartStore } from '@/store/cart'
 import { useTranslations } from 'next-intl'
 
 type BuyAgainButtonType = {
@@ -12,8 +12,7 @@ type BuyAgainButtonType = {
 export function BuyAgainButton({ product }: BuyAgainButtonType) {
   const t = useTranslations('OrderPage')
 
-  const { addToCart } = useCartStore()
-  const { toggleCart } = useOpenCart()
+  const { addToCart, toggleCart } = useCartStore()
 
   const handleAddToCart = () => {
     addToCart(product)
