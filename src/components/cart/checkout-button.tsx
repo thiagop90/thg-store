@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { createOrder } from '@/actions/order'
-import { createCheckout } from '@/actions/checkout'
 import { useCartStore } from '@/store/cart'
 import { loadStripe } from '@stripe/stripe-js'
 import { Button } from '../ui/button'
@@ -8,10 +6,12 @@ import { Icons } from '../icons'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
+
 export function CheckoutButton({ userId }: { userId: string | undefined }) {
   const t = useTranslations('Cart')
   const router = useRouter()
-  const { cart, toggleCart, removeAll } = useCartStore()
+  const { cart, toggleCart } = useCartStore()
 
   const [isProcessing, setIsProcessing] = useState(false)
 
@@ -20,28 +20,36 @@ export function CheckoutButton({ userId }: { userId: string | undefined }) {
     toggleCart()
   }
 
-  async function handleFinishPurchaseClick() {
+  async function handleCheckout() {
     if (!userId) return
 
     setIsProcessing(true)
 
-    const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
-    const order = await createOrder(cart, userId)
-    const checkout = await createCheckout(cart, order.id)
+    const stripe = await stripePromise
 
-    stripe?.redirectToCheckout({
-      sessionId: checkout.id,
+    const response = await fetch('/api/checkout-sessions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        cartItems: cart,
+        returnUrl: window.location.origin,
+        userId,
+      }),
     })
 
+    const { sessionId } = await response.json()
+    await stripe?.redirectToCheckout({ sessionId })
+
     toggleCart()
-    removeAll()
   }
 
   return (
     <div className="space-y-4 px-6 pb-6">
       <Button
         className="w-full"
-        onClick={userId ? handleFinishPurchaseClick : goToLoginPage}
+        onClick={userId ? handleCheckout : goToLoginPage}
         disabled={isProcessing}
       >
         {isProcessing ? (

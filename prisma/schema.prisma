@@ -38,6 +38,7 @@ model Order {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @default(now()) @updatedAt
   status        OrderStatus    @default(WAITING_FOR_PAYMENT)
+  sessionId     String?
   user          User           @relation(fields: [userId], references: [id])
   orderProducts OrderProduct[]
 
