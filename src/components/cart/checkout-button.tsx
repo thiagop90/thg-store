@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useCartStore } from '@/store/cart'
 import { loadStripe } from '@stripe/stripe-js'
-import { Button } from '../ui/button'
+import { Button, buttonVariants } from '../ui/button'
 
 import { useTranslations } from 'next-intl'
 import {
@@ -12,12 +12,12 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '../ui/alert-dialog'
+import { X } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
@@ -47,15 +47,24 @@ export function CheckoutButton({ userId }: { userId: string | undefined }) {
           <span translate="no">Checkout</span>
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Pagamento via Stripe</AlertDialogTitle>
-          <AlertDialogDescription>
-            Preencha os dados para prosseguir.
-          </AlertDialogDescription>
+      <AlertDialogContent className="flex flex-col gap-0 bg-card p-0">
+        <AlertDialogHeader className=" space-y-0 text-left">
+          <div className="flex items-center justify-between border-b px-6 py-4 ">
+            <AlertDialogTitle className="text-base">
+              Pagamento via Stripe
+            </AlertDialogTitle>
+            <AlertDialogCancel
+              className={cn(
+                buttonVariants({ size: 'icon', variant: 'outline' }),
+                'mt-0 h-9 w-9 shrink-0',
+              )}
+            >
+              <X className="size-4" />
+            </AlertDialogCancel>
+          </div>
         </AlertDialogHeader>
 
-        <div className="overflow-hidden rounded-md border">
+        <div className="overflow-y-auto px-6 py-4">
           <EmbeddedCheckoutProvider
             stripe={stripePromise}
             options={{ fetchClientSecret }}
@@ -63,10 +72,6 @@ export function CheckoutButton({ userId }: { userId: string | undefined }) {
             <EmbeddedCheckout />
           </EmbeddedCheckoutProvider>
         </div>
-
-        <AlertDialogFooter>
-          <AlertDialogCancel className="w-full">Cancelar</AlertDialogCancel>
-        </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
   )
