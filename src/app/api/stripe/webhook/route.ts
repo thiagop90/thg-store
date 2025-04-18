@@ -47,12 +47,7 @@ export async function POST(request: Request) {
     }
 
     try {
-      const order = await createOrder(cartProducts, userId)
-
-      await db.order.update({
-        where: { id: order.id },
-        data: { sessionId: session.id, status: 'PAYMENT_CONFIRMED' },
-      })
+      await createOrder(cartProducts, userId, session.id)
     } catch (error) {
       return NextResponse.json(
         { error: 'Failed to create order' },
