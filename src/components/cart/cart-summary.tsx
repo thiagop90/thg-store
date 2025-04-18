@@ -25,7 +25,7 @@ export function CartSummary() {
   } = useCartPricesFormatted()
 
   return (
-    <div className="flex flex-col border-t px-6 py-4">
+    <div className="flex flex-col py-4">
       <SummaryItem label="Subtotal" value={formattedSubtotal} />
       <SummaryItem label={t('discount')} value={`- ${formattedDiscount}`} />
       <SummaryItem label="Total" value={formattedTotalPriceWithDiscount} />

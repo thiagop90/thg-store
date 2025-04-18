@@ -17,11 +17,7 @@ import { Button } from '../ui/button'
 import { useTranslations } from 'next-intl'
 import { Icons } from '../icons'
 
-interface CardProps {
-  userId: string | undefined
-}
-
-export function Cart({ userId }: CardProps) {
+export function Cart() {
   const t = useTranslations('Cart')
   const { cart, removeAll, isOpenCart, toggleCart } = useCartStore()
 
@@ -82,8 +78,10 @@ export function Cart({ userId }: CardProps) {
               ))}
             </ScrollArea>
 
-            <CartSummary />
-            <CheckoutButton userId={userId} />
+            <div className="border-t px-6 pb-6">
+              <CartSummary />
+              <CheckoutButton />
+            </div>
           </div>
         )}
       </DrawerContent>

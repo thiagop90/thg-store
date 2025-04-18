@@ -7,9 +7,9 @@ declare namespace NodeJS {
     AUTH_GOOGLE_SECRET: string
     AUTH_GITHUB_ID: string
     AUTH_GITHUB_SECRET: string
-    NEXT_PUBLIC_STRIPE_PUBLIC_KEY: string
     STRIPE_SECRET_KEY: string
-    STRIPE_WEBHOOK_SECRET_KEY: string
+    STRIPE_WEBHOOK_SECRET: string
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: string
     HOST_URL: string
   }
 }

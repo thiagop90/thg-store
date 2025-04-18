@@ -1,66 +1,72 @@
-import { useState } from 'react'
+import { useCallback } from 'react'
 import { useCartStore } from '@/store/cart'
 import { loadStripe } from '@stripe/stripe-js'
 import { Button } from '../ui/button'
-import { Icons } from '../icons'
+
 import { useTranslations } from 'next-intl'
-import { useRouter } from 'next/navigation'
+import {
+  EmbeddedCheckout,
+  EmbeddedCheckoutProvider,
+} from '@stripe/react-stripe-js'
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '../ui/alert-dialog'
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
-export function CheckoutButton({ userId }: { userId: string | undefined }) {
+export function CheckoutButton() {
   const t = useTranslations('Cart')
-  const router = useRouter()
-  const { cart, toggleCart } = useCartStore()
+  const { cart } = useCartStore()
 
-  const [isProcessing, setIsProcessing] = useState(false)
-
-  function goToLoginPage() {
-    router.push('/login')
-    toggleCart()
-  }
-
-  async function handleCheckout() {
-    if (!userId) return
-
-    setIsProcessing(true)
-
-    const stripe = await stripePromise
-
-    const response = await fetch('/api/checkout-sessions', {
+  const fetchClientSecret = useCallback(() => {
+    return fetch('/api/checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        cartItems: cart,
-        returnUrl: window.location.origin,
-        userId,
+        products: cart,
       }),
     })
-
-    const { sessionId } = await response.json()
-    await stripe?.redirectToCheckout({ sessionId })
-
-    toggleCart()
-  }
+      .then((res) => res.json())
+      .then((data) => data.client_secret)
+  }, [])
 
   return (
-    <div className="space-y-4 px-6 pb-6">
-      <Button
-        className="w-full"
-        onClick={userId ? handleCheckout : goToLoginPage}
-        disabled={isProcessing}
-      >
-        {isProcessing ? (
-          <>
-            {t('processing')}
-            <Icons.spinner className="ml-1 h-4 w-4" />
-          </>
-        ) : (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button className="w-full">
           <span translate="no">Checkout</span>
-        )}
-      </Button>
-    </div>
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Pagamento via Stripe</AlertDialogTitle>
+          <AlertDialogDescription>
+            Preencha os dados para prosseguir.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+
+        <div className="overflow-hidden rounded-md border">
+          <EmbeddedCheckoutProvider
+            stripe={stripePromise}
+            options={{ fetchClientSecret }}
+          >
+            <EmbeddedCheckout />
+          </EmbeddedCheckoutProvider>
+        </div>
+
+        <AlertDialogFooter>
+          <AlertDialogCancel className="w-full">Cancelar</AlertDialogCancel>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   )
 }

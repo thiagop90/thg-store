@@ -16,44 +16,9 @@ export default async function OrderSummary({
 }: OrderSummaryProps) {
   const t = await getTranslations('OrderPage')
 
-  const orderId = stripeSession.metadata?.orderId
-
-  if (!orderId) {
-    return (
-      <div className="mx-auto max-w-2xl py-16 lg:max-w-4xl">
-        <div className="mt-20 flex w-full flex-col items-center justify-center">
-          <PackageSearch className="h-16 w-16" strokeWidth={1.25} />
-          <p className="mt-6 text-center text-2xl font-semibold">
-            {t('noOrdersWerePlaced')}
-          </p>
-          <Link
-            href="/search"
-            className={cn(buttonVariants({ size: 'sm' }), 'mt-6')}
-          >
-            {t('goShopping')}
-            <svg
-              className="ml-2 h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </Link>
-        </div>
-      </div>
-    )
-  }
-
-  const order = await db.order.findUnique({
+  const order = await db.order.findFirst({
     where: {
-      id: orderId,
+      sessionId: stripeSession.id,
     },
     include: {
       orderProducts: {
@@ -68,7 +33,11 @@ export default async function OrderSummary({
         <div className="mt-20 flex w-full flex-col items-center justify-center">
           <PackageSearch className="h-16 w-16" strokeWidth={1.25} />
           <p className="mt-6 text-center text-2xl font-semibold">
-            {t('noOrdersWerePlaced')}
+            Seu pedido está sendo processado
+          </p>
+          <p className="mt-2 text-muted-foreground">
+            O pagamento está sendo confirmado. Você receberá uma notificação
+            quando concluído.
           </p>
           <Link
             href="/search"
