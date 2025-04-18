@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { stripe } from '@/lib/stripe'
-import OrderSummary from '../success/components/order-summary'
+import OrderSummary from './components/order-summary'
 import { redirect } from 'next/navigation'
 
 export default async function PaymentConfirmationPage({
