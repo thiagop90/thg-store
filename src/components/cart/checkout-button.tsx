@@ -21,7 +21,7 @@ import {
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
-export function CheckoutButton() {
+export function CheckoutButton({ userId }: { userId: string | undefined }) {
   const t = useTranslations('Cart')
   const { cart } = useCartStore()
 
@@ -33,6 +33,7 @@ export function CheckoutButton() {
       },
       body: JSON.stringify({
         products: cart,
+        userId,
       }),
     })
       .then((res) => res.json())

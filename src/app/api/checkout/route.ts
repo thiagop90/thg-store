@@ -8,8 +8,17 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 })
 
 export async function POST(request: Request) {
-  const { products } = await request.json()
+  const { products, userId } = await request.json()
   const origin = (await headers()).get('origin')
+
+  const reducedProducts = products.map((product: CartProductProps) => ({
+    id: product.id,
+    quantity: product.quantity,
+    basePrice: product.basePrice,
+    discountPercentage: product.discountPercentage,
+  }))
+
+  const productsJson = JSON.stringify(reducedProducts)
 
   const session = await stripe.checkout.sessions.create({
     ui_mode: 'embedded',
@@ -29,6 +38,10 @@ export async function POST(request: Request) {
     mode: 'payment',
     payment_method_types: ['card'],
     return_url: `${origin}/payment-confirmation?session_id={CHECKOUT_SESSION_ID}`,
+    metadata: {
+      userId,
+      products: productsJson,
+    },
   })
 
   return NextResponse.json({

@@ -65,14 +65,14 @@ export default async function OrderSummary({
   }
 
   return (
-    <div className="mx-auto max-w-2xl py-16 lg:max-w-4xl">
-      <div>
+    <div className="mx-auto max-w-2xl lg:max-w-4xl">
+      {/* <div>
         <h1 className="text-2xl font-semibold sm:text-3xl">Detalhes</h1>
         <p className="mt-2 text-muted-foreground">
           {t('checkTheStatusOfRecentOrders')}
         </p>
-      </div>
-      <div className="mt-10">
+      </div> */}
+      <div className="border-t pt-6">
         <OrderItem order={order} />
       </div>
     </div>

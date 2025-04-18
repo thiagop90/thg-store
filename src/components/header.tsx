@@ -27,7 +27,7 @@ export async function Header() {
           </div>
 
           <Hydrate>
-            <Cart />
+            <Cart userId={userId} />
           </Hydrate>
         </div>
       </div>

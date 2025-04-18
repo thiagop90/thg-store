@@ -8,6 +8,7 @@ import {
 import { stripe } from '@/lib/stripe'
 import OrderSummary from './components/order-summary'
 import { redirect } from 'next/navigation'
+import { ClearCartOnSuccess } from './components/clear-cart-on-success'
 
 export default async function PaymentConfirmationPage({
   searchParams,
@@ -52,6 +53,7 @@ export default async function PaymentConfirmationPage({
         </CardHeader>
 
         <CardContent>
+          <ClearCartOnSuccess />
           <OrderSummary stripeSession={stripeSession} />
         </CardContent>
       </Card>

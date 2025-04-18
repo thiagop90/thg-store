@@ -17,7 +17,11 @@ import { Button } from '../ui/button'
 import { useTranslations } from 'next-intl'
 import { Icons } from '../icons'
 
-export function Cart() {
+interface CardProps {
+  userId: string | undefined
+}
+
+export function Cart({ userId }: CardProps) {
   const t = useTranslations('Cart')
   const { cart, removeAll, isOpenCart, toggleCart } = useCartStore()
 
@@ -80,7 +84,7 @@ export function Cart() {
 
             <div className="border-t px-6 pb-6">
               <CartSummary />
-              <CheckoutButton />
+              <CheckoutButton userId={userId} />
             </div>
           </div>
         )}

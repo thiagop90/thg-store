@@ -1,5 +1,6 @@
 declare namespace NodeJS {
   interface ProcessEnv {
+    NODE_ENV: string
     DATABASE_URL: string
     DIRECT_URL: string
     AUTH_SECRET: string
@@ -10,6 +11,6 @@ declare namespace NodeJS {
     STRIPE_SECRET_KEY: string
     STRIPE_WEBHOOK_SECRET: string
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: string
-    HOST_URL: string
+    NEXT_PUBLIC_BASE_URL: string
   }
 }

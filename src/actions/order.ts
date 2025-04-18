@@ -6,13 +6,11 @@ import { CartProductProps } from '@/store/cart'
 export async function createOrder(
   cartProducts: CartProductProps[],
   userId: string,
-  sessionId: string,
 ) {
   const order = await db.order.create({
     data: {
       userId,
-      status: 'PAYMENT_CONFIRMED',
-      sessionId,
+      status: 'WAITING_FOR_PAYMENT',
       orderProducts: {
         createMany: {
           data: cartProducts.map((product) => ({

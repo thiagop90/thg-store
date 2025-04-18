@@ -40,13 +40,13 @@ export async function OrderItem({ order }: OrderItemProps) {
 
   // Mapear status para texto traduzido
   const statusMap: Record<string, string> = {
-    PAID: t('paymentConfirmed'),
+    PAYMENT_CONFIRMED: t('paymentConfirmed'),
     WAITING_FOR_PAYMENT: t('waitingForPayment'),
   }
   const statusText = statusMap[order.status] || order.status
 
   return (
-    <div className="rounded-lg border bg-card p-6 shadow-sm">
+    <div>
       <div className="mb-4 flex items-center justify-between">
         <div>
           <h2 className="text-lg font-semibold">
@@ -61,7 +61,7 @@ export async function OrderItem({ order }: OrderItemProps) {
           <span
             className={cn(
               'rounded-full px-2 py-1',
-              order.status === 'PAID'
+              order.status === 'PAYMENT_CONFIRMED'
                 ? 'bg-green-100 text-green-800'
                 : 'bg-yellow-100 text-yellow-800',
             )}
