@@ -17,10 +17,10 @@ export function CartProduct({ product }: CartProductType) {
   const { removeItemFromCart } = useCartStore()
   const handleRemoveCartProduct = () => removeItemFromCart(product.id)
 
-  const { formattedBasePrice, formattedTotalPrice } =
+  const { formattedBasePrice, formattedPriceAfterDiscount } =
     useProductPricesFormatted(product)
 
-  const formattedTotalPriceTimesQuantity = formatCurrency(
+  const formattedPriceAfterDiscountTimesQuantity = formatCurrency(
     product.quantity * Number(product.totalPrice),
   )
   return (
@@ -43,12 +43,12 @@ export function CartProduct({ product }: CartProductType) {
                 {product.name}
               </Link>
             </SheetTrigger>
-            <p className="ml-2">{formattedTotalPriceTimesQuantity}</p>
+            <p className="ml-2">{formattedPriceAfterDiscountTimesQuantity}</p>
           </div>
           <div className="mt-0.5 flex items-center gap-1 text-sm">
             {product.discountPercentage > 0 ? (
               <>
-                <p>{formattedTotalPrice}</p>
+                <p>{formattedPriceAfterDiscount}</p>
                 <p className="text-xs text-muted-foreground line-through">
                   {formattedBasePrice}
                 </p>

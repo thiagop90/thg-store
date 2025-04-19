@@ -11,7 +11,7 @@ type ProductInfoType = {
 export function ProductInfo({ product }: ProductInfoType) {
   const t = useTranslations('ProductPage')
 
-  const { formattedBasePrice, formattedTotalPrice } =
+  const { formattedBasePrice, formattedPriceAfterDiscount } =
     useProductPricesFormatted(product)
 
   const truncatedDescription = `${product.description.slice(0, 376)}`
@@ -30,7 +30,7 @@ export function ProductInfo({ product }: ProductInfoType) {
         <h1 className="text-2xl font-medium">{product.name}</h1>
         <div className="mt-2 flex items-center gap-2">
           <h3 className="text-lg font-semibold md:text-xl">
-            {formattedTotalPrice}
+            {formattedPriceAfterDiscount}
           </h3>
           {product.discountPercentage > 0 && (
             <DiscountBadge>{product.discountPercentage}</DiscountBadge>

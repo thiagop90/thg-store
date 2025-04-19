@@ -18,7 +18,7 @@
 //   const t = useTranslations('OrderPage')
 
 //   const productTotalPrice = computePriceAfterDiscount(orderProduct.product)
-//   const { formattedBasePrice, formattedTotalPrice } = useProductPricesFormatted(
+//   const { formattedBasePrice, formattedPriceAfterDiscount } = useProductPricesFormatted(
 //     orderProduct.product,
 //   )
 
@@ -41,7 +41,7 @@
 //             <div className="flex items-center gap-2">
 //               {orderProduct.product.discountPercentage > 0 ? (
 //                 <>
-//                   <p>{formattedTotalPrice}</p>
+//                   <p>{formattedPriceAfterDiscount}</p>
 //                   <p className="text-sm text-muted-foreground line-through">
 //                     {formattedBasePrice}
 //                   </p>
