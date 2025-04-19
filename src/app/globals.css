@@ -29,7 +29,7 @@
 
 @layer base {
   * {
-    @apply border-border list-none;
+    @apply border-border list-none ;
   }
   
   body {

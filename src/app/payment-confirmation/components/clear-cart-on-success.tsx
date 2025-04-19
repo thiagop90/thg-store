@@ -14,7 +14,7 @@ export function ClearCartOnSuccess() {
     if (isOpenCart) {
       toggleCart()
     }
-  }, [])
+  }, [cart])
 
   return null
 }

@@ -73,7 +73,10 @@
     "quantity": "Quantidade",
     "viewProduct": "Ver produto",
     "buyAgain": "Comprar novamente",
-    "at": "às"
+    "at": "às",
+    "subtotal": "Subtotal",
+    "discount": "Desconto",
+    "orderTotal": "Total do pedido"
   },
   "ProductPage": {
     "back": "Voltar",
