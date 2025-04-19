@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client'
-import { OrderProductItem } from './order-product-item'
+// import { OrderProductItem } from './order-product-item'
 // import { getOrderStatus } from '../helpers/status'
 import { useMemo } from 'react'
 import { computePriceAfterDiscount } from '@/helpers/compute-price'
@@ -7,7 +7,7 @@ import { formatCurrency } from '@/helpers/format-currency'
 import { useTranslations } from 'next-intl'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
-import { getOrderStatus } from '@/actions/order'
+// import { getOrderStatus } from '@/actions/order'
 
 type OrderItemType = {
   order: Prisma.OrderGetPayload<{
@@ -59,9 +59,9 @@ export function OrderItem({ order }: OrderItemType) {
         </div>
       </div>
       <ul className="divide-y">
-        {order.orderProducts.map((orderProduct) => (
+        {/* {order.orderProducts.map((orderProduct) => (
           <OrderProductItem key={orderProduct.id} orderProduct={orderProduct} />
-        ))}
+        ))} */}
       </ul>
     </div>
   )
