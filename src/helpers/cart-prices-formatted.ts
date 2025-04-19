@@ -8,11 +8,11 @@ export function useCartPricesFormatted() {
 
   const formattedSubtotal = formatCurrency(subtotal())
   const formattedDiscount = formatCurrency(discount())
-  const formattedPriceAfterDiscountWithDiscount = formatCurrency(totalPrice())
+  const formattedTotalPriceWithDiscount = formatCurrency(totalPrice())
 
   return {
     formattedSubtotal,
     formattedDiscount,
-    formattedPriceAfterDiscountWithDiscount,
+    formattedTotalPriceWithDiscount,
   }
 }

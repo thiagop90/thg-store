@@ -21,14 +21,14 @@ export function CartSummary() {
   const {
     formattedDiscount,
     formattedSubtotal,
-    formattedPriceAfterDiscountWithDiscount,
+    formattedTotalPriceWithDiscount,
   } = useCartPricesFormatted()
 
   return (
     <div className="flex flex-col py-4">
       <SummaryItem label="Subtotal" value={formattedSubtotal} />
       <SummaryItem label={t('discount')} value={`- ${formattedDiscount}`} />
-      <SummaryItem label="Total" value={formattedPriceAfterDiscountWithDiscount} />
+      <SummaryItem label="Total" value={formattedTotalPriceWithDiscount} />
     </div>
   )
 }
