@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react'
 import Autoplay from 'embla-carousel-autoplay'
-import { computeProductTotalPrice } from '@/helpers/compute-price'
+import { computePriceAfterDiscount } from '@/helpers/compute-price'
 import { Product } from '@prisma/client'
 import { CardCarousel } from './card-carousel'
 import { cn } from '@/lib/utils'
@@ -70,7 +70,7 @@ export const CarouselProducts = forwardRef<HTMLDivElement, ProductListProps>(
           <div className="flex touch-pan-y backface-hidden">
             {products.map((product) => (
               <div key={product.id} className="mr-4 last:mr-0">
-                <CardCarousel product={computeProductTotalPrice(product)} />
+                <CardCarousel product={computePriceAfterDiscount(product)} />
               </div>
             ))}
           </div>

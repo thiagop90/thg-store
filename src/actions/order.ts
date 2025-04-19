@@ -2,6 +2,8 @@
 
 import db from '@/lib/prisma'
 import { CartProductProps } from '@/store/cart'
+import { OrderStatus } from '@prisma/client'
+import { getTranslations } from 'next-intl/server'
 
 export async function createOrder(
   cartProducts: CartProductProps[],
@@ -27,4 +29,20 @@ export async function createOrder(
   })
 
   return order
+}
+
+export async function getOrderStatus(
+  orderStatus: OrderStatus,
+): Promise<{ text: string; status: OrderStatus }> {
+  const t = await getTranslations('OrderPage')
+
+  const statusMap: Record<OrderStatus, string> = {
+    [OrderStatus.PAYMENT_CONFIRMED]: t('paymentConfirmed'),
+    [OrderStatus.WAITING_FOR_PAYMENT]: t('waitingForPayment'),
+  }
+
+  return {
+    text: statusMap[orderStatus],
+    status: orderStatus,
+  }
 }

@@ -2,7 +2,7 @@ import { Product } from '@prisma/client'
 
 export type ProductWithTotalPrice = Product & { totalPrice: number }
 
-export function computeProductTotalPrice(
+export function computePriceAfterDiscount(
   product: Product,
 ): ProductWithTotalPrice {
   const totalPrice =

@@ -1,4 +1,4 @@
-import { computeProductTotalPrice } from '@/helpers/compute-price'
+import { computePriceAfterDiscount } from '@/helpers/compute-price'
 import { useProductPricesFormatted } from '@/helpers/product-prices-formatted'
 import { Prisma } from '@prisma/client'
 import Image from 'next/image'
@@ -17,9 +17,10 @@ type OrderProductItemType = {
 export function OrderProductItem({ orderProduct }: OrderProductItemType) {
   const t = useTranslations('OrderPage')
 
-  const productTotalPrice = computeProductTotalPrice(orderProduct.product)
-  const { formattedBasePrice, formattedTotalPrice } =
-    useProductPricesFormatted(productTotalPrice)
+  const productTotalPrice = computePriceAfterDiscount(orderProduct.product)
+  const { formattedBasePrice, formattedTotalPrice } = useProductPricesFormatted(
+    orderProduct.product,
+  )
 
   return (
     <li className="p-4 sm:p-6">

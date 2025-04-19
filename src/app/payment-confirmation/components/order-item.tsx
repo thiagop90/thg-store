@@ -1,132 +1,61 @@
-import { getTranslations } from 'next-intl/server'
-import { cn } from '@/lib/utils'
-import { Clock, Package } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
+import { formatCurrency } from '@/helpers/format-currency'
+import type { ProductWithTotalPrice } from '@/helpers/compute-price'
+import Link from 'next/link'
 
 interface OrderItemProps {
-  order: {
-    id: string
-    createdAt: Date
-    status: string
-    orderProducts: {
-      productId: string
-      quantity: number
-      basePrice: number
-      discountPercentage: number
-      product: {
-        name: string
-        imageUrls: string[]
-      }
-    }[]
-  }
+  product: ProductWithTotalPrice
+  orderProductQuantity: number
 }
 
-export async function OrderItem({ order }: OrderItemProps) {
-  const t = await getTranslations('OrderPage')
+export function OrderItem({ product, orderProductQuantity }: OrderItemProps) {
+  const t = useTranslations('OrderPage')
 
-  // Calcular o preço total da ordem
-  const totalPrice = order.orderProducts.reduce((total, item) => {
-    const priceAfterDiscount =
-      item.basePrice * (1 - item.discountPercentage / 100)
-    return total + priceAfterDiscount * item.quantity
-  }, 0)
-
-  // Formatar a data
-  const formattedDate = new Date(order.createdAt).toLocaleDateString('pt-BR', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-  })
-
-  // Mapear status para texto traduzido
-  const statusMap: Record<string, string> = {
-    PAYMENT_CONFIRMED: t('paymentConfirmed'),
-    WAITING_FOR_PAYMENT: t('waitingForPayment'),
-  }
-  const statusText = statusMap[order.status] || order.status
+  const priceAfterDiscount =
+    product.basePrice * (1 - product.discountPercentage / 100)
+  const itemTotal = priceAfterDiscount * orderProductQuantity
 
   return (
-    <div>
-      <div className="mb-4 flex items-center justify-between">
-        <div>
-          <h2 className="text-lg font-semibold">
-            Pedido #{order.id.slice(0, 8)}
-          </h2>
-          <div className="mt-1 flex items-center text-sm text-muted-foreground">
-            <Clock className="mr-1 h-4 w-4" />
-            <span>{formattedDate}</span>
-          </div>
+    <div className="border-t pt-4">
+      <div className="flex items-center gap-3">
+        <div className="relative size-16 flex-shrink-0 ">
+          <Image
+            src={product.imageUrls[0] || '/placeholder.png'}
+            alt={product.name}
+            fill
+            className="rounded object-cover"
+          />
         </div>
-        <div className="text-sm font-medium">
-          <span
-            className={cn(
-              'rounded-full px-2 py-1',
-              order.status === 'PAYMENT_CONFIRMED'
-                ? 'bg-green-100 text-green-800'
-                : 'bg-yellow-100 text-yellow-800',
-            )}
+        <div className="flex-1 space-y-1.5">
+          <Link
+            href={`/${product.slug}`}
+            className="font-medium hover:underline hover:underline-offset-4 sm:text-base"
           >
-            {statusText}
-          </span>
-        </div>
-      </div>
+            {product.name}
+          </Link>
 
-      <div className="space-y-4">
-        {order.orderProducts.map((item) => {
-          const priceAfterDiscount =
-            item.basePrice * (1 - item.discountPercentage / 100)
-          const itemTotal = priceAfterDiscount * item.quantity
-
-          return (
-            <div
-              key={item.productId}
-              className="flex items-center gap-4 border-t pt-4"
-            >
-              <div className="relative h-16 w-16 flex-shrink-0">
-                <Image
-                  src={item.product.imageUrls[0] || '/placeholder.png'}
-                  alt={item.product.name}
-                  fill
-                  className="rounded object-cover"
-                />
-              </div>
-              <div className="flex-1">
-                <h3 className="font-medium">{item.product.name}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {t('quantity')}: {item.quantity}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  Preço unico:{' '}
-                  {new Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  }).format(priceAfterDiscount)}
-                </p>
-              </div>
-              <div className="text-right">
-                <p className="font-medium">
-                  {new Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  }).format(itemTotal)}
-                </p>
-              </div>
+          <div className="space-y-0.5">
+            <p className="text-sm">
+              Preço:{' '}
+              {product.discountPercentage > 0 ? (
+                <>
+                  <span>{formatCurrency(priceAfterDiscount)}</span>{' '}
+                  <span className="ml-1.5 text-muted-foreground line-through">
+                    {formatCurrency(product.basePrice)}
+                  </span>
+                </>
+              ) : (
+                <span>{formatCurrency(product.basePrice)}</span>
+              )}
+            </p>
+            <div className="flex justify-between">
+              <span className="text-sm text-muted-foreground">
+                {t('quantity')}: {orderProductQuantity}
+              </span>
+              <span className="font-medium">{formatCurrency(itemTotal)}</span>
             </div>
-          )
-        })}
-      </div>
-
-      <div className="mt-6 flex items-center justify-between border-t pt-4">
-        <div className="flex items-center text-sm text-muted-foreground">
-          <Package className="mr-1 h-4 w-4" />
-          <span>Total Itens: {order.orderProducts.length}</span>
-        </div>
-        <div className="text-lg font-semibold">
-          Total:{' '}
-          {new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-          }).format(totalPrice)}
+          </div>
         </div>
       </div>
     </div>

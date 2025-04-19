@@ -6,7 +6,7 @@ import { useInView } from 'react-intersection-observer'
 import { useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { getAllProducts } from '@/actions/get-all-products'
-import { computeProductTotalPrice } from '@/helpers/compute-price'
+import { computePriceAfterDiscount } from '@/helpers/compute-price'
 import { Icons } from '@/components/icons'
 import { WrapperProduct } from './components/wrapper-product'
 import { ProductCard } from './components/product-card'
@@ -77,7 +77,7 @@ export default function SearchPage() {
               {page.result.map((product: Product) => (
                 <ProductCard
                   key={product.id}
-                  product={computeProductTotalPrice(product)}
+                  product={computePriceAfterDiscount(product)}
                 />
               ))}
             </Fragment>

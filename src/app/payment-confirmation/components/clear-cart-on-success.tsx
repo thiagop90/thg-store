@@ -4,11 +4,16 @@ import { useEffect } from 'react'
 import { useCartStore } from '@/store/cart'
 
 export function ClearCartOnSuccess() {
-  const { removeAll, toggleCart } = useCartStore()
+  const { cart, isOpenCart, removeAll, toggleCart } = useCartStore()
 
   useEffect(() => {
-    removeAll()
-    toggleCart()
+    if (cart.length > 0) {
+      removeAll()
+    }
+
+    if (isOpenCart) {
+      toggleCart()
+    }
   }, [])
 
   return null

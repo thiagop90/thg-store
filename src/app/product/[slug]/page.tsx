@@ -1,6 +1,6 @@
 import db from '@/lib/prisma'
 import { CarouselImages } from './components/carousel-images'
-import { computeProductTotalPrice } from '@/helpers/compute-price'
+import { computePriceAfterDiscount } from '@/helpers/compute-price'
 import { ProductInfo } from './components/product-info'
 import { CarouselProducts } from '@/app/(home)/components/carousel-products'
 import { Metadata } from 'next'
@@ -64,7 +64,7 @@ export default async function ProductDetailsPage({
       <div className="relative -mx-4 flex flex-col border-y bg-card py-8 md:mx-0 md:rounded-lg md:border-x md:p-12 lg:flex-row lg:items-center lg:gap-8">
         <BackButton />
         <CarouselImages imageUrls={product.imageUrls} />
-        <ProductInfo product={computeProductTotalPrice(product)} />
+        <ProductInfo product={computePriceAfterDiscount(product)} />
       </div>
       <div className="py-8">
         <h2 className="mb-4 text-2xl font-semibold">{t('relatedProducts')}</h2>

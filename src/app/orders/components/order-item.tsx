@@ -1,12 +1,13 @@
 import { Prisma } from '@prisma/client'
 import { OrderProductItem } from './order-product-item'
-import { getOrderStatus } from '../helpers/status'
+// import { getOrderStatus } from '../helpers/status'
 import { useMemo } from 'react'
-import { computeProductTotalPrice } from '@/helpers/compute-price'
+import { computePriceAfterDiscount } from '@/helpers/compute-price'
 import { formatCurrency } from '@/helpers/format-currency'
 import { useTranslations } from 'next-intl'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import { getOrderStatus } from '@/actions/order'
 
 type OrderItemType = {
   order: Prisma.OrderGetPayload<{
@@ -21,17 +22,13 @@ type OrderItemType = {
 export function OrderItem({ order }: OrderItemType) {
   const t = useTranslations('OrderPage')
 
-  const formattedCreatedAtWithTime = format(
-    order.createdAt,
-    `P '${t('at')}' kk':'mm`,
-    {
-      locale: ptBR,
-    },
-  )
+  const formattedCreatedAtWithTime = format(order.createdAt, 'PPP', {
+    locale: ptBR,
+  })
 
   const totalAmount = useMemo(() => {
     return order.orderProducts.reduce((acc, { product, quantity }) => {
-      const productTotalPrice = computeProductTotalPrice(product)
+      const productTotalPrice = computePriceAfterDiscount(product)
 
       return acc + productTotalPrice.totalPrice * quantity
     }, 0)
@@ -45,7 +42,7 @@ export function OrderItem({ order }: OrderItemType) {
         <div className="flex justify-between pt-4 sm:block sm:pt-0">
           <p className="font-medium">Status</p>
           <span className="text-muted-foreground sm:mt-1">
-            {getOrderStatus(order.status)}
+            {/* {getOrderStatus(order.status)} */}
           </span>
         </div>
         <div className="flex justify-between pt-4 sm:block sm:pt-0">

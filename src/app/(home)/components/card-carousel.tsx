@@ -9,7 +9,7 @@ type ProductItemProps = {
 }
 
 export function CardCarousel({ product }: ProductItemProps) {
-  const { formattedBasePrice, formattedTotalPrice } =
+  const { formattedBasePrice, formattedPriceAfterDiscount } =
     useProductPricesFormatted(product)
 
   return (
@@ -36,7 +36,7 @@ export function CardCarousel({ product }: ProductItemProps) {
                   <p className="text-xs font-medium text-muted-foreground line-through">
                     {formattedBasePrice}
                   </p>
-                  <p className="font-semibold">{formattedTotalPrice}</p>
+                  <p className="font-semibold">{formattedPriceAfterDiscount}</p>
                 </>
               ) : (
                 <p className="font-semibold">{formattedBasePrice}</p>

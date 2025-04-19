@@ -2,7 +2,7 @@ import db from '@/lib/prisma'
 import { WrapperProduct } from '../components/wrapper-product'
 import { Prisma } from '@prisma/client'
 import { ProductCard } from '@/app/search/components/product-card'
-import { computeProductTotalPrice } from '@/helpers/compute-price'
+import { computePriceAfterDiscount } from '@/helpers/compute-price'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import type { CategorySlug } from '@/@types/category'
@@ -79,7 +79,7 @@ export default async function CategoryProducts({
         {category.products.map((product) => (
           <ProductCard
             key={product.id}
-            product={computeProductTotalPrice(product)}
+            product={computePriceAfterDiscount(product)}
           />
         ))}
       </WrapperProduct>
