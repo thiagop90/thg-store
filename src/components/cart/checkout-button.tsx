@@ -38,7 +38,7 @@ export function CheckoutButton({ userId }: { userId: string | undefined }) {
     })
       .then((res) => res.json())
       .then((data) => data.client_secret)
-  }, [])
+  }, [cart, userId])
 
   return (
     <AlertDialog>
@@ -51,7 +51,7 @@ export function CheckoutButton({ userId }: { userId: string | undefined }) {
         <AlertDialogHeader className=" space-y-0 text-left">
           <div className="flex items-center justify-between border-b px-6 py-4 ">
             <AlertDialogTitle className="text-base">
-              Pagamento via Stripe
+              {t('paymentViaStripe')}
             </AlertDialogTitle>
             <AlertDialogCancel
               className={cn(

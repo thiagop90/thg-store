@@ -19,7 +19,7 @@ export function OrderItem({ product, orderProductQuantity }: OrderItemProps) {
   return (
     <div className="flex items-center pt-4">
       <div className="flex flex-1 items-center gap-3 sm:gap-4">
-        <div className="relative size-16 flex-shrink-0 sm:size-20">
+        <div className="relative size-16 flex-shrink-0">
           <Image
             src={product.imageUrls[0] || '/placeholder.png'}
             alt={product.name}
@@ -28,36 +28,35 @@ export function OrderItem({ product, orderProductQuantity }: OrderItemProps) {
           />
         </div>
         <div className="flex-1 space-y-1.5">
-          <Link
-            href={`product/${product.slug}`}
-            className="line-clamp-1 font-medium hover:underline hover:underline-offset-4"
-          >
-            {product.name}
-          </Link>
+          <div className="flex justify-between gap-2">
+            <Link
+              href={`product/${product.slug}`}
+              className="font-medium hover:underline hover:underline-offset-4"
+            >
+              {product.name}
+            </Link>
+            <span className="text- font-medium sm:text-base">
+              {formatCurrency(itemTotal)}
+            </span>
+          </div>
 
-          <div className="space-y-1">
-            <div className="text-sm">
-              Preço:{' '}
-              {product.discountPercentage > 0 ? (
+          <div className="flex justify-between gap-2">
+            <span className="text-sm text-muted-foreground">
+              {t('quantity')} {orderProductQuantity}
+            </span>
+
+            <span className=" text-sm text-muted-foreground">
+              {orderProductQuantity > 1 && (
                 <>
-                  <span>{formatCurrency(priceAfterDiscount)}</span>
-                  <span className="ml-1.5 text-muted-foreground line-through">
-                    {formatCurrency(product.basePrice)}
-                  </span>
+                  {product.discountPercentage > 0 ? (
+                    <span>{formatCurrency(priceAfterDiscount)}</span>
+                  ) : (
+                    <span>{formatCurrency(product.basePrice)}</span>
+                  )}{' '}
+                  {t('each')}
                 </>
-              ) : (
-                <span>{formatCurrency(product.basePrice)}</span>
               )}
-            </div>
-            <div className="flex justify-between">
-              <span className="text-sm text-muted-foreground">
-                {t('quantity')}: {orderProductQuantity}
-              </span>
-
-              <span className="text-sm font-medium sm:text-base">
-                {formatCurrency(itemTotal)}
-              </span>
-            </div>
+            </span>
           </div>
         </div>
       </div>

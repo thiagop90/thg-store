@@ -23,7 +23,7 @@ interface CardProps {
 
 export function Cart({ userId }: CardProps) {
   const t = useTranslations('Cart')
-  const { cart, removeAll, isOpenCart, toggleCart } = useCartStore()
+  const { cart, clearCart, isOpenCart, toggleCart } = useCartStore()
 
   const itemText = cart.length > 1 ? t('items') : 'item'
 
@@ -49,7 +49,7 @@ export function Cart({ userId }: CardProps) {
             size="icon"
             variant="outline"
             className="absolute right-6 top-1/2 h-8 w-8 -translate-y-1/2"
-            onClick={toggleCart}
+            onClick={() => toggleCart(false)}
           >
             <X className="h-4 w-4" />
           </Button>
@@ -70,7 +70,7 @@ export function Cart({ userId }: CardProps) {
               <Button
                 variant="link"
                 className="h-fit p-0 text-base"
-                onClick={removeAll}
+                onClick={clearCart}
               >
                 {t('emptyCart')}
               </Button>

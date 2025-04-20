@@ -9,7 +9,7 @@ export type CartProductProps = ProductWithTotalPrice & {
 type CartStore = {
   cart: CartProductProps[]
   isOpenCart: boolean
-  toggleCart: () => void
+  toggleCart: (isOpenCart: boolean) => void
   quantity: () => number
   subtotal: () => number
   totalPrice: () => number
@@ -17,7 +17,7 @@ type CartStore = {
   addToCart: (product: ProductWithTotalPrice) => void
   removeFromCartByQuantity: (productId: string) => void
   removeItemFromCart: (productId: string) => void
-  removeAll: () => void
+  clearCart: () => void
 }
 
 export const useCartStore = create<CartStore>()(
@@ -60,7 +60,7 @@ export const useCartStore = create<CartStore>()(
         set({ cart: updatedCart })
       },
 
-      removeAll: () => set({ cart: [] }),
+      clearCart: () => set({ cart: [] }),
     }),
 
     { name: 'cart-items' },

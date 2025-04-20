@@ -50,7 +50,8 @@
     "remove": "Remove",
     "items": "items",
     "discount": "Discount",
-    "processing": "Processing..."
+    "processing": "Processing...",
+    "paymentViaStripe": "Payment via Stripe"
   },
   "Profile": {
     "signIn": "Sign in",
@@ -62,18 +63,22 @@
     "logoutOfAccount": "Log out of account"
   },
   "OrderPage": {
+    "order": "Order",
+    "pendingPayment": "Pending Payment",
+    "processingPayment": "Your payment is being processed. We are verifying the status.",
+    "loadingOrder": "Loading Order",
+    "pleaseWait": "Please wait",
+    "thankYou": "Thank you for your order!",
+    "orderProcessed": "Your order has been processed successfully.",
     "noOrdersWerePlaced": "No orders were placed.",
-    "goShopping": "Go shopping",
+    "backToShopping": "Back to shopping",
     "orderHistory": "Order history",
     "checkTheStatusOfRecentOrders": "Check the status of recent orders and discover similar products.",
     "paymentConfirmed": "Payment confirmed",
     "waitingForPayment": "Waiting for Payment",
-    "purchaseData": "Date placed",
-    "totalAmount": "Total amount",
+    "totalItems": "Total items:",
+    "each": "each",
     "quantity": "Quantity",
-    "viewProduct": "View product",
-    "buyAgain": "Buy again",
-    "at": "at",
     "subtotal": "Subtotal",
     "discount": "Discount",
     "orderTotal": "Order total"
