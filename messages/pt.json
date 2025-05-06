@@ -1,0 +1,444 @@
+{
+  "SearchPage": {
+    "scrollToTop": "Rolar para o topo",
+    "allProducts": "Todos produtos",
+    "items": "itens",
+    "products": "Produtos",
+    "search": "Pesquisar",
+    "searchProducts": "Pesquisar por produtos...",
+    "thereAreNoProductsThatMatch": "Não há produtos que correspondam a",
+    "noProductsFound": "Nenhum produto encontrado.",
+    "showing": "Mostrando",
+    "resultsTo": "resultado(s) para",
+    "loadingMoreProducts": "Carregando mais produtos...",
+    "back": "Voltar"
+  },
+  "Categories": {
+    "categories": "Categorias",
+    "categoryNotFound": "Categoria não encontrada.",
+    "all": "Todos",
+    "mouses": "Mouses",
+    "keyboards": "Teclados",
+    "headsets": "Fone de ouvidos",
+    "mousepads": "Mousepads",
+    "monitors": "Monitores",
+    "speakers": "Caixas de Som"
+  },
+  "SortBy": {
+    "sortBy": "Ordenar por",
+    "relevance": "Relevância",
+    "lowToHigh": "Preço: Baixo - Alto",
+    "highToLow": "Preço: Alto - Baixo"
+  },
+  "HomePage": {
+    "home": "Página inicial",
+    "discountMessage": "Economize até 30% em acessórios de computador selecionados.",
+    "shopByCategory": "Comprar por categoria",
+    "seeAll": "Ver tudo",
+    "start": "Iniciar",
+    "stop": "Pausar"
+  },
+  "Footer": {
+    "allRightsReserved": "Todos os direitos reservados."
+  },
+  "Cart": {
+    "cart": "Carrinho",
+    "myCart": "Meu carrinho",
+    "emptyCart": "Esvaziar carrinho",
+    "addToCart": "Adicionar ao carrinho",
+    "yourCartIsEmpty": "Seu carrinho está vazio.",
+    "remove": "Remover",
+    "items": "itens",
+    "discount": "Desconto",
+    "processing": "Processando...",
+    "paymentViaStripe": "Pagamento via Stripe"
+  },
+  "Profile": {
+    "signIn": "Fazer login",
+    "hello": "Olá",
+    "goodShopping": "Boas compras.",
+    "signinToContinueToPlatform": "Faça login para continuar na plataforma.",
+    "continueWith": "Continuar com",
+    "orderHistory": "Histórico de pedidos",
+    "logoutOfAccount": "Sair da conta"
+  },
+  "OrderPage": {
+    "order": "Pedido",
+    "pendingPayment": "Pagamento Pendente",
+    "processingPayment": "Seu pagamento está sendo processado. Estamos verificando o status.",
+    "loadingOrder": "Carregando pedido",
+    "pleaseWait": "Por favor, aguarde",
+    "thankYou": "Obrigado pelo seu pedido!",
+    "orderProcessed": "Seu pedido foi processado com sucesso.",
+    "noOrdersWerePlaced": "Nenhum pedido foi feito.",
+    "backToShopping": "Voltar às compras",
+    "orderHistory": "Histórico de pedidos",
+    "checkTheStatusOfRecentOrders": "Verifique o status de pedidos recentes.",
+    "paymentConfirmed": "Pagamento confirmado",
+    "waitingForPayment": "Aguardando pagamento",
+    "totalItems": "Total de itens:",
+    "each": "cada",
+    "quantity": "Quantidade",
+    "subtotal": "Subtotal",
+    "discount": "Desconto",
+    "orderTotal": "Total do pedido",
+    "hideItems": "Ocultar itens",
+    "viewItems": "Ver itens"
+  },
+  "ProductPage": {
+    "back": "Voltar",
+    "soldAndDeliveredBy": "Vendido e entregue por:",
+    "inStock": "Em estoque",
+    "relatedProducts": "Produtos relacionados"
+  },
+  "Products": {
+    "razer-basilisk-v3-pro": {
+      "name": "Mouse Razer Basilisk V3 Pro",
+      "description": "Mouse gamer sem fio de alto desempenho com iluminação RGB personalizável e sensor óptico avançado."
+    },
+    "razer-deathadder-v2-pro": {
+      "name": "Mouse Razer Deathadder V2 Pro",
+      "description": "Mouse ergonômico sem fio com tecnologia hyperspeed para jogos de baixa latência."
+    },
+    "kit-gamer-razer-victory-bundle": {
+      "name": "Kit Gamer Razer Victory Bundle",
+      "description": "Kit gamer completo com mouse, teclado e Fone de ouvido para uma experiência imersiva."
+    },
+    "razer-orochi-v2": {
+      "name": "Mouse Razer Orochi V2",
+      "description": "Mouse sem fio portátil com conectividade dupla e bateria de até 950 horas."
+    },
+    "logitech-mx-master-3s": {
+      "name": "Mouse Logitech MX Master 3s",
+      "description": "Mouse sem fio avançado com design ergonômico e rolagem ultrarrápida para produtividade."
+    },
+    "logitech-pro-x-superlight": {
+      "name": "Mouse Logitech Pro X Superlight",
+      "description": "Mouse gamer sem fio ultraleve com sensor HERO para desempenho profissional."
+    },
+    "logitech-g305-lightspeed": {
+      "name": "Mouse Logitech G305 Lightspeed",
+      "description": "Mouse gamer sem fio acessível com tecnologia lightspeed para desempenho confiável."
+    },
+    "logitech-g502-x": {
+      "name": "Mouse Logitech G502 X",
+      "description": "Mouse gamer com fio com switches óptico-mecânicos para cliques precisos."
+    },
+    "logitech-m280": {
+      "name": "Mouse Logitech M280",
+      "description": "Mouse sem fio confortável com formato contornado, ideal para uso diário."
+    },
+    "redragon-cobra-lunar-white": {
+      "name": "Mouse Redragon Cobra Lunar White",
+      "description": "Mouse gamer estiloso com iluminação RGB personalizável e botões programáveis."
+    },
+    "redragon-cobra-black": {
+      "name": "Mouse Redragon Cobra Black",
+      "description": "Mouse gamer de alta precisão com DPI ajustável e switches duráveis."
+    },
+    "redragon-storm": {
+      "name": "Mouse Redragon Storm",
+      "description": "Mouse gamer leve com design colmeia para maior conforto e ventilação."
+    },
+    "kit-redragon-mouse-mousepad": {
+      "name": "Kit Redragon Mouse & Mousepad",
+      "description": "Kit gamer com mouse de alta precisão e mousepad grande e suave."
+    },
+    "logitech-mx-keys-mini": {
+      "name": "Teclado Logitech MX Keys Mini",
+      "description": "Teclado sem fio compacto com teclas retroiluminadas e conectividade multi-dispositivos."
+    },
+    "logitech-ergo-k860": {
+      "name": "Teclado Logitech Ergo K860",
+      "description": "Teclado ergonômico dividido projetado para conforto e redução de tensão."
+    },
+    "logitech-pop-keys": {
+      "name": "Teclado Logitech Pop Keys",
+      "description": "Teclado mecânico colorido com teclas emoji personalizáveis."
+    },
+    "logitech-k835-tkl": {
+      "name": "Teclado Logitech K835 TKL",
+      "description": "Teclado mecânico sem teclado numérico com estrutura de alumínio durável."
+    },
+    "epomaker-th80": {
+      "name": "Teclado Epomaker TH80",
+      "description": "Teclado mecânico personalizável com interruptores hot-swappable."
+    },
+    "redragon-shiva-rgb": {
+      "name": "Teclado Redragon Shiva RGB",
+      "description": "Teclado de membrana com iluminação RGB vibrante e teclas macro."
+    },
+    "kit-redragon-led-rainbow": {
+      "name": "Kit Redragon LED Rainbow",
+      "description": "Kit gamer com teclado retroiluminado por LED e mouse."
+    },
+    "redragon-lakshmi": {
+      "name": "Teclado Redragon Lakshmi",
+      "description": "Teclado mecânico compacto 60% com RGB personalizável."
+    },
+    "redragon-kumara": {
+      "name": "Teclado Redragon Kumara",
+      "description": "Teclado mecânico com anti-ghosting e retroiluminação LED."
+    },
+    "redragon-infernal": {
+      "name": "Teclado Redragon Infernal",
+      "description": "Teclado gamer com RGB dinâmico e interruptores duráveis."
+    },
+    "razer-cynosa-v2": {
+      "name": "Teclado Razer Cynosa V2",
+      "description": "Teclado gamer de membrana com RGB Chroma personalizável."
+    },
+    "razer-blackwindow-v3-chroma": {
+      "name": "Teclado Razer BlackWidow V3 Chroma",
+      "description": "Teclado mecânico com interruptores Razer Green e RGB Chroma."
+    },
+    "razer-huntsman-mini": {
+      "name": "Teclado Razer Huntsman Mini",
+      "description": "Teclado óptico 60% com interruptores lineares Razer rápidos."
+    },
+    "razer-huntsman-v2-rosa": {
+      "name": "Teclado Razer Huntsman V2 Rosa",
+      "description": "Teclado mecânico rosa com interruptores ópticos e RGB."
+    },
+    "razer-huntsman-v3-tenkeyless": {
+      "name": "Teclado Razer BlackWidow V3 Tenkeyless",
+      "description": "Teclado mecânico sem teclado numérico com iluminação RGB Chroma."
+    },
+    "logitech-zone-vibe-100": {
+      "name": "Fone de ouvido Logitech Zone Vibe 100",
+      "description": "Fone de ouvido sem fio leve com áudio claro e microfone com cancelamento de ruído."
+    },
+    "logitech-pro-x-2-lightspeed": {
+      "name": "Fone de ouvido Logitech Pro X 2 Lightspeed",
+      "description": "Fone de ouvido gamer sem fio com som surround 7.1 e microfone de alta qualidade."
+    },
+    "logitech-astro-a30": {
+      "name": "Fone de ouvido Logitech Astro A30",
+      "description": "Fone de ouvido sem fio versátil com áudio imersivo e suporte multiplataforma."
+    },
+    "logitech-zone-wired-earbuds": {
+      "name": "Fone de ouvido Logitech Zone Wired Earbuds",
+      "description": "Fones de ouvido com fio com áudio de qualidade de estúdio e microfone com cancelamento de ruído."
+    },
+    "hyperx-cloud-stinger-2": {
+      "name": "Fone de ouvido HyperX Cloud Stinger 2",
+      "description": "Fone de ouvido gamer leve com áudio claro e design confortável."
+    },
+    "razer-kraken-x": {
+      "name": "Fone de ouvido Razer Kraken X",
+      "description": "Fone de ouvido leve com som surround 7.1 e microfone flexível."
+    },
+    "razer-kaira-x": {
+      "name": "Fone de ouvido Razer Kaira X",
+      "description": "Fone de ouvido gamer com fio com drivers TriForce e microfone claro."
+    },
+    "razer-kraken-multi-platform": {
+      "name": "Fone de ouvido Razer Kraken Multi Platform",
+      "description": "Fone de ouvido multiplataforma com almofadas de gel refrescante e áudio rico."
+    },
+    "razer-kraken-bt-kitty": {
+      "name": "Fone de ouvido Razer Kraken BT Kitty",
+      "description": "Fone de ouvido Bluetooth com design de orelhas de gato e iluminação RGB Chroma."
+    },
+    "redragon-zeus-x": {
+      "name": "Fone de ouvido Redragon Zeus X",
+      "description": "Fone de ouvido gamer com fio com som surround 7.1 e microfone destacável."
+    },
+    "redragon-lamia-2": {
+      "name": "Fone de ouvido Redragon Lamia 2",
+      "description": "Fone de ouvido gamer com RGB, áudio claro e ajuste confortável."
+    },
+    "jbl-quantum-one-rgb": {
+      "name": "Fone de ouvido JBL Quantum One RGB",
+      "description": "Fone de ouvido premium com cancelamento de ruído ativo e iluminação RGB."
+    },
+    "hyperx-cloud-alpha-s": {
+      "name": "Fone de ouvido HyperX Cloud Alpha S",
+      "description": "Fone de ouvido gamer com som surround virtual 7.1 e ajuste de graves."
+    },
+    "hyperx-cloud-singer-core": {
+      "name": "Fone de ouvido HyperX Cloud Stinger Core",
+      "description": "Fone de ouvido acessível com áudio claro e design leve."
+    },
+    "corsair-virtuoso-rgb": {
+      "name": "Fone de ouvido Corsair Virtuoso RGB",
+      "description": "Fone de ouvido sem fio de alta fidelidade com iluminação RGB e microfone premium."
+    },
+    "logitech-powerplay": {
+      "name": "Mousepad Logitech Powerplay",
+      "description": "Mousepad com carregamento sem fio e superfícies de pano e rígida personalizáveis."
+    },
+    "logitech-desk-mat": {
+      "name": "Mousepad Logitech Desk Mat",
+      "description": "Tapete de mesa grande com base antiderrapante e superfície de tecido suave."
+    },
+    "logitech-g640": {
+      "name": "Mousepad Logitech G640",
+      "description": "Mousepad de pano grande otimizado para jogos com DPI baixo."
+    },
+    "logitech-mousepad-studio-series": {
+      "name": "Mousepad Logitech Studio Series",
+      "description": "Tapete de mesa elegante com superfície resistente a respingos e cores vibrantes."
+    },
+    "logitech-g840-xl-edicao-lol": {
+      "name": "Mousepad Logitech G840 XL Edição LOL",
+      "description": "Mousepad extra grande com design temático de League of Legends."
+    },
+    "husky-gaming-avalanche": {
+      "name": "Mousepad Husky Gaming Avalanche",
+      "description": "Mousepad gamer com superfície suave e base de borracha antiderrapante."
+    },
+    "razer-sphex-v2": {
+      "name": "Mousepad Razer Sphex V2",
+      "description": "Mousepad ultrafino com base adesiva para posicionamento seguro."
+    },
+    "razer-goliathus-mobile": {
+      "name": "Mousepad Razer Goliathus Mobile",
+      "description": "Mousepad portátil com tecido microtexturizado para precisão."
+    },
+    "razer-gigantus-elite": {
+      "name": "Mousepad Razer Gigantus Elite",
+      "description": "Mousepad gamer grande com espuma grossa para conforto e controle."
+    },
+    "redragon-pluto-rgb": {
+      "name": "Mousepad Redragon Pluto RGB",
+      "description": "Mousepad com iluminação RGB, superfície suave e costura durável."
+    },
+    "corsair-mm150-uf": {
+      "name": "Mousepad Corsair MM150 Ultra Fino",
+      "description": "Mousepad ultrafino com superfície de policarbonato otimizada para precisão."
+    },
+    "havit-speed": {
+      "name": "Mousepad Havit Speed",
+      "description": "Mousepad focado em velocidade com base antiderrapante e rastreamento suave."
+    },
+    "risemode-ak47": {
+      "name": "Mousepad Rise Mode AK47",
+      "description": "Mousepad gamer com design temático AK47 e bordas costuradas."
+    },
+    "cougar-arena-x": {
+      "name": "Mousepad Cougar Arena X",
+      "description": "Mousepad extra grande com superfície resistente à água e base antiderrapante."
+    },
+    "aigo-darkflash-23-8-144-hz": {
+      "name": "Monitor Aigo Darkflash 23.8 144 Hz",
+      "description": "Monitor gamer de 23,8 polegadas com taxa de atualização de 144Hz e cores vibrantes."
+    },
+    "lg-ultragear-24-144-hz": {
+      "name": "Monitor LG UltraGear 24 144 Hz",
+      "description": "Monitor gamer IPS de 24 polegadas com 144Hz e baixo tempo de resposta."
+    },
+    "redragon-quartz-23-8-165-hz": {
+      "name": "Monitor Redragon Quartz 23.8 165 Hz",
+      "description": "Monitor gamer de 23,8 polegadas com 165Hz e visuais nítidos."
+    },
+    "asus-rog-27-360-hz": {
+      "name": "Monitor ASUS ROG 27 360 Hz",
+      "description": "Monitor de esports de 27 polegadas com taxa de atualização ultrarrápida de 360Hz."
+    },
+    "samsung-odyssey-49-240-hz": {
+      "name": "Monitor Samsung Odyssey 49 240 Hz",
+      "description": "Monitor curvo ultra-wide de 49 polegadas com 240Hz para jogos imersivos."
+    },
+    "cooler-master-ga241-23-8-100-hz": {
+      "name": "Monitor Cooler Master GA241 23.8 100 Hz",
+      "description": "Monitor econômico de 23,8 polegadas com 100Hz para visuais suaves."
+    },
+    "husky-blizzard-27-240-hz": {
+      "name": "Monitor Husky Blizzard 27 240 Hz",
+      "description": "Monitor gamer de 27 polegadas com 240Hz e precisão de cores vívidas."
+    },
+    "husky-hailstorm-31-5-165-hz": {
+      "name": "Monitor Husky Hailstorm 31.5 165 Hz",
+      "description": "Monitor curvo de 31,5 polegadas com 165Hz para jogos imersivos."
+    },
+    "aoc-hero-27-144-hz": {
+      "name": "Monitor AOC Hero 27 144 Hz",
+      "description": "Monitor gamer de 27 polegadas com 144Hz e sincronização adaptativa."
+    },
+    "aoc-27-2k-155-hz": {
+      "name": "Monitor AOC 27 2K 155 Hz",
+      "description": "Monitor 2K de 27 polegadas com 155Hz para visuais nítidos e suaves."
+    },
+    "cooler-master-27-165-hz": {
+      "name": "Monitor Cooler Master 27 165 Hz",
+      "description": "Monitor IPS de 27 polegadas com 165Hz e reprodução de cores vibrantes."
+    },
+    "gigabyte-27-g27f-165-hz": {
+      "name": "Monitor Gigabyte 27 G27F 165 Hz",
+      "description": "Monitor gamer de 27 polegadas com 165Hz e baixo input lag."
+    },
+    "acer-23-8-ka2-100-hz": {
+      "name": "Monitor Acer 23.8 KA2 100 Hz",
+      "description": "Monitor de 23,8 polegadas com 100Hz para jogos casuais e trabalho."
+    },
+    "cooler-master-34-144-hz": {
+      "name": "Monitor Cooler Master 34 144 Hz",
+      "description": "Monitor ultra-wide de 34 polegadas com 144Hz para multitarefa e jogos."
+    },
+    "benq-mobiuz-27-165-hz": {
+      "name": "Monitor BENQ Mobiuz 27 165 Hz",
+      "description": "Monitor gamer de 27 polegadas com 165Hz e HDR para visuais vívidos."
+    },
+    "logitech-surround-sound-z607": {
+      "name": "Caixa de Som Logitech Surround Sound Z607",
+      "description": "Sistema de som surround 5.1 com Bluetooth e conectividade multi-dispositivos."
+    },
+    "logitech-dock": {
+      "name": "Caixa de Som Logitech Dock",
+      "description": "Caixa de som tudo-em-um com áudio nítido e suporte para chamadas de vídeo."
+    },
+    "sony-sa-z9r-speakers": {
+      "name": "Caixa de Som Sony SA-Z9R Speakers",
+      "description": "Caixas traseiras sem fio para áudio de home theater imersivo."
+    },
+    "sony-xb43-extra-bass": {
+      "name": "Caixa de Som Sony XB43 Extra Bass",
+      "description": "Caixa Bluetooth portátil com graves profundos e iluminação para festas."
+    },
+    "sony-xb23-extra-bass": {
+      "name": "Caixa de Som Sony XB23 Extra Bass",
+      "description": "Caixa Bluetooth compacta com graves poderosos e design à prova d'água."
+    },
+    "sony-ht-s200f-soundbar": {
+      "name": "Caixa de Som Sony HT-S200F Soundbar",
+      "description": "Soundbar compacta com subwoofer integrado para áudio claro."
+    },
+    "jbl-control-1-pro": {
+      "name": "Caixa de Som JBL Control 1 Pro",
+      "description": "Monitores de estúdio compactos com som claro para uso profissional."
+    },
+    "jbl-partybox-encore-essential": {
+      "name": "Caixa de Som JBL Partybox Encore Essential",
+      "description": "Caixa de festa portátil com show de luzes dinâmico e graves profundos."
+    },
+    "jbl-quantum-duo-rgb": {
+      "name": "Caixa de Som JBL Quantum Duo RGB",
+      "description": "Caixas gamer com som imersivo e iluminação RGB personalizável."
+    },
+    "jbl-go-3-eco": {
+      "name": "Caixa de Som JBL GO 3 Eco",
+      "description": "Caixa ultraportátil ecológica com som ousado e à prova d'água."
+    },
+    "harman-kardon-onyx-studio-8": {
+      "name": "Caixa de Som Harman Kardon Onyx Studio 8",
+      "description": "Caixa Bluetooth premium com som rico e design elegante."
+    },
+    "jbl-flip-6": {
+      "name": "Caixa de Som JBL Flip 6",
+      "description": "Caixa Bluetooth portátil com som poderoso e design robusto."
+    },
+    "edifier-r1280t-2-0": {
+      "name": "Caixa de Som Edifier R1280T 2.0",
+      "description": "Caixas de estante com som estéreo rico e controle remoto."
+    },
+    "jbl-boombox-3-camuflada": {
+      "name": "Caixa de Som JBL Boombox 3 Camuflada",
+      "description": "Caixa Bluetooth poderosa com design camuflado e graves massivos."
+    },
+    "edifier-x230-rgb": {
+      "name": "Caixa de Som Edifier X230 RGB",
+      "description": "Caixas gamer compactas com iluminação RGB e áudio claro."
+    }
+  }
+}

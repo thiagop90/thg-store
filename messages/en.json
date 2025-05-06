@@ -1,0 +1,94 @@
+{
+  "SearchPage": {
+    "scrollToTop": "Scroll to top",
+    "allProducts": "All products",
+    "items": "items",
+    "products": "Products",
+    "search": "Search",
+    "searchProducts": "Search for products...",
+    "thereAreNoProductsThatMatch": "There are no products that match",
+    "noProductsFound": "No products found.",
+    "showing": "Showing",
+    "resultsTo": "result(s) to",
+    "loadingMoreProducts": "Loading more products...",
+    "back": "Back"
+  },
+  "Categories": {
+    "categories": "Categories",
+    "categoryNotFound": "Category not found.",
+    "all": "All",
+    "mouses": "Mouses",
+    "keyboards": "Keyboards",
+    "headsets": "Headsets",
+    "mousepads": "Mousepads",
+    "monitors": "Monitors",
+    "speakers": "Speakers"
+  },
+  "SortBy": {
+    "sortBy": "Sort by",
+    "relevance": "Relevance",
+    "lowToHigh": "Price: Low - High",
+    "highToLow": "Price: High - Low"
+  },
+  "HomePage": {
+    "home": "Home",
+    "discountMessage": "Save up to 30% on select computer accessories.",
+    "shopByCategory": "Shop by category",
+    "seeAll": "See all",
+    "start": "Start",
+    "stop": "Stop"
+  },
+  "Footer": {
+    "allRightsReserved": "All rights reserved."
+  },
+  "Cart": {
+    "cart": "Cart",
+    "myCart": "My cart",
+    "emptyCart": "Empty cart",
+    "yourCartIsEmpty": "Your cart is empty.",
+    "addToCart": "Add to cart",
+    "remove": "Remove",
+    "items": "items",
+    "discount": "Discount",
+    "processing": "Processing...",
+    "paymentViaStripe": "Payment via Stripe"
+  },
+  "Profile": {
+    "signIn": "Sign in",
+    "hello": "Hello",
+    "goodShopping": "Good shopping.",
+    "signinToContinueToPlatform": "Sign in to continue to platform.",
+    "continueWith": "Continue with",
+    "orderHistory": "Order history",
+    "logoutOfAccount": "Log out of account"
+  },
+  "OrderPage": {
+    "order": "Order",
+    "pendingPayment": "Pending Payment",
+    "processingPayment": "Your payment is being processed. We are verifying the status.",
+    "loadingOrder": "Loading Order",
+    "pleaseWait": "Please wait",
+    "thankYou": "Thank you for your order!",
+    "orderProcessed": "Your order has been processed successfully.",
+    "noOrdersWerePlaced": "No orders were placed.",
+    "backToShopping": "Back to shopping",
+    "orderHistory": "Order history",
+    "checkTheStatusOfRecentOrders": "Check the status of recent orders.",
+    "paymentConfirmed": "Payment confirmed",
+    "waitingForPayment": "Waiting for Payment",
+    "totalItems": "Total items:",
+    "each": "each",
+    "quantity": "Quantity",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "orderTotal": "Order total",
+    "hideItems": "Hide items",
+    "viewItems": "View items"
+  },
+  "ProductPage": {
+    "back": "Back",
+    "soldAndDeliveredBy": "Sold and delivered by:",
+    "inStock": "In stock",
+    "relatedProducts": "Related products"
+  }
+}

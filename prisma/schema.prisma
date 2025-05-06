@@ -1,0 +1,139 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Category {
+  id       String    @id @default(uuid())
+  name     String
+  slug     String
+  products Product[]
+
+  @@map("categories")
+}
+
+model Product {
+  id                 String          @id @default(uuid())
+  name               String
+  slug               String
+  description        String
+  basePrice          Int
+  categoryId         String
+  discountPercentage Int             @default(0)
+  imageUrls          String[]
+  OrderProduct       OrderProduct[]
+  category           Category        @relation(fields: [categoryId], references: [id])
+  reviews            ProductReview[]
+
+  @@map("products")
+}
+
+model ProductReview {
+  id        String   @id @default(uuid())
+  productId String
+  userId    String
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
+  product   Product  @relation(fields: [productId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@map("product_reviews")
+}
+
+model Order {
+  id            String         @id @default(uuid())
+  userId        String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @default(now()) @updatedAt
+  status        OrderStatus    @default(WAITING_FOR_PAYMENT)
+  sessionId     String?
+  user          User           @relation(fields: [userId], references: [id])
+  orderProducts OrderProduct[]
+
+  @@map("orders")
+}
+
+model OrderProduct {
+  id                 String  @id @default(uuid())
+  productId          String
+  orderId            String
+  basePrice          Int
+  discountPercentage Int     @default(0)
+  quantity           Int
+  order              Order   @relation(fields: [orderId], references: [id])
+  product            Product @relation(fields: [productId], references: [id])
+
+  @@map("order_products")
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("sessions")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  orders        Order[]
+
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  reviews   ProductReview[]
+
+  @@map("users")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+  @@map("verification_tokens")
+}
+
+enum OrderStatus {
+  WAITING_FOR_PAYMENT
+  PAYMENT_CONFIRMED
+}
