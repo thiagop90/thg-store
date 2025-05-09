@@ -45,7 +45,7 @@ export function ProductInfo({ product }: ProductInfoType) {
       <h2 className="mb-6 text-sm leading-relaxed text-muted-foreground">
         {truncatedDescription}
       </h2>
-      <AddToCartButton product={product} />
+      <AddToCartButton className="w-full" size="default" product={product} />
     </div>
   )
 }
