@@ -26,10 +26,9 @@ export function OrderItem({ product, orderProductQuantity }: OrderItemProps) {
       <div className="flex flex-1 items-center gap-3 sm:gap-4">
         <div className="relative flex size-16 flex-shrink-0 items-center justify-center rounded-sm bg-neutral-900">
           {!isImageLoaded && <Icons.loadingDots />}
-          <Image
+          <img
             src={product.imageUrls[0]}
             alt={product.name}
-            fill
             className={cn(
               'object-cover p-1.5 transition-opacity duration-200',
               !isImageLoaded ? 'opacity-0' : 'opacity-100',
