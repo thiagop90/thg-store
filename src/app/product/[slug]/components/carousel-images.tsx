@@ -1,7 +1,6 @@
 'use client'
 
 import { Fragment, useCallback, useEffect, useState } from 'react'
-import Image from 'next/image'
 import useEmblaCarousel from 'embla-carousel-react'
 import { ThumbsButton } from './thumbs-button'
 import { cn } from '@/lib/utils'
@@ -63,7 +62,7 @@ export function CarouselImages({ imageUrls }: ProductImagesProps) {
                   <Icons.loadingDots />
                 </div>
               )}
-              <Image
+              <img
                 key={imageUrl}
                 src={imageUrl}
                 alt=""
@@ -75,8 +74,6 @@ export function CarouselImages({ imageUrls }: ProductImagesProps) {
                   imageLoaded && 'opacity-100',
                 )}
                 onLoad={handleImageLoad}
-                quality={100}
-                priority
               />
             </Fragment>
           ))}

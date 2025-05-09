@@ -2,7 +2,6 @@ import { ProductWithTotalPrice } from '@/helpers/compute-price'
 import { useProductPricesFormatted } from '@/helpers/product-prices-formatted'
 import Link from 'next/link'
 import { DiscountBadge } from '@/components/discount-badge'
-import Image from 'next/image'
 import { AddToCartButton } from '@/components/cart/add-to-cart-button'
 import { Icons } from '@/components/icons'
 import { useState } from 'react'
@@ -22,13 +21,11 @@ export function CardCarousel({ product }: ProductItemProps) {
       <Link href={`/product/${product.slug}`}>
         <div className="flex h-full w-full items-center justify-center">
           {loading && <Icons.loadingDots />}
-          <Image
-            fill
+          <img
             src={product.imageUrls[0]}
             sizes="100vw"
             className={cn('object-contain p-14', loading ? 'hidden' : 'block')}
             alt={product.name}
-            priority
             onLoad={() => setLoading(false)}
           />
         </div>

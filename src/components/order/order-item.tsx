@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
-import Image from 'next/image'
 import { formatCurrency } from '@/helpers/format-currency'
 import type { ProductWithTotalPrice } from '@/helpers/compute-price'
 import Link from 'next/link'

@@ -1,6 +1,5 @@
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
 import React, { useState } from 'react'
 
 type PropType = {
@@ -31,7 +30,7 @@ export function ThumbsButton(props: PropType) {
       >
         {/* <Skeleton className="h-full w-full animate-none" /> */}
         {!imageLoaded && <Skeleton className="h-full w-full animate-none" />}
-        <Image
+        <img
           src={imgSrc}
           alt={imgSrc}
           width={80}

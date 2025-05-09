@@ -1,7 +1,6 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
 import { useState, unstable_ViewTransition as ViewTransition } from 'react'
 import { Icons } from './icons'
 import {
@@ -39,11 +38,9 @@ export function ContainerImage({ product, active }: ContainerImageProps) {
                       <Icons.loadingDots />
                     </div>
                   )}
-                  <Image
-                    fill
+                  <img
                     alt={imageUrl}
                     src={imageUrl}
-                    priority={index === 0}
                     className={cn(
                       'object-contain',
                       imageLoaded ? 'opacity-100' : 'opacity-0',
@@ -68,11 +65,9 @@ export function ContainerImage({ product, active }: ContainerImageProps) {
               <Icons.loadingDots />
             </div>
           )}
-          <Image
-            fill
+          <img
             alt={product.name}
             src={product.imageUrls[0]}
-            priority
             className={cn(
               'object-contain',
               imageLoaded ? 'opacity-100' : 'opacity-0',

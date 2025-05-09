@@ -1,5 +1,4 @@
 import { CartProductProps, useCartStore } from '@/store/cart'
-import Image from 'next/image'
 import Link from 'next/link'
 import { SheetTrigger } from '@/components/ui/sheet'
 import { QuantityControl } from './quantity-control'
@@ -26,7 +25,7 @@ export function CartProduct({ product }: CartProductType) {
   return (
     <li className="flex border-b py-6 last:border-0 ">
       <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg border bg-background p-1">
-        <Image
+        <img
           src={product.imageUrls[0]}
           alt={product.name}
           width={0}
