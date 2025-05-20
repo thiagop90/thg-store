@@ -6,6 +6,7 @@ import { AddToCartButton } from '@/components/cart/add-to-cart-button'
 import { Icons } from '@/components/icons'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
 
 type ProductItemProps = {
   product: ProductWithTotalPrice
@@ -21,7 +22,7 @@ export function CardCarousel({ product }: ProductItemProps) {
       <Link href={`/product/${product.slug}`}>
         <div className="flex h-full w-full items-center justify-center">
           {loading && <Icons.loadingDots />}
-          <img
+          <Image
             src={product.imageUrls[0]}
             sizes="100vw"
             className={cn('object-contain p-14', loading ? 'hidden' : 'block')}

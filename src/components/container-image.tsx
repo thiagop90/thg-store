@@ -12,6 +12,7 @@ import {
 } from './ui/carousel'
 import Link from 'next/link'
 import type { Product } from '@/generated/prisma'
+import Image from 'next/image'
 
 type ContainerImageProps = {
   product: Pick<Product, 'id' | 'imageUrls' | 'name' | 'slug'>
@@ -38,7 +39,7 @@ export function ContainerImage({ product, active }: ContainerImageProps) {
                       <Icons.loadingDots />
                     </div>
                   )}
-                  <img
+                  <Image
                     alt={imageUrl}
                     src={imageUrl}
                     className={cn(
@@ -65,7 +66,7 @@ export function ContainerImage({ product, active }: ContainerImageProps) {
               <Icons.loadingDots />
             </div>
           )}
-          <img
+          <Image
             alt={product.name}
             src={product.imageUrls[0]}
             className={cn(

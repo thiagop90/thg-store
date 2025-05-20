@@ -5,6 +5,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import { ThumbsButton } from './thumbs-button'
 import { cn } from '@/lib/utils'
 import { Icons } from '@/components/icons'
+import Image from 'next/image'
 
 type ProductImagesProps = {
   imageUrls: string[]
@@ -62,7 +63,7 @@ export function CarouselImages({ imageUrls }: ProductImagesProps) {
                   <Icons.loadingDots />
                 </div>
               )}
-              <img
+              <Image
                 key={imageUrl}
                 src={imageUrl}
                 alt=""

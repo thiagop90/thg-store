@@ -7,6 +7,7 @@ import type { ProductWithTotalPrice } from '@/helpers/compute-price'
 import Link from 'next/link'
 import { Icons } from '@/components/icons'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
 
 interface OrderItemProps {
   product: ProductWithTotalPrice
@@ -26,7 +27,7 @@ export function OrderItem({ product, orderProductQuantity }: OrderItemProps) {
       <div className="flex flex-1 items-center gap-3 sm:gap-4">
         <div className="relative flex size-16 flex-shrink-0 items-center justify-center rounded-sm bg-neutral-900">
           {!isImageLoaded && <Icons.loadingDots />}
-          <img
+          <Image
             src={product.imageUrls[0]}
             alt={product.name}
             className={cn(

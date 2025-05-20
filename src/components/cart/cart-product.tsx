@@ -6,6 +6,7 @@ import { useProductPricesFormatted } from '@/helpers/product-prices-formatted'
 import { formatCurrency } from '@/helpers/format-currency'
 import { Button } from '@/components/ui/button'
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
 
 type CartProductType = {
   product: CartProductProps
@@ -25,7 +26,7 @@ export function CartProduct({ product }: CartProductType) {
   return (
     <li className="flex border-b py-6 last:border-0 ">
       <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg border bg-background p-1">
-        <img
+        <Image
           src={product.imageUrls[0]}
           alt={product.name}
           width={0}
