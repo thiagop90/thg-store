@@ -30,6 +30,7 @@ export function OrderItem({ product, orderProductQuantity }: OrderItemProps) {
           <Image
             src={product.imageUrls[0]}
             alt={product.name}
+            fill
             className={cn(
               'object-cover p-1.5 transition-opacity duration-200',
               !isImageLoaded ? 'opacity-0' : 'opacity-100',
