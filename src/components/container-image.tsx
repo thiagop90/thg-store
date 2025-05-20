@@ -42,6 +42,7 @@ export function ContainerImage({ product, active }: ContainerImageProps) {
                   <Image
                     alt={imageUrl}
                     src={imageUrl}
+                    fill
                     className={cn(
                       'object-contain',
                       imageLoaded ? 'opacity-100' : 'opacity-0',
@@ -69,6 +70,7 @@ export function ContainerImage({ product, active }: ContainerImageProps) {
           <Image
             alt={product.name}
             src={product.imageUrls[0]}
+            fill
             className={cn(
               'object-contain',
               imageLoaded ? 'opacity-100' : 'opacity-0',

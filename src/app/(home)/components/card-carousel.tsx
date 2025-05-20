@@ -15,19 +15,23 @@ type ProductItemProps = {
 export function CardCarousel({ product }: ProductItemProps) {
   const { formattedBasePrice, formattedPriceAfterDiscount } =
     useProductPricesFormatted(product)
-  const [loading, setLoading] = useState(true)
+  const [imageLoaded, setImageLoaded] = useState(false)
 
   return (
     <li className="group relative aspect-square h-[30vh] max-h-[275px] min-h-[240px] flex-none overflow-hidden rounded-lg border bg-card lg:hover:border-primary">
       <Link href={`/product/${product.slug}`}>
         <div className="flex h-full w-full items-center justify-center">
-          {loading && <Icons.loadingDots />}
+          {!imageLoaded && <Icons.loadingDots />}
           <Image
             src={product.imageUrls[0]}
             sizes="100vw"
-            className={cn('object-contain p-14', loading ? 'hidden' : 'block')}
+            fill
+            className={cn(
+              'object-contain p-14 opacity-0',
+              imageLoaded && 'opacity-100',
+            )}
             alt={product.name}
-            onLoad={() => setLoading(false)}
+            onLoad={() => setImageLoaded(true)}
           />
         </div>
         <div className="absolute inset-x-4 top-4 flex items-start">
