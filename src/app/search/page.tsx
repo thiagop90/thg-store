@@ -1,6 +1,10 @@
 'use client'
 
-import { useEffect, Fragment } from 'react'
+import {
+  useEffect,
+  Fragment,
+  unstable_ViewTransition as ViewTransition,
+} from 'react'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { useInView } from 'react-intersection-observer'
 import { useSearchParams } from 'next/navigation'

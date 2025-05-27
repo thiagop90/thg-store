@@ -43,7 +43,7 @@ export function ScrollToTopButton() {
             initial={{ y: -42 }}
             animate={{ y: 0 }}
             exit={{ y: -42, opacity: 0 }}
-            className="sticky top-[4.5rem] z-40 flex"
+            className="sticky top-[4.5rem] z-40 mx-auto flex w-fit"
           >
             <Button
               ref={ref}

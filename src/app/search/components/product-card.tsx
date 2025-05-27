@@ -116,7 +116,7 @@ function ProductCardActive({ product, active, onExit }: ProductCardProps) {
         className="fixed inset-0 z-[90] bg-black/40 backdrop-blur"
         onClick={onExit}
       />
-      <div className="fixed left-[50%] top-[50%] z-[90] w-full max-w-[480px] translate-x-[-50%] translate-y-[-50%] px-4 sm:px-0">
+      <div className="fixed left-[50%] top-[50%] z-[90] w-full max-w-[450px] translate-x-[-50%] translate-y-[-50%] px-2 sm:px-0">
         <ViewTransition name={`card-${product.id}`}>
           <div className="relative grid h-fit grid-cols-1 overflow-hidden rounded-2xl border bg-card">
             <ViewTransition name={`actionButton-${product.id}`}>

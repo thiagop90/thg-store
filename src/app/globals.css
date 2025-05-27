@@ -50,12 +50,15 @@
   .command-list::-webkit-scrollbar-thumb {
     @apply rounded-2xl bg-neutral-800;
   }
-
+  
   /* ::view-transition-old(*) {
-    animation-duration: 100ms;
-  } */
+    transition: none !important;
+    animation: none !important;
+  }
 
-  /* ::view-transition-new(*) {
-    animation-duration: 500ms;
-  } */
+  ::view-transition-new(*) {
+    transition: none !important;
+    animation: none !important;
+  }
+ */
 }
