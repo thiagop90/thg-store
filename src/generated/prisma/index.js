@@ -218,7 +218,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\thiag\\Desktop\\Frontend\\thg-store\\src\\generated\\prisma",
+      "value": "C:\\Users\\thiag\\Desktop\\thg-store\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -232,11 +232,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\thiag\\Desktop\\Frontend\\thg-store\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\thiag\\Desktop\\thg-store\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
+    "rootEnvPath": "../../../.env",
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../../prisma",
@@ -257,7 +257,7 @@ const config = {
   },
   "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nmodel Category {\n  id       String    @id @default(uuid())\n  name     String\n  slug     String\n  products Product[]\n\n  @@map(\"categories\")\n}\n\nmodel Product {\n  id                 String          @id @default(uuid())\n  name               String\n  slug               String\n  description        String\n  basePrice          Int\n  categoryId         String\n  discountPercentage Int             @default(0)\n  imageUrls          String[]\n  OrderProduct       OrderProduct[]\n  category           Category        @relation(fields: [categoryId], references: [id])\n  reviews            ProductReview[]\n\n  @@map(\"products\")\n}\n\nmodel ProductReview {\n  id        String   @id @default(uuid())\n  productId String\n  userId    String\n  rating    Int\n  comment   String?\n  createdAt DateTime @default(now())\n  product   Product  @relation(fields: [productId], references: [id])\n  user      User     @relation(fields: [userId], references: [id])\n\n  @@map(\"product_reviews\")\n}\n\nmodel Order {\n  id            String         @id @default(uuid())\n  userId        String\n  createdAt     DateTime       @default(now())\n  updatedAt     DateTime       @default(now()) @updatedAt\n  status        OrderStatus    @default(WAITING_FOR_PAYMENT)\n  sessionId     String?\n  user          User           @relation(fields: [userId], references: [id])\n  orderProducts OrderProduct[]\n\n  @@map(\"orders\")\n}\n\nmodel OrderProduct {\n  id                 String  @id @default(uuid())\n  productId          String\n  orderId            String\n  basePrice          Int\n  discountPercentage Int     @default(0)\n  quantity           Int\n  order              Order   @relation(fields: [orderId], references: [id])\n  product            Product @relation(fields: [productId], references: [id])\n\n  @@map(\"order_products\")\n}\n\nmodel Account {\n  userId            String\n  type              String\n  provider          String\n  providerAccountId String\n  refresh_token     String?\n  access_token      String?\n  expires_at        Int?\n  token_type        String?\n  scope             String?\n  id_token          String?\n  session_state     String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@id([provider, providerAccountId])\n  @@map(\"accounts\")\n}\n\nmodel Session {\n  sessionToken String   @unique\n  userId       String\n  expires      DateTime\n  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"sessions\")\n}\n\nmodel User {\n  id            String    @id @default(cuid())\n  name          String?\n  email         String    @unique\n  emailVerified DateTime?\n  image         String?\n  accounts      Account[]\n  sessions      Session[]\n  orders        Order[]\n\n  createdAt DateTime        @default(now())\n  updatedAt DateTime        @updatedAt\n  reviews   ProductReview[]\n\n  @@map(\"users\")\n}\n\nmodel VerificationToken {\n  identifier String\n  token      String\n  expires    DateTime\n\n  @@id([identifier, token])\n  @@map(\"verification_tokens\")\n}\n\nenum OrderStatus {\n  WAITING_FOR_PAYMENT\n  PAYMENT_CONFIRMED\n}\n",
   "inlineSchemaHash": "8815e4dad21da95bda024a2e2f47e2869b31a9f07df06a88f2b10d3e3e6b50a2",
-  "copyEngine": false
+  "copyEngine": true
 }
 
 const fs = require('fs')
@@ -294,3 +294,9 @@ const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
+// file annotations for bundling tools to include these files
+path.join(__dirname, "query_engine-windows.dll.node");
+path.join(process.cwd(), "src/generated/prisma/query_engine-windows.dll.node")
+// file annotations for bundling tools to include these files
+path.join(__dirname, "schema.prisma");
+path.join(process.cwd(), "src/generated/prisma/schema.prisma")
