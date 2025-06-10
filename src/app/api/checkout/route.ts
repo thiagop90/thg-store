@@ -30,7 +30,7 @@ export async function POST(request: Request) {
             name: product.name,
             images: product.imageUrls,
           },
-          unit_amount: product.totalPrice,
+          unit_amount: Math.round(product.totalPrice),
         },
         quantity: product.quantity,
       }
